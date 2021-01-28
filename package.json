@@ -1,0 +1,31 @@
+{
+  "name": "bookmarks-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.20",
+    "vue": "^2.6.11",
+    "vue-i18n": "^8.22.4",
+    "vue-loader": "^15.9.6",
+    "vue-router": "^3.5.1",
+    "vuedraggable": "^2.24.3",
+    "vuelidate": "^0.7.6",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "@vue/cli-service": "~4.5.0",
+    "css-loader": "^3.6.0",
+    "node-sass": "^5.0.0",
+    "sass": "^1.32.5",
+    "sass-loader": "^10.1.1",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
