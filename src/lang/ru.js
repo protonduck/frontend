@@ -33,6 +33,7 @@ export default {
             title: 'Заголовок',
             description: 'Описание',
             url: 'Ссылка',
+            category_id: 'Категория',
         },
     },
     category: {

@@ -33,6 +33,7 @@ export default {
             title: 'Title',
             description: 'Description',
             url: 'Url',
+            category_id: 'Category',
         },
     },
     category: {

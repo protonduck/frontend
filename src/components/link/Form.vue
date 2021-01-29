@@ -55,6 +55,23 @@
                     </template>
                 </div>
                 <div class="form-group">
+                  <label for="link-category-id">{{ $t('form.link.category_id') }}</label>
+                  <input
+                      id="link-category-id"
+                      type="text"
+                      class="form-control"
+                      :class="validationCssClass($v.category_id)"
+                      v-model.trim="$v.category_id.$model"
+                      @keydown="responseErrors = responseErrors.filter((item) => item.field !== 'category_id')"
+                  />
+                  <template v-for="(validator, validatorName) in $v.category_id.$params">
+                    <div class="invalid-feedback"
+                         v-if="!$v.category_id[validatorName]"
+                         v-t="validator && validator.message ? validator.message : validator"
+                    ></div>
+                  </template>
+                </div>
+                <div class="form-group">
                     <button type="submit" class="btn btn-success mr-2" :disabled="isSaving">
                         <spinner :state="isSaving"><i :class="['fas', isNewRecord ? 'fa-plus-square' : 'fa-save']"></i>
                         </spinner>
@@ -79,7 +96,7 @@
 <script>
     import LinkService from "../../services/LinkService";
     import Spinner from "../misc/Spinner";
-    import {required, minLength, maxLength, helpers} from 'vuelidate/lib/validators';
+    import {required, minLength, maxLength, numeric, helpers} from 'vuelidate/lib/validators';
     import {serverError} from "@/validators/validators";
     import BoardService from "../../services/BoardService";
 
@@ -92,6 +109,7 @@
                 id: null,
                 title: '',
                 description: '',
+                category_id: '',
                 url: '',
                 // states
                 isSaving: false,
@@ -110,6 +128,10 @@
             description: {
                 maxLength: helpers.withParams({message: {path: 'error.tooLong', args: {max: 255}}}, maxLength(255)),
                 serverError: serverError('description'),
+            },
+            category_id: {
+                numeric,
+                serverError: serverError('category_id'),
             },
             url: {
                 minLength: helpers.withParams({message: {path: 'error.tooShort', args: {min: 2}}}, minLength(2)),
