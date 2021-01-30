@@ -235,5 +235,12 @@
             });
 
         },
+      mounted() {
+        window.addEventListener('keydown', e => {
+          if (e.key === 'Escape') {
+            this.close();
+          }
+        });
+      }
     }
 </script>
