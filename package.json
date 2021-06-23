@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "test:e2e:open": "cypress open --config fileServerFolder=tests/e2e/cypress",
+    "test:e2e:run": "cypress run --config fileServerFolder=tests/e2e/cypress"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -27,6 +29,7 @@
     "node-sass": "^5.0.0",
     "sass": "^1.32.5",
     "sass-loader": "^10.1.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "cypress": "^7.5.0"
   }
 }

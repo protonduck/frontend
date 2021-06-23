@@ -17,6 +17,22 @@ npm run serve
 npm run build
 ```
 
+### Running Tests
+
+Running cypress (e2e) tests:
+
+Open the browser and start the tests:
+
+```
+npm run test:e2e:open
+```
+
+Run the tests in console:
+
+```
+npm run test:e2e:run
+```
+
 ## License
 
 This project is licensed under the AGPL-3.0 License. See the LICENSE file for details.
