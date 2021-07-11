@@ -38,11 +38,11 @@ export default new Vuex.Store({
     board_save(state, board) {
       state.board = board;
     },
-    board_remove(state) {},
-    category_save(state, category) {},
-    category_remove(state) {},
-    link_save(state, category) {},
-    link_remove(state) {},
+    board_remove() {},
+    category_save() {},
+    category_remove() {},
+    link_save() {},
+    link_remove() {},
     toggle_category_modal(state, payload) {
       state.show_category_modal = payload;
     },
@@ -66,131 +66,133 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login({commit}, user) {
+    login({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request');
-        axios({url: '/user/login', data: user, method: 'POST'})
-          .then(resp => {
+        axios({ url: '/user/login', data: user, method: 'POST' })
+          .then((resp) => {
             const token = resp.data.api_key;
+            // eslint-disable-next-line no-shadow
             const user = resp.data;
             localStorage.setItem(authTokenName, token);
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+            axios.defaults.headers.common.Authorization = `Bearer ${token}`;
             commit('auth_success', token, user);
             resolve(resp);
           })
-          .catch(err => {
+          .catch((err) => {
             commit('auth_error');
             localStorage.removeItem(authTokenName);
             reject(err);
           });
-      })
+      });
     },
-    register({commit}, user) {
+    register({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request');
-        axios({url: '/user/signup', data: user, method: 'POST'})
-          .then(resp => {
+        axios({ url: '/user/signup', data: user, method: 'POST' })
+          .then((resp) => {
             const token = resp.data.api_key;
+            // eslint-disable-next-line no-shadow
             const user = resp.data;
             localStorage.setItem(authTokenName, token);
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+            axios.defaults.headers.common.Authorization = `Bearer ${token}`;
             commit('auth_success', token, user);
             resolve(resp);
           })
-          .catch(err => {
+          .catch((err) => {
             commit('auth_error', err);
             localStorage.removeItem(authTokenName);
             reject(err);
           });
-      })
+      });
     },
-    logout({commit}) {
-      return new Promise((resolve, reject) => {
+    logout({ commit }) {
+      return new Promise((resolve) => {
         commit('logout');
         localStorage.removeItem(authTokenName);
-        delete axios.defaults.headers.common['Authorization'];
+        delete axios.defaults.headers.common.Authorization;
         resolve();
-      })
+      });
     },
-    board_save({commit}, payload) {
+    board_save({ commit }, payload) {
       return new Promise((resolve, reject) => {
         commit('board_save', payload);
-        axios({url: payload.url, method: payload.method, data: payload})
-          .then(resp => {
+        axios({ url: payload.url, method: payload.method, data: payload })
+          .then((resp) => {
             commit('board_save', payload);
             resolve(resp);
           })
-          .catch(err => {
+          .catch((err) => {
             commit('board_save');
             reject(err);
           });
       });
     },
-    board_remove({commit}, payload) {
+    board_remove({ commit }, payload) {
       return new Promise((resolve, reject) => {
         commit('board_remove');
-        axios({url: payload.url, method: payload.method, data: payload})
-          .then(resp => {
+        axios({ url: payload.url, method: payload.method, data: payload })
+          .then((resp) => {
             commit('board_remove');
             resolve(resp);
           })
-          .catch(err => {
+          .catch((err) => {
             commit('board_remove', payload);
             reject(err);
           });
       });
     },
-    category_save({commit}, payload) {
+    category_save({ commit }, payload) {
       return new Promise((resolve, reject) => {
         commit('category_save', payload);
-        axios({url: payload.url, method: payload.method, data: payload})
-          .then(resp => {
+        axios({ url: payload.url, method: payload.method, data: payload })
+          .then((resp) => {
             commit('category_save', payload);
             resolve(resp);
           })
-          .catch(err => {
+          .catch((err) => {
             commit('category_save');
             reject(err);
           });
       });
     },
-    category_remove({commit}, payload) {
+    category_remove({ commit }, payload) {
       return new Promise((resolve, reject) => {
         commit('category_remove');
-        axios({url: payload.url, method: payload.method, data: payload})
-          .then(resp => {
+        axios({ url: payload.url, method: payload.method, data: payload })
+          .then((resp) => {
             commit('category_remove');
             resolve(resp);
           })
-          .catch(err => {
+          .catch((err) => {
             commit('category_remove', payload);
             reject(err);
           });
       });
     },
-    link_save({commit}, payload) {
+    link_save({ commit }, payload) {
       return new Promise((resolve, reject) => {
         commit('link_save', payload);
-        axios({url: payload.api_url, method: payload.method, data: payload})
-          .then(resp => {
+        axios({ url: payload.api_url, method: payload.method, data: payload })
+          .then((resp) => {
             commit('link_save', payload);
             resolve(resp);
           })
-          .catch(err => {
+          .catch((err) => {
             commit('link_save');
             reject(err);
           });
       });
     },
-    link_remove({commit}, payload) {
+    link_remove({ commit }, payload) {
       return new Promise((resolve, reject) => {
         commit('link_remove');
-        axios({url: payload.url, method: payload.method, data: payload})
-          .then(resp => {
+        axios({ url: payload.url, method: payload.method, data: payload })
+          .then((resp) => {
             commit('link_remove');
             resolve(resp);
           })
-          .catch(err => {
+          .catch((err) => {
             commit('link_remove', payload);
             reject(err);
           });
@@ -198,14 +200,14 @@ export default new Vuex.Store({
     },
   },
   getters: {
-    isLoggedIn: state => !!state.token,
-    authStatus: state => state.status,
-    showCategoryModal: state => state.show_category_modal,
-    showBoardModal: state => state.show_board_modal,
-    showLinkModal: state => state.show_link_modal,
-    activeBoardId: state => state.active_board_id,
-    currentCategoryId: state => state.current_category_id,
-    boards: state => state.boards,
-    categories: state => state.categories,
+    isLoggedIn: (state) => !!state.token,
+    authStatus: (state) => state.status,
+    showCategoryModal: (state) => state.show_category_modal,
+    showBoardModal: (state) => state.show_board_modal,
+    showLinkModal: (state) => state.show_link_modal,
+    activeBoardId: (state) => state.active_board_id,
+    currentCategoryId: (state) => state.current_category_id,
+    boards: (state) => state.boards,
+    categories: (state) => state.categories,
   },
-})
+});

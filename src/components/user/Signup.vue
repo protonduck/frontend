@@ -6,73 +6,73 @@
     <form @submit.prevent="register">
       <div class="form-group">
         <label
-          for="name"
           data-testid="signup_form_label_username"
+          for="name"
         >
           {{ $t('form.username') }}
         </label>
         <input
           id="name"
-          type="text"
-          class="form-control"
           v-model="name"
-          required
           autofocus
+          class="form-control"
           data-testid="signup_form_input_username"
+          required
+          type="text"
         />
       </div>
       <div class="form-group">
         <label
-          for="email"
           data-testid="signup_form_label_email"
+          for="email"
         >
           {{ $t('form.email') }}
         </label>
         <input
           id="email"
-          type="email"
-          class="form-control"
           v-model="email"
-          required
+          class="form-control"
           data-testid="signup_form_input_email"
+          required
+          type="email"
         />
       </div>
       <div class="form-group">
         <label
-          for="password"
           data-testid="signup_form_label_password"
+          for="password"
         >
           {{ $t('form.password') }}
         </label>
         <input
           id="password"
-          type="password"
-          class="form-control"
           v-model="password"
-          required
+          class="form-control"
           data-testid="signup_form_input_password"
+          required
+          type="password"
         />
       </div>
       <div class="form-group">
         <label
-          for="password-confirm"
           data-testid="signup_form_label_password_confirmation"
+          for="password-confirm"
         >
           {{ $t('form.passwordConfirm') }}
         </label>
         <input
           id="password-confirm"
-          type="password"
-          class="form-control"
           v-model="password_confirmation"
-          required
+          class="form-control"
           data-testid="signup_form_input_password_confirmation"
+          required
+          type="password"
         />
       </div>
       <button
-        type="submit"
         class="btn btn-success"
         data-testid="signup_form_button_signup"
+        type="submit"
       >
         {{ $t('menu.signup') }}
       </button>
@@ -84,25 +84,25 @@
 export default {
   data() {
     return {
-      name: "",
-      email: "",
-      password: "",
-      password_confirmation: "",
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: '',
       is_admin: null,
-    }
+    };
   },
   methods: {
-    register: function () {
-      let data = {
+    register() {
+      const data = {
         name: this.name,
         email: this.email,
         password: this.password,
         is_admin: this.is_admin,
-      }
+      };
       this.$store.dispatch('register', data)
         .then(() => this.$router.push('/'))
-        .catch(err => console.log(err))
+        .catch((err) => console.log(err));
     },
   },
-}
+};
 </script>

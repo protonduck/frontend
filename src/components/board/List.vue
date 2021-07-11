@@ -3,21 +3,26 @@
     <div class="boards mb-3">
       <nav>
         <div class="d-flex">
-          <draggable v-model="boards" group="boards" @change="update()" class="nav nav-pills">
-            <a class="nav-item nav-link" href="#"
-               v-bind:class="{active: board.id === $store.getters.activeBoardId}"
-               v-for="(board, i) in boards" @click.prevent="switchBoard(board.id)"
-               :key="board.id">
+          <draggable v-model="boards" class="nav nav-pills" group="boards" @change="update()">
+            <a v-for="(board) in boards" :key="board.id"
+               class="nav-item nav-link"
+               href="#" v-bind:class="{active: board.id === $store.getters.activeBoardId}"
+               @click.prevent="switchBoard(board.id)"
+            >
               {{ board.name }}
             </a>
           </draggable>
 
           <div class="nav nav-pills">
-            <a href="#" class="nav-item nav-link" @click.prevent="$store.commit('toggle_board_modal', true)">
+            <a
+              class="nav-item nav-link"
+              href="#"
+              @click.prevent="$store.commit('toggle_board_modal', true)"
+            >
               <i class="fa fa-plus"></i>
             </a>
 
-            <a href="#" class="nav-item nav-link" @click.prevent="edit">
+            <a class="nav-item nav-link" href="#" @click.prevent="edit">
               <i class="fa fa-edit"></i>
             </a>
           </div>
@@ -27,29 +32,29 @@
 
     <modal v-if="$store.getters.showBoardModal">
       <div slot="content">
-        <board-form></board-form>
+        <board-form />
       </div>
     </modal>
 
-    <categories-list></categories-list>
+    <categories-list />
   </div>
 </template>
 
 <script>
-import BoardService from "../../services/BoardService";
-import CategoriesList from "../category/List";
-import Modal from "../Modal";
-import BoardForm from "./Form";
-import _ from "lodash";
-import draggable from 'vuedraggable'
+import _ from 'lodash';
+import draggable from 'vuedraggable';
+import BoardService from '../../services/BoardService';
+import CategoriesList from '../category/List.vue';
+import Modal from '../Modal.vue';
+import BoardForm from './Form.vue';
 
 export default {
-  name: "BoardsList",
+  name: 'BoardsList',
   components: {
     CategoriesList,
     Modal,
     BoardForm,
-    draggable
+    draggable,
   },
   computed: {
     boards: {
@@ -58,12 +63,15 @@ export default {
       },
       set(value) {
         this.$store.commit('update_boards', value);
-      }
-    }
+      },
+    },
   },
   methods: {
     edit() {
-      let selectedItem = _.find(this.$store.getters.boards, {'id': this.$store.getters.activeBoardId});
+      const selectedItem = _.find(
+        this.$store.getters.boards,
+        { id: this.$store.getters.activeBoardId },
+      );
 
       this.$store.commit('toggle_board_modal', true);
 
@@ -79,10 +87,12 @@ export default {
       BoardService.$emit('boardsChanged');
     },
     update() {
+      // eslint-disable-next-line array-callback-return
       this.boards.map((board, index) => {
         this.$store.dispatch('board_save', {
-          url: '/boards/' + board.id,
+          url: `/boards/${board.id}`,
           method: 'put',
+          // eslint-disable-next-line no-param-reassign
           sort: board.sort = index + 1,
         });
       });
@@ -91,18 +101,18 @@ export default {
   created() {
     BoardService.$on('boardsChanged', () => {
       if (BoardService.getActiveBoard() !== undefined) {
-        let activeBoard = BoardService.getActiveBoard();
+        const activeBoard = BoardService.getActiveBoard();
 
         this.$store.commit('update_categories', activeBoard.categories);
 
-        document.body.style.backgroundImage = "url('" + activeBoard.image + "')";
+        document.body.style.backgroundImage = `url('${activeBoard.image}')`;
         document.body.className = 'body_bg_image';
       }
     });
 
     BoardService.fetchBoards();
   },
-}
+};
 </script>
 
 <style>

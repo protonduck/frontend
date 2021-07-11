@@ -17,6 +17,11 @@ npm run serve
 npm run build
 ```
 
+### Run linter 
+```
+npm run lint
+```
+
 ### Running Tests
 
 Running cypress (e2e) tests:

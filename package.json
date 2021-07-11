@@ -1,10 +1,11 @@
 {
   "name": "bookmarks-frontend",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
     "test:e2e:open": "cypress open --config fileServerFolder=tests/e2e/cypress",
     "test:e2e:run": "cypress run --config fileServerFolder=tests/e2e/cypress"
   },
@@ -24,12 +25,18 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
+    "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
     "css-loader": "^3.6.0",
+    "cypress": "^7.5.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^5.0.0",
     "sass": "^1.32.5",
     "sass-loader": "^10.1.1",
-    "vue-template-compiler": "^2.6.11",
-    "cypress": "^7.5.0"
+    "vue-template-compiler": "^2.6.11"
   }
 }

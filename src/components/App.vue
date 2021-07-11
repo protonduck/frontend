@@ -1,32 +1,28 @@
 <template>
-    <div>
-        <main-menu></main-menu>
+  <div>
+    <main-menu />
 
-        <div class="container">
-            <router-view></router-view>
-        </div>
+    <div class="container">
+      <router-view></router-view>
     </div>
+  </div>
 </template>
 
 <script>
-    import MainMenu from "./MainMenu";
+import MainMenu from './MainMenu.vue';
 
-    export default {
-        components: {
-            MainMenu
-        },
-        created: function () {
-            this.$http.interceptors.response.use(undefined, function (err) {
-                return new Promise(function (resolve, reject) {
-                    if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-                        this.$store.dispatch("logout")
-                    }
-                    throw err;
-                });
-            });
-        }
-    }
+export default {
+  components: {
+    MainMenu,
+  },
+  created() {
+    this.$http.interceptors.response.use(undefined, (err) => new Promise(() => {
+      // eslint-disable-next-line no-underscore-dangle
+      if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+        this.$store.dispatch('logout');
+      }
+      throw err;
+    }));
+  },
+};
 </script>
-
-<style scoped lang="scss">
-</style>
