@@ -172,9 +172,8 @@ export default {
       })
         .then(() => {
           BoardService.fetchBoards();
-          this.$store.commit('toggle_board_modal', false);
           localStorage.removeItem('active_board_id');
-          this.reset();
+          this.close();
         })
         .catch((err) => {
           if (err.response.status === 422) {

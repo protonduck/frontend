@@ -22,7 +22,7 @@
               <i class="fa fa-plus"></i>
             </a>
 
-            <a class="nav-item nav-link" href="#" @click.prevent="edit">
+            <a class="nav-item nav-link" href="#" @click.prevent="edit" v-if="boards.length">
               <i class="fa fa-edit"></i>
             </a>
           </div>

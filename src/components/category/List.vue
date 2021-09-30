@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div v-if="$store.getters.activeBoardId !== 0" class="col-md-3">
+      <div v-if="$store.getters.boards.length" class="col-md-3">
         <div class="card bg-white">
           <div class="card-header">
             <i class="fa fa-plus pr-1"></i>
