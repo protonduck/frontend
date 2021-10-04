@@ -62,7 +62,7 @@ export default {
         return this.$store.getters.boards;
       },
       set(value) {
-        this.$store.commit('update_boards', value);
+        this.$store.commit('updateBoards', value);
       },
     },
   },
@@ -89,7 +89,7 @@ export default {
     update() {
       // eslint-disable-next-line array-callback-return
       this.boards.map((board, index) => {
-        this.$store.dispatch('board_save', {
+        this.$store.dispatch('boardSave', {
           url: `/boards/${board.id}`,
           method: 'put',
           // eslint-disable-next-line no-param-reassign
@@ -103,7 +103,7 @@ export default {
       if (BoardService.getActiveBoard() !== undefined) {
         const activeBoard = BoardService.getActiveBoard();
 
-        this.$store.commit('update_categories', activeBoard.categories);
+        this.$store.commit('updateCategories', activeBoard.categories);
 
         document.body.style.backgroundImage = `url('${activeBoard.image}')`;
         document.body.className = 'body_bg_image';

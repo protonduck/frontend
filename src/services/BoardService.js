@@ -24,7 +24,7 @@ export default new Vue({
         });
       }
 
-      this.$store.commit('update_boards', boards);
+      this.$store.commit('updateBoards', boards);
 
       this.$emit('boardsChanged');
     },

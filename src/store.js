@@ -35,14 +35,6 @@ export default new Vuex.Store({
       state.status = '';
       state.token = '';
     },
-    board_save(state, board) {
-      state.board = board;
-    },
-    board_remove() {},
-    category_save() {},
-    category_remove() {},
-    link_save() {},
-    link_remove() {},
     toggle_category_modal(state, payload) {
       state.show_category_modal = payload;
     },
@@ -58,17 +50,16 @@ export default new Vuex.Store({
     change_current_category_id(state, payload) {
       state.current_category_id = payload;
     },
-    update_boards(state, payload) {
-      state.boards = payload;
+    updateBoards(state, boards) {
+      state.boards = boards;
     },
-    update_categories(state, payload) {
-      state.categories = payload;
+    updateCategories(state, categories) {
+      state.categories = categories;
     },
   },
   actions: {
     login({ commit }, user) {
       return new Promise((resolve, reject) => {
-        commit('auth_request');
         axios({ url: '/user/login', data: user, method: 'POST' })
           .then((resp) => {
             const token = resp.data.api_key;
@@ -88,7 +79,6 @@ export default new Vuex.Store({
     },
     register({ commit }, user) {
       return new Promise((resolve, reject) => {
-        commit('auth_request');
         axios({ url: '/user/signup', data: user, method: 'POST' })
           .then((resp) => {
             const token = resp.data.api_key;
@@ -114,86 +104,47 @@ export default new Vuex.Store({
         resolve();
       });
     },
-    board_save({ commit }, payload) {
+    boardSave(context, payload) {
       return new Promise((resolve, reject) => {
-        commit('board_save', payload);
-        axios({ url: payload.url, method: payload.method, data: payload })
+        axios({
+          url: payload.url,
+          method: payload.method,
+          data: payload,
+        })
           .then((resp) => {
-            commit('board_save', payload);
             resolve(resp);
           })
           .catch((err) => {
-            commit('board_save');
             reject(err);
           });
       });
     },
-    board_remove({ commit }, payload) {
+    categorySave(context, payload) {
       return new Promise((resolve, reject) => {
-        commit('board_remove');
-        axios({ url: payload.url, method: payload.method, data: payload })
+        axios({
+          url: payload.url,
+          method: payload.method,
+          data: payload,
+        })
           .then((resp) => {
-            commit('board_remove');
             resolve(resp);
           })
           .catch((err) => {
-            commit('board_remove', payload);
             reject(err);
           });
       });
     },
-    category_save({ commit }, payload) {
+    linkSave(context, payload) {
       return new Promise((resolve, reject) => {
-        commit('category_save', payload);
-        axios({ url: payload.url, method: payload.method, data: payload })
+        axios({
+          url: payload.api_url,
+          method: payload.method,
+          data: payload,
+        })
           .then((resp) => {
-            commit('category_save', payload);
             resolve(resp);
           })
           .catch((err) => {
-            commit('category_save');
-            reject(err);
-          });
-      });
-    },
-    category_remove({ commit }, payload) {
-      return new Promise((resolve, reject) => {
-        commit('category_remove');
-        axios({ url: payload.url, method: payload.method, data: payload })
-          .then((resp) => {
-            commit('category_remove');
-            resolve(resp);
-          })
-          .catch((err) => {
-            commit('category_remove', payload);
-            reject(err);
-          });
-      });
-    },
-    link_save({ commit }, payload) {
-      return new Promise((resolve, reject) => {
-        commit('link_save', payload);
-        axios({ url: payload.api_url, method: payload.method, data: payload })
-          .then((resp) => {
-            commit('link_save', payload);
-            resolve(resp);
-          })
-          .catch((err) => {
-            commit('link_save');
-            reject(err);
-          });
-      });
-    },
-    link_remove({ commit }, payload) {
-      return new Promise((resolve, reject) => {
-        commit('link_remove');
-        axios({ url: payload.url, method: payload.method, data: payload })
-          .then((resp) => {
-            commit('link_remove');
-            resolve(resp);
-          })
-          .catch((err) => {
-            commit('link_remove', payload);
             reject(err);
           });
       });

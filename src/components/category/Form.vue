@@ -192,7 +192,7 @@ export default {
 
       this.isSaving = true;
 
-      this.$store.dispatch('category_save', {
+      this.$store.dispatch('categorySave', {
         url: this.isNewRecord ? '/categories' : `/categories/${this.id}`,
         method: this.isNewRecord ? 'post' : 'put',
         board_id: this.$store.getters.activeBoardId,
@@ -229,7 +229,7 @@ export default {
     remove() {
       this.isRemoving = true;
 
-      this.$store.dispatch('category_remove', {
+      this.$store.dispatch('categorySave', {
         url: `/categories/${this.id}`,
         method: 'delete',
       })

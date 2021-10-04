@@ -74,7 +74,7 @@ export default {
     update() {
       // eslint-disable-next-line array-callback-return
       this.items.links.map((link, index) => {
-        this.$store.dispatch('link_save', {
+        this.$store.dispatch('linkSave', {
           api_url: `/links/${link.id}`,
           method: 'put',
           // eslint-disable-next-line no-param-reassign

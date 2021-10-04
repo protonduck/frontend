@@ -193,7 +193,7 @@ export default {
 
       this.isSaving = true;
 
-      this.$store.dispatch('link_save', {
+      this.$store.dispatch('linkSave', {
         api_url: this.isNewRecord ? '/links' : `/links/${this.id}`,
         method: this.isNewRecord ? 'post' : 'put',
         id: this.id,
@@ -230,8 +230,8 @@ export default {
     remove() {
       this.isRemoving = true;
 
-      this.$store.dispatch('link_remove', {
-        url: `/links/${this.id}`,
+      this.$store.dispatch('linkSave', {
+        api_url: `/links/${this.id}`,
         method: 'delete',
       })
         .then(() => {
