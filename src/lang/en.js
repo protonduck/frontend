@@ -8,7 +8,7 @@ export default {
   form: {
     name: 'Name',
     username: 'Name',
-    email: 'Email',
+    email: 'E-Mail',
     password: 'Password',
     passwordConfirm: 'Confirm Password',
     add: 'Add',
@@ -46,5 +46,9 @@ export default {
     required: 'Field is required',
     tooShort: 'Too short (min: {min})',
     tooLong: 'Too long (max: {max})',
+    serverError: 'Error. Something went wrong.',
+    incorrect_login_password: 'Incorrect login or password.',
+    email_invalid: 'Please enter a valid E-Mail.',
   },
+  serverError: 'Error. Something went wrong.',
 };

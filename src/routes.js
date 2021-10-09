@@ -23,10 +23,6 @@ export const routes = [
     component: Signup,
   },
   {
-    path: '/catergories',
-    name: 'catergoryAdd',
-  },
-  {
     path: '*',
     component: BoardsList,
     meta: {

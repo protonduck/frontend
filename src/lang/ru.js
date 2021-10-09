@@ -8,7 +8,7 @@ export default {
   form: {
     name: 'Название',
     username: 'Имя',
-    email: 'Email',
+    email: 'E-Mail',
     password: 'Пароль',
     passwordConfirm: 'Подтвердите пароль',
     add: 'Добавить',
@@ -46,5 +46,8 @@ export default {
     required: 'Поле является обязательным',
     tooShort: 'Слишком короткое (мин: {min})',
     tooLong: 'Слишком длинное (макс: {max})',
+    incorrect_login_password: 'Не верный логин или пароль.',
+    email_invalid: 'Пожалуйста, введите действительный E-Mail.',
   },
+  serverError: 'Ошибка. Что-то пошло не так.',
 };
