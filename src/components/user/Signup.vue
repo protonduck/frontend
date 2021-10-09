@@ -3,7 +3,16 @@
     <h1 data-testid="signup_header">
       {{ $t('menu.signup') }}
     </h1>
-    <form @submit.prevent="register">
+    <div v-if="responseErrors.length > 0">
+      <div v-for="(error, index) in responseErrors" :key="index" class="alert alert-danger">
+        <span v-if="error.message === 'email_not_unique'">{{ $t('error.email_not_unique') }}</span>
+        <span v-else-if="error.message === 'email_invalid'">{{ $t('error.email_invalid') }}</span>
+        <span v-else>
+          {{ error.message }}
+        </span>
+      </div>
+    </div>
+    <form @submit.prevent="register" novalidate>
       <div class="form-group">
         <label
           data-testid="signup_form_label_username"
@@ -13,13 +22,21 @@
         </label>
         <input
           id="name"
-          v-model="name"
+          v-model.trim="$v.name.$model"
           autofocus
           class="form-control"
+          :class="validationCssClass($v.name)"
           data-testid="signup_form_input_username"
-          required
           type="text"
         />
+        <template v-for="(validator, validatorName, index) in $v.name.$params">
+          <div
+            v-if="!$v.name[validatorName]"
+            :key="index"
+            v-t="validator && validator.message ? validator.message : validator"
+            class="invalid-feedback"
+          />
+        </template>
       </div>
       <div class="form-group">
         <label
@@ -30,12 +47,20 @@
         </label>
         <input
           id="email"
-          v-model="email"
+          v-model.trim="$v.email.$model"
           class="form-control"
+          :class="validationCssClass($v.email)"
           data-testid="signup_form_input_email"
-          required
           type="email"
         />
+        <template v-for="(validator, validatorName, index) in $v.email.$params">
+          <div
+            v-if="!$v.email[validatorName]"
+            :key="index"
+            v-t="validator && validator.message ? validator.message : validator"
+            class="invalid-feedback"
+          />
+        </template>
       </div>
       <div class="form-group">
         <label
@@ -46,12 +71,20 @@
         </label>
         <input
           id="password"
-          v-model="password"
+          v-model.trim="$v.password.$model"
           class="form-control"
+          :class="validationCssClass($v.password)"
           data-testid="signup_form_input_password"
-          required
           type="password"
         />
+        <template v-for="(validator, validatorName, index) in $v.password.$params">
+          <div
+            v-if="!$v.password[validatorName]"
+            :key="index"
+            v-t="validator && validator.message ? validator.message : validator"
+            class="invalid-feedback"
+          />
+        </template>
       </div>
       <div class="form-group">
         <label
@@ -62,12 +95,20 @@
         </label>
         <input
           id="password-confirm"
-          v-model="password_confirmation"
+          v-model.trim="$v.password_confirmation.$model"
+          :class="validationCssClass($v.password_confirmation)"
           class="form-control"
           data-testid="signup_form_input_password_confirmation"
-          required
           type="password"
         />
+        <template v-for="(validator, validatorName, index) in $v.password_confirmation.$params">
+          <div
+            v-if="!$v.password_confirmation[validatorName]"
+            :key="index"
+            v-t="validator && validator.message ? validator.message : validator"
+            class="invalid-feedback"
+          />
+        </template>
       </div>
       <button
         class="btn btn-success"
@@ -81,6 +122,13 @@
 </template>
 
 <script>
+import {
+  helpers,
+  maxLength,
+  minLength,
+  required,
+} from 'vuelidate/lib/validators';
+
 export default {
   data() {
     return {
@@ -89,20 +137,60 @@ export default {
       password: '',
       password_confirmation: '',
       is_admin: null,
+      responseErrors: [],
     };
   },
   methods: {
     register() {
+      this.$v.$touch();
+
+      if (this.$v.$invalid) {
+        return;
+      }
+
       const data = {
         name: this.name,
         email: this.email,
         password: this.password,
         is_admin: this.is_admin,
       };
+
       this.$store.dispatch('register', data)
         .then(() => this.$router.push('/'))
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          if (err.response.status === 422) {
+            this.responseErrors = err.response.data;
+          }
+        });
     },
+    validationCssClass(validation) {
+      return {
+        'is-valid': !validation.$error && validation.$dirty,
+        'is-invalid': validation.$error,
+      };
+    },
+  },
+  validations: {
+    name: {
+      required: helpers.withParams({ message: 'error.required' }, required),
+    },
+    email: {
+      required: helpers.withParams({ message: 'error.required' }, required),
+    },
+    password: {
+      required: helpers.withParams({ message: 'error.required' }, required),
+      minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 6 } } }, minLength(6)),
+      maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 100 } } }, maxLength(100)),
+    },
+    password_confirmation: {
+      required: helpers.withParams({ message: 'error.required' }, required),
+      minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 6 } } }, minLength(6)),
+      maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 100 } } }, maxLength(100)),
+    },
+  },
+  created() {
+    // Reset validation
+    this.$v.$reset();
   },
 };
 </script>

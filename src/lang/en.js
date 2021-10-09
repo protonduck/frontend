@@ -49,6 +49,7 @@ export default {
     serverError: 'Error. Something went wrong.',
     incorrect_login_password: 'Incorrect login or password.',
     email_invalid: 'Please enter a valid E-Mail.',
+    email_not_unique: 'An account with this email already exists.',
   },
   serverError: 'Error. Something went wrong.',
 };

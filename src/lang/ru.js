@@ -48,6 +48,7 @@ export default {
     tooLong: 'Слишком длинное (макс: {max})',
     incorrect_login_password: 'Не верный логин или пароль.',
     email_invalid: 'Пожалуйста, введите действительный E-Mail.',
+    email_not_unique: 'Аккаунт с таким E-Mail уже существует.',
   },
   serverError: 'Ошибка. Что-то пошло не так.',
 };

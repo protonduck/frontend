@@ -6,8 +6,11 @@
     <div v-if="responseErrors.length > 0">
       <div v-for="(error, index) in responseErrors" :key="index" class="alert alert-danger">
         <span v-if="error.message === 'email_invalid'">{{ $t('error.email_invalid') }}</span>
-        <span v-if="error.message === 'incorrect_login_password'">
+        <span v-else-if="error.message === 'incorrect_login_password'">
           {{ $t('error.incorrect_login_password') }}
+        </span>
+        <span v-else>
+          {{ error.message }}
         </span>
       </div>
     </div>
