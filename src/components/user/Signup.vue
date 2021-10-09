@@ -14,101 +14,109 @@
     </div>
     <form @submit.prevent="register" novalidate>
       <div class="form-group">
-        <label
-          data-testid="signup_form_label_username"
-          for="name"
-        >
-          {{ $t('form.username') }}
-        </label>
-        <input
-          id="name"
-          v-model.trim="$v.name.$model"
-          autofocus
-          class="form-control"
-          :class="validationCssClass($v.name)"
-          data-testid="signup_form_input_username"
-          type="text"
-        />
-        <template v-for="(validator, validatorName, index) in $v.name.$params">
-          <div
-            v-if="!$v.name[validatorName]"
-            :key="index"
-            v-t="validator && validator.message ? validator.message : validator"
-            class="invalid-feedback"
+        <div class="col-sm-3">
+          <label
+            data-testid="signup_form_label_username"
+            for="name"
+          >
+            {{ $t('form.username') }}
+          </label>
+          <input
+            id="name"
+            v-model.trim="$v.name.$model"
+            autofocus
+            class="form-control"
+            :class="validationCssClass($v.name)"
+            data-testid="signup_form_input_username"
+            type="text"
           />
-        </template>
+          <template v-for="(validator, validatorName, index) in $v.name.$params">
+            <div
+              v-if="!$v.name[validatorName]"
+              :key="index"
+              v-t="validator && validator.message ? validator.message : validator"
+              class="invalid-feedback"
+            />
+          </template>
+        </div>
       </div>
       <div class="form-group">
-        <label
-          data-testid="signup_form_label_email"
-          for="email"
-        >
-          {{ $t('form.email') }}
-        </label>
-        <input
-          id="email"
-          v-model.trim="$v.email.$model"
-          class="form-control"
-          :class="validationCssClass($v.email)"
-          data-testid="signup_form_input_email"
-          type="email"
-        />
-        <template v-for="(validator, validatorName, index) in $v.email.$params">
-          <div
-            v-if="!$v.email[validatorName]"
-            :key="index"
-            v-t="validator && validator.message ? validator.message : validator"
-            class="invalid-feedback"
+        <div class="col-sm-3">
+          <label
+            data-testid="signup_form_label_email"
+            for="email"
+          >
+            {{ $t('form.email') }}
+          </label>
+          <input
+            id="email"
+            v-model.trim="$v.email.$model"
+            class="form-control"
+            :class="validationCssClass($v.email)"
+            data-testid="signup_form_input_email"
+            type="email"
           />
-        </template>
+          <template v-for="(validator, validatorName, index) in $v.email.$params">
+            <div
+              v-if="!$v.email[validatorName]"
+              :key="index"
+              v-t="validator && validator.message ? validator.message : validator"
+              class="invalid-feedback"
+            />
+          </template>
+        </div>
       </div>
       <div class="form-group">
-        <label
-          data-testid="signup_form_label_password"
-          for="password"
-        >
-          {{ $t('form.password') }}
-        </label>
-        <input
-          id="password"
-          v-model.trim="$v.password.$model"
-          class="form-control"
-          :class="validationCssClass($v.password)"
-          data-testid="signup_form_input_password"
-          type="password"
-        />
-        <template v-for="(validator, validatorName, index) in $v.password.$params">
-          <div
-            v-if="!$v.password[validatorName]"
-            :key="index"
-            v-t="validator && validator.message ? validator.message : validator"
-            class="invalid-feedback"
+        <div class="col-sm-3">
+          <label
+            data-testid="signup_form_label_password"
+            for="password"
+          >
+            {{ $t('form.password') }}
+          </label>
+          <input
+            id="password"
+            v-model.trim="$v.password.$model"
+            class="form-control"
+            :class="validationCssClass($v.password)"
+            data-testid="signup_form_input_password"
+            type="password"
           />
-        </template>
+          <template v-for="(validator, validatorName, index) in $v.password.$params">
+            <div
+              v-if="!$v.password[validatorName]"
+              :key="index"
+              v-t="validator && validator.message ? validator.message : validator"
+              class="invalid-feedback"
+            />
+          </template>
+        </div>
       </div>
       <div class="form-group">
-        <label
-          data-testid="signup_form_label_password_confirmation"
-          for="password-confirm"
-        >
-          {{ $t('form.passwordConfirm') }}
-        </label>
-        <input
-          id="password-confirm"
-          v-model.trim="$v.password_confirmation.$model"
-          :class="validationCssClass($v.password_confirmation)"
-          class="form-control"
-          data-testid="signup_form_input_password_confirmation"
-          type="password"
-        />
-        <template v-for="(validator, validatorName, index) in $v.password_confirmation.$params">
-          <div
-            v-if="!$v.password_confirmation[validatorName]"
-            :key="index"
-            v-t="validator && validator.message ? validator.message : validator"
-            class="invalid-feedback"
+        <div class="col-sm-3">
+          <label
+            data-testid="signup_form_label_password_confirmation"
+            for="password-confirm"
+          >
+            {{ $t('form.passwordConfirm') }}
+          </label>
+          <input
+            id="password-confirm"
+            v-model.trim="$v.password_confirmation.$model"
+            :class="validationCssClass($v.password_confirmation)"
+            class="form-control"
+            data-testid="signup_form_input_password_confirmation"
+            type="password"
           />
-        </template>
+          <template v-for="(validator, validatorName, index) in $v.password_confirmation.$params">
+            <div
+              v-if="!$v.password_confirmation[validatorName]"
+              :key="index"
+              v-t="validator && validator.message ? validator.message : validator"
+              class="invalid-feedback"
+            />
+          </template>
+        </div>
       </div>
       <button
         class="btn btn-success"
