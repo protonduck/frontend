@@ -5,8 +5,7 @@
     </h1>
     <div v-if="responseErrors.length > 0">
       <div v-for="(error, index) in responseErrors" :key="index" class="alert alert-danger">
-        <span v-if="error.message === 'email_invalid'">{{ $t('error.email_invalid') }}</span>
-        <span v-else-if="error.message === 'incorrect_login_password'">
+        <span v-if="error.message === 'incorrect_login_password'">
           {{ $t('error.incorrect_login_password') }}
         </span>
         <span v-else>
@@ -83,6 +82,7 @@
 <script>
 import {
   required,
+  email,
   helpers,
 } from 'vuelidate/lib/validators';
 
@@ -125,6 +125,7 @@ export default {
   validations: {
     email: {
       required: helpers.withParams({ message: 'error.required' }, required),
+      email: helpers.withParams({ message: 'error.email_invalid' }, email),
     },
     password: {
       required: helpers.withParams({ message: 'error.required' }, required),

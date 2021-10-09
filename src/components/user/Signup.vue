@@ -5,8 +5,9 @@
     </h1>
     <div v-if="responseErrors.length > 0">
       <div v-for="(error, index) in responseErrors" :key="index" class="alert alert-danger">
-        <span v-if="error.message === 'email_not_unique'">{{ $t('error.email_not_unique') }}</span>
-        <span v-else-if="error.message === 'email_invalid'">{{ $t('error.email_invalid') }}</span>
+        <span v-if="error.message === 'email_not_unique'">
+          {{ $t('error.email_not_unique') }}
+        </span>
         <span v-else>
           {{ error.message }}
         </span>
@@ -131,6 +132,7 @@
 
 <script>
 import {
+  email,
   helpers,
   maxLength,
   minLength,
@@ -184,6 +186,7 @@ export default {
     },
     email: {
       required: helpers.withParams({ message: 'error.required' }, required),
+      email: helpers.withParams({ message: 'error.email_invalid' }, email),
     },
     password: {
       required: helpers.withParams({ message: 'error.required' }, required),
