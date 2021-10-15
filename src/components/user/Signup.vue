@@ -18,11 +18,11 @@
       <PDInput
         id="name"
         :label-text="$t('form.username')"
-        :vObj="$v.name"
+        :v-obj="$v.name"
         autocomplete="username"
+        container-class="col-sm-3"
         data-test-id="signup_form_input_username"
         label-data-test-id="signup_form_label_username"
-        container-class="col-sm-3"
       >
         <template #error>
           <template v-for="(validator, validatorName, index) in $v.name.$params">
@@ -39,12 +39,12 @@
       <PDInput
         id="email"
         :label-text="$t('form.email')"
-        :vObj="$v.email"
+        :v-obj="$v.email"
         autocomplete="email"
+        container-class="col-sm-3"
         data-test-id="signup_form_input_email"
         label-data-test-id="signup_form_label_email"
         type="email"
-        container-class="col-sm-3"
       >
         <template #error>
           <template v-for="(validator, validatorName, index) in $v.email.$params">
@@ -61,12 +61,12 @@
       <PDInput
         id="password"
         :label-text="$t('form.password')"
-        :vObj="$v.password"
+        :v-obj="$v.password"
         autocomplete="new-password"
+        container-class="col-sm-3"
         data-test-id="signup_form_input_password"
         label-data-test-id="signup_form_label_password"
         type="password"
-        container-class="col-sm-3"
       >
         <template #error>
           <template v-for="(validator, validatorName, index) in $v.password.$params">
@@ -83,12 +83,12 @@
       <PDInput
         id="password-confirm"
         :label-text="$t('form.passwordConfirm')"
-        :vObj="$v.password_confirmation"
-        data-test-id="signup_form_input_password_confirmation"
+        :v-obj="$v.password_confirmation"
         autocomplete="off"
+        container-class="col-sm-3"
+        data-test-id="signup_form_input_password_confirmation"
         label-data-test-id="signup_form_label_password_confirmation"
         type="password"
-        container-class="col-sm-3"
       >
         <template #error>
           <template v-for="(validator, validatorName, index) in $v.password_confirmation.$params">

@@ -17,13 +17,13 @@
 
       <PDInput
         id="email"
-        type="email"
-        :vObj="$v.email"
-        data-test-id="login_form_input_email"
-        autocomplete="email"
         :label-text="$t('form.email')"
-        label-data-test-id="login_form_label_email"
+        :v-obj="$v.email"
+        autocomplete="email"
         container-class="col-sm-3"
+        data-test-id="login_form_input_email"
+        label-data-test-id="login_form_label_email"
+        type="email"
       >
         <template #error>
           <template v-for="(validator, validatorName, index) in $v.email.$params">
@@ -39,13 +39,13 @@
 
       <PDInput
         id="password"
-        type="password"
-        :vObj="$v.password"
-        data-test-id="login_form_input_password"
-        autocomplete="current-password"
         :label-text="$t('form.password')"
-        label-data-test-id="login_form_label_password"
+        :v-obj="$v.password"
+        autocomplete="current-password"
         container-class="col-sm-3"
+        data-test-id="login_form_input_password"
+        label-data-test-id="login_form_label_password"
+        type="password"
       >
         <template #error>
           <template v-for="(validator, validatorName, index) in $v.password.$params">
