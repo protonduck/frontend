@@ -51,7 +51,6 @@ const app = new Vue({
 });
 
 components.forEach((component) => {
-  console.log(component);
   Vue.component(component.name, component);
 });
 
