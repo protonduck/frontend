@@ -14,23 +14,18 @@
       </div>
     </div>
     <form @submit.prevent="login" novalidate>
-      <div class="form-group">
-        <label
-          data-testid="login_form_label_email"
-          for="email"
-        >
-          {{ $t('form.email') }}
-        </label>
-        <div class="col-sm-3">
-          <input
-            id="email"
-            v-model.trim="$v.email.$model"
-            class="form-control"
-            data-testid="login_form_input_email"
-            type="email"
-            :class="validationCssClass($v.email)"
-            autocomplete="email"
-          />
+
+      <PDInput
+        id="email"
+        type="email"
+        :vObj="$v.email"
+        data-test-id="login_form_input_email"
+        autocomplete="email"
+        :label-text="$t('form.email')"
+        label-data-test-id="login_form_label_email"
+        container-class="col-sm-3"
+      >
+        <template #error>
           <template v-for="(validator, validatorName, index) in $v.email.$params">
             <div
               v-if="!$v.email[validatorName]"
@@ -39,25 +34,20 @@
               class="invalid-feedback"
             />
           </template>
-        </div>
-      </div>
-      <div class="form-group">
-        <label
-          data-testid="login_form_label_password"
-          for="password"
-        >
-          {{ $t('form.password') }}
-        </label>
-        <div class="col-sm-3">
-          <input
-            id="password"
-            v-model.trim="$v.password.$model"
-            class="form-control"
-            data-testid="login_form_input_password"
-            type="password"
-            :class="validationCssClass($v.password)"
-            autocomplete="current-password"
-          />
+        </template>
+      </PDInput>
+
+      <PDInput
+        id="password"
+        type="password"
+        :vObj="$v.password"
+        data-test-id="login_form_input_password"
+        autocomplete="current-password"
+        :label-text="$t('form.password')"
+        label-data-test-id="login_form_label_password"
+        container-class="col-sm-3"
+      >
+        <template #error>
           <template v-for="(validator, validatorName, index) in $v.password.$params">
             <div
               v-if="!$v.password[validatorName]"
@@ -66,8 +56,9 @@
               class="invalid-feedback"
             />
           </template>
-        </div>
-      </div>
+        </template>
+      </PDInput>
+
       <button
         class="btn btn-success"
         data-testid="login_form_button_login"
@@ -114,12 +105,6 @@ export default {
             this.responseErrors = err.response.data;
           }
         });
-    },
-    validationCssClass(validation) {
-      return {
-        'is-valid': !validation.$error && validation.$dirty,
-        'is-invalid': validation.$error,
-      };
     },
   },
   validations: {

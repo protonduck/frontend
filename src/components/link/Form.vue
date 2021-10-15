@@ -14,7 +14,7 @@
             autocomplete="off"
             class="form-control"
             type="text"
-            @keydown="responseErrors = responseErrors.filter((item) => item.field !== 'title')"
+            @keydown="filterErrors('title')"
           >
           <template v-for="(validator, validatorName, index) in $v.title.$params">
             <div
@@ -34,9 +34,7 @@
             class="form-control"
             rows="2"
             type="text"
-            @keydown="responseErrors = responseErrors.filter(
-              (item) => item.field !== 'description'
-            )"
+            @keydown="filterErrors('description')"
           ></textarea>
           <template v-for="(validator, validatorName, index) in $v.description.$params">
             <div
@@ -58,7 +56,7 @@
             autocomplete="off"
             class="form-control"
             type="text"
-            @keydown="responseErrors = responseErrors.filter((item) => item.field !== 'url')"
+            @keydown="filterErrors('url')"
           >
           <template v-for="(validator, validatorName, index) in $v.url.$params">
             <div
@@ -79,9 +77,7 @@
             :class="validationCssClass($v.category_id)"
             class="form-control"
             type="text"
-            @keydown="responseErrors = responseErrors.filter(
-              (item) => item.field !== 'category_id'
-            )"
+            @keydown="filterErrors('category_id')"
           />
           <template v-for="(validator, validatorName, index) in $v.category_id.$params">
             <div
@@ -252,6 +248,9 @@ export default {
         'is-valid': !validation.$error && validation.$dirty,
         'is-invalid': validation.$error,
       };
+    },
+    filterErrors(field) {
+      return this.responseErrors.filter((item) => item.field !== field);
     },
   },
   created() {

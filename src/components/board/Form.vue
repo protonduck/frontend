@@ -13,7 +13,7 @@
             autocomplete="off"
             class="form-control"
             type="text"
-            @keydown="responseErrors = responseErrors.filter((item) => item.field !== 'name')"
+            @keydown="filterErrors('name')"
           >
           <template v-for="(validator, validatorName, index) in $v.name.$params">
             <div
@@ -35,7 +35,7 @@
             class="form-control"
             rows="2"
             type="text"
-            @keydown="responseErrors = responseErrors.filter((item) => item.field !== 'image')"
+            @keydown="filterErrors('image')"
           ></textarea>
           <template v-for="(validator, validatorName, index) in $v.image.$params">
             <div
@@ -188,6 +188,9 @@ export default {
         'is-valid': !validation.$error && validation.$dirty,
         'is-invalid': validation.$error,
       };
+    },
+    filterErrors(field) {
+      return this.responseErrors.filter((item) => item.field !== field);
     },
   },
   created() {

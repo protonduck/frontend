@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Axios from 'axios';
 import VueI18n from 'vue-i18n';
 import Vuelidate from 'vuelidate';
+import components from '@/components/ui';
 import Store, { authTokenName } from './store';
 import App from './components/App.vue';
 import { router } from './router';
@@ -39,7 +40,7 @@ if (authToken) {
   Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${authToken}`;
 }
 
-const main = new Vue({
+const app = new Vue({
   i18n,
   router,
   render: (h) => h(App),
@@ -49,7 +50,9 @@ const main = new Vue({
   },
 });
 
-// Mount only if div#app exist
-if (document.getElementById('app')) {
-  main.$mount('#app');
-}
+components.forEach((component) => {
+  console.log(component);
+  Vue.component(component.name, component);
+});
+
+app.$mount('#app');
