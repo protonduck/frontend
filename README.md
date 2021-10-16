@@ -1,6 +1,6 @@
-## Open Source Bookmark Manager (frontend)
+## ProtonDuck - Open Source Bookmark Manager (frontend)
 
-Frontend for [Bookmarks](https://github.com/dignityinside/bookmarks).
+Frontend for [Bookmarks](https://github.com/protonduck/bookmarks).
 
 ## Project setup
 ```

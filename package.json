@@ -1,7 +1,20 @@
 {
   "name": "bookmarks-frontend",
-  "version": "1.1.0",
+  "description": "Frontend for opensource bookmark manager ProtonDuck.",
+  "keywords": [
+    "bookmark-manager",
+    "bookmark",
+    "bookmark-frontend",
+    "vuejs"
+  ],
+  "homepage": "https://github.com/protonduck",
+  "funding": {
+    "type": "individual",
+    "url": "http://protonduck.com"
+  },
+  "version": "1.1.1",
   "private": true,
+  "license": "AGPL-3.0-only",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -10,33 +23,33 @@
     "test:e2e:run": "cypress run --config fileServerFolder=tests/e2e/cypress"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "bootstrap": "^4.6.0",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.0",
     "lodash": "^4.17.20",
     "popper.js": "^1.16.1",
-    "vue": "^2.6.11",
-    "vue-i18n": "^8.22.4",
-    "vue-loader": "^15.9.6",
-    "vue-router": "^3.5.1",
+    "vue": "^2.6.14",
+    "vue-i18n": "^8.26.5",
+    "vue-loader": "^15.9.8",
+    "vue-router": "^3.5.2",
     "vuedraggable": "^2.24.3",
     "vuelidate": "^0.7.6",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.2",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@vue/cli-plugin-eslint": "~4.5.14",
+    "@vue/cli-service": "~4.5.14",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "css-loader": "^3.6.0",
-    "cypress": "^7.5.0",
+    "cypress": "^7.7.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-cypress": "^2.11.3",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^5.0.0",
-    "sass": "^1.32.5",
-    "sass-loader": "^10.1.1",
-    "vue-template-compiler": "^2.6.11"
+    "sass": "^1.43.2",
+    "sass-loader": "^10.2.0",
+    "vue-template-compiler": "^2.6.14"
   }
 }
