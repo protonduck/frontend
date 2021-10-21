@@ -132,7 +132,7 @@ import {
 } from 'vuelidate/lib/validators';
 import { serverError } from '@/validators/validators';
 import LinkService from '../../services/LinkService';
-import Spinner from '../misc/Spinner.vue';
+import Spinner from '../../components/misc/Spinner.vue';
 import BoardService from '../../services/BoardService';
 
 export default {

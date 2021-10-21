@@ -1,6 +1,6 @@
-import Login from './components/user/Login.vue';
-import Signup from './components/user/Signup.vue';
-import BoardsList from './components/board/List.vue';
+import Login from './views/user/Login.vue';
+import Signup from './views/user/Signup.vue';
+import BoardsList from './views/board/List.vue';
 
 // eslint-disable-next-line import/prefer-default-export
 export const routes = [
