@@ -67,18 +67,25 @@
             />
           </template>
         </div>
-        <div class="form-group">
+        <div class="form-group" v-if="!isNewRecord">
           <label for="link-category-id">
             {{ $t('form.link.category_id') }}
           </label>
-          <input
+          <select
             id="link-category-id"
-            v-model.trim="$v.category_id.$model"
+            v-model="$v.category_id.$model"
             :class="validationCssClass($v.category_id)"
             class="form-control"
-            type="text"
             @keydown="filterErrors('category_id')"
-          />
+          >
+            <option
+              v-for="(category, index) in categories"
+              :key="index"
+              :value="category.id"
+            >
+              {{ category.name }}
+            </option>
+          </select>
           <template v-for="(validator, validatorName, index) in $v.category_id.$params">
             <div
               v-if="!$v.category_id[validatorName]"
@@ -177,6 +184,9 @@ export default {
   computed: {
     isNewRecord() {
       return this.id === null;
+    },
+    categories() {
+      return this.$store.getters.categories;
     },
   },
   methods: {
