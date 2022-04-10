@@ -89,7 +89,7 @@ import {
 } from 'vuelidate/lib/validators';
 import { serverError } from '@/validators/validators';
 import BoardService from '../../services/BoardService';
-import Spinner from '../../components/misc/Spinner.vue';
+import Spinner from '../../components/Elements/e-spinner/Spinner.vue';
 
 export default {
   name: 'BoardForm',

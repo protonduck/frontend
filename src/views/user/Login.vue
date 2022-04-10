@@ -14,13 +14,11 @@
       </div>
     </div>
     <form @submit.prevent="login" novalidate>
-
       <PDInput
         id="email"
         :label-text="$t('form.email')"
         :v-obj="$v.email"
         autocomplete="email"
-        container-class="col-sm-3"
         data-test-id="login_form_input_email"
         label-data-test-id="login_form_label_email"
         type="email"
@@ -42,7 +40,6 @@
         :label-text="$t('form.password')"
         :v-obj="$v.password"
         autocomplete="current-password"
-        container-class="col-sm-3"
         data-test-id="login_form_input_password"
         label-data-test-id="login_form_label_password"
         type="password"
@@ -76,6 +73,7 @@ import {
   email,
   helpers,
 } from 'vuelidate/lib/validators';
+import PDInput from '@/components/Elements/e-input/Input.vue';
 
 export default {
   data() {
@@ -84,6 +82,9 @@ export default {
       password: '',
       responseErrors: [],
     };
+  },
+  components: {
+    PDInput,
   },
   methods: {
     login() {

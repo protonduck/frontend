@@ -45,7 +45,7 @@ import _ from 'lodash';
 import draggable from 'vuedraggable';
 import BoardService from '../../services/BoardService';
 import CategoriesList from '../category/List.vue';
-import Modal from '../../components/misc/Modal.vue';
+import Modal from '../../components/Elements/e-modal/Modal.vue';
 import BoardForm from './Form.vue';
 
 export default {

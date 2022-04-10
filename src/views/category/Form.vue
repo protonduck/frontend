@@ -133,7 +133,7 @@ import {
 import { serverError } from '@/validators/validators';
 import CategoryService from '../../services/CategoryService';
 import BoardService from '../../services/BoardService';
-import Spinner from '../../components/misc/Spinner.vue';
+import Spinner from '../../components/Elements/e-spinner/Spinner.vue';
 
 export default {
   name: 'CategoryForm',

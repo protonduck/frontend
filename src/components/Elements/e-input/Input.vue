@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'PDInput',
+  name: 'input',
   props: {
     id: {
       required: true,
@@ -69,6 +69,7 @@ export default {
     containerClass: {
       required: false,
       type: String,
+      default: 'col-sm-3',
     },
   },
   methods: {
@@ -81,7 +82,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>

@@ -42,7 +42,7 @@ import draggable from 'vuedraggable';
 import _ from 'lodash';
 import LinkForm from './Form.vue';
 import LinkService from '../../services/LinkService';
-import Modal from '../../components/misc/Modal.vue';
+import Modal from '../../components/Elements/e-modal/Modal.vue';
 
 export default {
   name: 'LinkList',

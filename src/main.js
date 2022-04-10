@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Axios from 'axios';
 import VueI18n from 'vue-i18n';
 import Vuelidate from 'vuelidate';
-import components from '@/components/ui';
 import Store, { authTokenName } from './store';
 import App from './components/App.vue';
 import { router } from './router';
@@ -48,10 +47,6 @@ const app = new Vue({
     // set BaseURL for axios
     Vue.prototype.$http.defaults.baseURL = process.env.VUE_APP_API_URL;
   },
-});
-
-components.forEach((component) => {
-  Vue.component(component.name, component);
 });
 
 app.$mount('#app');

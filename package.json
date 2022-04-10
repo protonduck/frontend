@@ -20,7 +20,9 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e:open": "cypress open --config fileServerFolder=tests/e2e/cypress",
-    "test:e2e:run": "cypress run --config fileServerFolder=tests/e2e/cypress"
+    "test:e2e:run": "cypress run --config fileServerFolder=tests/e2e/cypress",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "axios": "^0.21.4",
@@ -37,10 +39,16 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.9",
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "@storybook/addon-actions": "^6.4.20",
+    "@storybook/addon-essentials": "^6.4.20",
+    "@storybook/addon-links": "^6.4.20",
+    "@storybook/vue": "^6.4.20",
     "@vue/cli-plugin-eslint": "~4.5.14",
     "@vue/cli-service": "~4.5.14",
     "@vue/eslint-config-airbnb": "^5.0.2",
+    "babel-loader": "^8.2.4",
     "css-loader": "^3.6.0",
     "cypress": "^7.7.0",
     "eslint": "^6.7.2",

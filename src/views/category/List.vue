@@ -50,7 +50,7 @@ import draggable from 'vuedraggable';
 import CategoryForm from './Form.vue';
 import LinkList from '../link/List.vue';
 import CategoryService from '../../services/CategoryService';
-import Modal from '../../components/misc/Modal.vue';
+import Modal from '../../components/Elements/e-modal/Modal.vue';
 
 export default {
   name: 'CategoriesList',

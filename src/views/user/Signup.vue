@@ -20,7 +20,6 @@
         :label-text="$t('form.username')"
         :v-obj="$v.name"
         autocomplete="username"
-        container-class="col-sm-3"
         data-test-id="signup_form_input_username"
         label-data-test-id="signup_form_label_username"
       >
@@ -41,7 +40,6 @@
         :label-text="$t('form.email')"
         :v-obj="$v.email"
         autocomplete="email"
-        container-class="col-sm-3"
         data-test-id="signup_form_input_email"
         label-data-test-id="signup_form_label_email"
         type="email"
@@ -63,7 +61,6 @@
         :label-text="$t('form.password')"
         :v-obj="$v.password"
         autocomplete="new-password"
-        container-class="col-sm-3"
         data-test-id="signup_form_input_password"
         label-data-test-id="signup_form_label_password"
         type="password"
@@ -85,7 +82,6 @@
         :label-text="$t('form.passwordConfirm')"
         :v-obj="$v.password_confirmation"
         autocomplete="off"
-        container-class="col-sm-3"
         data-test-id="signup_form_input_password_confirmation"
         label-data-test-id="signup_form_label_password_confirmation"
         type="password"
@@ -121,6 +117,7 @@ import {
   minLength,
   required,
 } from 'vuelidate/lib/validators';
+import PDInput from '@/components/Elements/e-input/Input.vue';
 
 export default {
   data() {
@@ -132,6 +129,9 @@ export default {
       is_admin: null,
       responseErrors: [],
     };
+  },
+  components: {
+    PDInput,
   },
   methods: {
     register() {
