@@ -6,7 +6,9 @@ import messages from './en';
 Vue.use(VueI18n);
 
 export const localeParamName = 'selectedLocale';
+
 let selectedLocale = localStorage.getItem(localeParamName);
+
 if (!selectedLocale) {
   selectedLocale = 'en';
 }
@@ -29,22 +31,23 @@ function setI18nLanguage(lang) {
 }
 
 export function loadLanguageAsync(lang) {
-  // Если локализация та же
+  // when same localization
   if (i18n.locale === lang) {
     return Promise.resolve(setI18nLanguage(lang));
   }
 
-  // Если локализация уже была загружена
+  // when localization has already been uploaded
   if (loadedLanguages.includes(lang)) {
     return Promise.resolve(setI18nLanguage(lang));
   }
 
-  // Если локализация ещё не была загружена
+  // when localization has not yet been uploaded
   return import(`./${lang}.js`)
     // eslint-disable-next-line no-shadow
     .then((messages) => {
       i18n.setLocaleMessage(lang, messages.default);
       loadedLanguages.push(lang);
+
       return setI18nLanguage(lang);
     });
 }

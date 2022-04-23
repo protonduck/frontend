@@ -4,7 +4,7 @@ import VueI18n from 'vue-i18n';
 import Vuelidate from 'vuelidate';
 import Store, { authTokenName } from './store';
 import App from './components/App.vue';
-import { router } from './router';
+import router from './router';
 import { i18n } from './lang/i18n-setup';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@fortawesome/fontawesome-free/css/all.css';
