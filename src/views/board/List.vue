@@ -89,7 +89,7 @@ export default {
     update() {
       // eslint-disable-next-line array-callback-return
       this.boards.map((board, index) => {
-        this.$store.dispatch('boardSave', {
+        this.$store.dispatch('save', {
           url: `/boards/${board.id}`,
           method: 'put',
           // eslint-disable-next-line no-param-reassign

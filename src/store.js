@@ -58,39 +58,21 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login({ commit }, user) {
+    auth(context, payload) {
       return new Promise((resolve, reject) => {
-        axios({ url: '/user/login', data: user, method: 'POST' })
+        axios({
+          url: payload.url,
+          data: payload.data,
+          method: 'POST',
+        })
           .then((resp) => {
             const token = resp.data.api_key;
-            // eslint-disable-next-line no-shadow
-            const user = resp.data;
             localStorage.setItem(authTokenName, token);
-            axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-            commit('auth_success', token, user);
+            context.commit('auth_success', token, resp.data);
             resolve(resp);
           })
           .catch((err) => {
-            commit('auth_error');
-            localStorage.removeItem(authTokenName);
-            reject(err);
-          });
-      });
-    },
-    register({ commit }, user) {
-      return new Promise((resolve, reject) => {
-        axios({ url: '/user/signup', data: user, method: 'POST' })
-          .then((resp) => {
-            const token = resp.data.api_key;
-            // eslint-disable-next-line no-shadow
-            const user = resp.data;
-            localStorage.setItem(authTokenName, token);
-            axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-            commit('auth_success', token, user);
-            resolve(resp);
-          })
-          .catch((err) => {
-            commit('auth_error', err);
+            context.commit('auth_error');
             localStorage.removeItem(authTokenName);
             reject(err);
           });
@@ -100,44 +82,13 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
         commit('logout');
         localStorage.removeItem(authTokenName);
-        delete axios.defaults.headers.common.Authorization;
         resolve();
       });
     },
-    boardSave(context, payload) {
+    save(context, payload) {
       return new Promise((resolve, reject) => {
         axios({
           url: payload.url,
-          method: payload.method,
-          data: payload,
-        })
-          .then((resp) => {
-            resolve(resp);
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      });
-    },
-    categorySave(context, payload) {
-      return new Promise((resolve, reject) => {
-        axios({
-          url: payload.url,
-          method: payload.method,
-          data: payload,
-        })
-          .then((resp) => {
-            resolve(resp);
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      });
-    },
-    linkSave(context, payload) {
-      return new Promise((resolve, reject) => {
-        axios({
-          url: payload.api_url,
           method: payload.method,
           data: payload,
         })

@@ -134,7 +134,7 @@ export default {
 
       this.isSaving = true;
 
-      this.$store.dispatch('boardSave', {
+      this.$store.dispatch('save', {
         url: this.isNewRecord ? '/boards' : `/boards/${this.id}`,
         method: this.isNewRecord ? 'post' : 'put',
         name: this.name,
@@ -166,7 +166,7 @@ export default {
     remove() {
       this.isRemoving = true;
 
-      this.$store.dispatch('categorySave', {
+      this.$store.dispatch('save', {
         url: `/boards/${this.id}`,
         method: 'delete',
       })

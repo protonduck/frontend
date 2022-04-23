@@ -148,7 +148,10 @@ export default {
         is_admin: this.is_admin,
       };
 
-      this.$store.dispatch('register', data)
+      this.$store.dispatch('auth', {
+        url: '/user/signup',
+        data,
+      })
         .then(() => this.$router.push('/'))
         .catch((err) => {
           if (err.response.status === 422) {

@@ -81,7 +81,7 @@ export default {
     update() {
       // eslint-disable-next-line array-callback-return
       this.categories.map((category, index) => {
-        this.$store.dispatch('categorySave', {
+        this.$store.dispatch('save', {
           url: `/categories/${category.id}`,
           method: 'put',
           // eslint-disable-next-line no-param-reassign

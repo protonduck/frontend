@@ -20,18 +20,18 @@ Vue.prototype.$http = Axios;
 
 Vue.config.productionTip = false;
 
-// Authorization
-const authToken = localStorage.getItem(authTokenName);
-
-if (authToken) {
-  Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${authToken}`;
-}
-
 const app = new Vue({
   i18n,
   router,
   render: (h) => h(App),
   beforeMount() {
+    // authorization
+    const authToken = localStorage.getItem(authTokenName);
+
+    if (authToken) {
+      Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${authToken}`;
+    }
+
     // set BaseURL for axios
     Vue.prototype.$http.defaults.baseURL = process.env.VUE_APP_API_URL;
   },

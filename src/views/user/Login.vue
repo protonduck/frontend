@@ -94,9 +94,12 @@ export default {
         return;
       }
 
-      this.$store.dispatch('login', {
-        email: this.email,
-        password: this.password,
+      this.$store.dispatch('auth', {
+        url: '/user/login',
+        data: {
+          email: this.email,
+          password: this.password,
+        },
       })
         .then(() => {
           this.$router.push('/');
