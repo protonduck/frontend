@@ -1,17 +1,13 @@
 {
-  "name": "bookmarks-frontend",
-  "description": "Frontend for opensource bookmark manager ProtonDuck.",
+  "name": "frontend",
+  "description": "Frontend for open source bookmark manager ProtonDuck.",
   "keywords": [
     "bookmark-manager",
     "bookmark",
-    "bookmark-frontend",
+    "frontend",
     "vuejs"
   ],
   "homepage": "https://github.com/protonduck",
-  "funding": {
-    "type": "individual",
-    "url": "http://protonduck.com"
-  },
   "version": "1.1.1",
   "private": true,
   "license": "AGPL-3.0-only",
@@ -27,9 +23,7 @@
   "dependencies": {
     "axios": "^0.21.4",
     "bootstrap": "^4.6.0",
-    "jquery": "^3.6.0",
     "lodash": "^4.17.20",
-    "popper.js": "^1.16.1",
     "vue": "^2.6.14",
     "vue-i18n": "^8.26.5",
     "vue-loader": "^15.9.8",
@@ -48,14 +42,11 @@
     "@vue/cli-plugin-eslint": "~4.5.14",
     "@vue/cli-service": "~4.5.14",
     "@vue/eslint-config-airbnb": "^5.0.2",
-    "babel-loader": "^8.2.4",
-    "css-loader": "^3.6.0",
     "cypress": "^7.7.0",
     "eslint": "^6.7.2",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-vue": "^6.2.2",
-    "node-sass": "^7.0.0",
     "sass": "^1.43.2",
     "sass-loader": "^10.2.0",
     "vue-template-compiler": "^2.6.14"
