@@ -49,8 +49,8 @@ import _ from 'lodash';
 import draggable from 'vuedraggable';
 import CategoryForm from './Form.vue';
 import LinkList from '../link/List.vue';
-import CategoryService from '../../services/CategoryService';
 import Modal from '../../components/Elements/e-modal/Modal.vue';
+import bus from '../../bus';
 
 export default {
   name: 'CategoriesList',
@@ -75,7 +75,7 @@ export default {
       const selectedCategory = _.find(this.categories, { id: selectedId });
       this.$store.commit('toggle_category_modal', true);
       this.$nextTick(() => {
-        CategoryService.edit(selectedCategory);
+        bus.edit('edit-category', selectedCategory);
       });
     },
     update() {
@@ -91,11 +91,6 @@ export default {
         });
       });
     },
-  },
-  created() {
-    CategoryService.$on('categoriesChanged', () => {
-      this.categories = CategoryService.categories;
-    });
   },
 };
 </script>

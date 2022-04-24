@@ -43,10 +43,10 @@
 <script>
 import _ from 'lodash';
 import draggable from 'vuedraggable';
-import BoardService from '../../services/BoardService';
 import CategoriesList from '../category/List.vue';
 import Modal from '../../components/Elements/e-modal/Modal.vue';
 import BoardForm from './Form.vue';
+import bus from '../../bus';
 
 export default {
   name: 'BoardsList',
@@ -76,7 +76,7 @@ export default {
       this.$store.commit('toggle_board_modal', true);
 
       this.$nextTick(() => {
-        BoardService.edit(selectedItem);
+        bus.edit('edit-board', selectedItem);
       });
     },
     switchBoard(id) {
@@ -84,7 +84,7 @@ export default {
 
       localStorage.setItem('active_board_id', id);
 
-      BoardService.$emit('boardsChanged');
+      bus.edit('board-changed');
     },
     update() {
       // eslint-disable-next-line array-callback-return
@@ -101,10 +101,13 @@ export default {
     },
   },
   created() {
-    BoardService.$on('boardsChanged', () => {
-      if (BoardService.getActiveBoard() !== undefined) {
-        const activeBoard = BoardService.getActiveBoard();
+    bus.$on('board-changed', () => {
+      const activeBoard = _.find(
+        this.$store.getters.boards,
+        { id: this.$store.getters.activeBoardId },
+      );
 
+      if (activeBoard !== undefined) {
         this.$store.commit('updateCategories', activeBoard.categories);
 
         document.body.style.backgroundImage = `url('${activeBoard.image}')`;
@@ -112,7 +115,7 @@ export default {
       }
     });
 
-    BoardService.fetchBoards();
+    bus.fetchBoards();
   },
 };
 </script>

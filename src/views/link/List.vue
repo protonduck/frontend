@@ -41,7 +41,7 @@
 import draggable from 'vuedraggable';
 import _ from 'lodash';
 import LinkForm from './Form.vue';
-import LinkService from '../../services/LinkService';
+import bus from '../../bus';
 import Modal from '../../components/Elements/e-modal/Modal.vue';
 
 export default {
@@ -68,7 +68,7 @@ export default {
       this.$store.commit('toggle_link_modal', true);
 
       this.$nextTick(() => {
-        LinkService.edit(selectedItem);
+        bus.edit('edit-link', selectedItem);
       });
     },
     update() {

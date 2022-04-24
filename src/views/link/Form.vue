@@ -138,9 +138,8 @@ import {
   helpers,
 } from 'vuelidate/lib/validators';
 import { serverError } from '@/validators/validators';
-import LinkService from '../../services/LinkService';
+import bus from '../../bus';
 import Spinner from '../../components/Elements/e-spinner/Spinner.vue';
-import BoardService from '../../services/BoardService';
 
 export default {
   name: 'LinkForm',
@@ -211,7 +210,7 @@ export default {
         },
       })
         .then(() => {
-          BoardService.fetchBoards();
+          bus.fetchBoards();
           this.$store.commit('toggle_link_modal', false);
           this.reset();
         })
@@ -243,7 +242,7 @@ export default {
         method: 'delete',
       })
         .then(() => {
-          BoardService.fetchBoards();
+          bus.fetchBoards();
           this.$store.commit('toggle_link_modal', false);
           this.reset();
         })
@@ -271,7 +270,7 @@ export default {
 
     this.category_id = this.$store.getters.currentCategoryId;
 
-    LinkService.$on('edit', (item) => {
+    bus.$on('edit-link', (item) => {
       this.id = item.id;
       this.category_id = item.category_id;
       this.title = item.title;

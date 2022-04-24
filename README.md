@@ -1,6 +1,6 @@
 ## ProtonDuck - Open Source Bookmark Manager (frontend)
 
-Frontend for [Bookmarks](https://github.com/protonduck/bookmarks).
+Frontend for [Bookmarks](https://github.com/protonduck/backend).
 
 ## Project setup
 ```
