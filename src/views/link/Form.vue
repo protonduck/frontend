@@ -238,7 +238,7 @@ export default {
     remove() {
       this.isRemoving = true;
 
-      this.$store.dispatch('linkSave', {
+      this.$store.dispatch('save', {
         api_url: `/links/${this.id}`,
         method: 'delete',
       })
