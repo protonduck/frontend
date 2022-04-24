@@ -82,10 +82,12 @@ export default {
       // eslint-disable-next-line array-callback-return
       this.categories.map((category, index) => {
         this.$store.dispatch('save', {
-          url: `/categories/${category.id}`,
+          api_url: `/categories/${category.id}`,
           method: 'put',
-          // eslint-disable-next-line no-param-reassign
-          sort: category.sort = index + 1,
+          data: {
+            // eslint-disable-next-line no-param-reassign
+            sort: category.sort = index + 1,
+          },
         });
       });
     },

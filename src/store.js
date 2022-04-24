@@ -86,9 +86,9 @@ export default new Vuex.Store({
     save(context, payload) {
       return new Promise((resolve, reject) => {
         axios({
-          url: payload.url,
+          url: payload.api_url,
           method: payload.method,
-          data: payload,
+          data: payload.data,
         })
           .then((resp) => {
             resolve(resp);

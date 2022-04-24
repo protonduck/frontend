@@ -191,13 +191,15 @@ export default {
       this.isSaving = true;
 
       this.$store.dispatch('save', {
-        url: this.isNewRecord ? '/categories' : `/categories/${this.id}`,
+        api_url: this.isNewRecord ? '/categories' : `/categories/${this.id}`,
         method: this.isNewRecord ? 'post' : 'put',
-        board_id: this.$store.getters.activeBoardId,
-        name: this.name,
-        description: this.description,
-        color: this.color,
-        icon: this.icon,
+        data: {
+          board_id: this.$store.getters.activeBoardId,
+          name: this.name,
+          description: this.description,
+          color: this.color,
+          icon: this.icon,
+        },
       })
         .then(() => {
           BoardService.fetchBoards();
@@ -228,7 +230,7 @@ export default {
       this.isRemoving = true;
 
       this.$store.dispatch('save', {
-        url: `/categories/${this.id}`,
+        api_url: `/categories/${this.id}`,
         method: 'delete',
       })
         .then(() => {

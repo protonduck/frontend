@@ -77,8 +77,10 @@ export default {
         this.$store.dispatch('save', {
           api_url: `/links/${link.id}`,
           method: 'put',
-          // eslint-disable-next-line no-param-reassign
-          sort: link.sort = index + 1,
+          data: {
+            // eslint-disable-next-line no-param-reassign
+            sort: link.sort = index + 1,
+          },
         });
       });
     },

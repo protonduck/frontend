@@ -202,11 +202,13 @@ export default {
       this.$store.dispatch('save', {
         api_url: this.isNewRecord ? '/links' : `/links/${this.id}`,
         method: this.isNewRecord ? 'post' : 'put',
-        id: this.id,
-        category_id: this.category_id,
-        title: this.title,
-        description: this.description,
-        url: this.url,
+        data: {
+          id: this.id,
+          category_id: this.category_id,
+          title: this.title,
+          description: this.description,
+          url: this.url,
+        },
       })
         .then(() => {
           BoardService.fetchBoards();
@@ -236,7 +238,7 @@ export default {
     remove() {
       this.isRemoving = true;
 
-      this.$store.dispatch('save', {
+      this.$store.dispatch('linkSave', {
         api_url: `/links/${this.id}`,
         method: 'delete',
       })

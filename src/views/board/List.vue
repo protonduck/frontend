@@ -90,10 +90,12 @@ export default {
       // eslint-disable-next-line array-callback-return
       this.boards.map((board, index) => {
         this.$store.dispatch('save', {
-          url: `/boards/${board.id}`,
+          api_url: `/boards/${board.id}`,
           method: 'put',
-          // eslint-disable-next-line no-param-reassign
-          sort: board.sort = index + 1,
+          data: {
+            // eslint-disable-next-line no-param-reassign
+            sort: board.sort = index + 1,
+          },
         });
       });
     },

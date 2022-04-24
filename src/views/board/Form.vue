@@ -135,10 +135,12 @@ export default {
       this.isSaving = true;
 
       this.$store.dispatch('save', {
-        url: this.isNewRecord ? '/boards' : `/boards/${this.id}`,
+        api_url: this.isNewRecord ? '/boards' : `/boards/${this.id}`,
         method: this.isNewRecord ? 'post' : 'put',
-        name: this.name,
-        image: this.image,
+        data: {
+          name: this.name,
+          image: this.image,
+        },
       })
         .then(() => {
           BoardService.fetchBoards();
@@ -167,7 +169,7 @@ export default {
       this.isRemoving = true;
 
       this.$store.dispatch('save', {
-        url: `/boards/${this.id}`,
+        api_url: `/boards/${this.id}`,
         method: 'delete',
       })
         .then(() => {
