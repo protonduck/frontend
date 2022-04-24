@@ -10,7 +10,6 @@ export default new Vuex.Store({
   state: {
     status: '',
     token: localStorage.getItem(authTokenName) || '',
-    user: {},
     show_category_modal: false,
     show_board_modal: false,
     show_link_modal: false,
@@ -23,10 +22,9 @@ export default new Vuex.Store({
     auth_request(state) {
       state.status = 'loading';
     },
-    auth_success(state, token, user) {
+    auth_success(state, token) {
       state.status = 'success';
       state.token = token;
-      state.user = user;
     },
     auth_error(state) {
       state.status = 'error';
@@ -68,7 +66,7 @@ export default new Vuex.Store({
           .then((resp) => {
             const token = resp.data.api_key;
             localStorage.setItem(authTokenName, token);
-            context.commit('auth_success', token, resp.data);
+            context.commit('auth_success', token);
             resolve(resp);
           })
           .catch((err) => {
