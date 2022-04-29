@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: 'input',
+  name: 'e-input',
   props: {
     id: {
       required: true,

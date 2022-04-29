@@ -30,11 +30,11 @@
       </nav>
     </div>
 
-    <modal v-if="$store.getters.showBoardModal">
+    <e-modal v-if="$store.getters.showBoardModal">
       <div slot="content">
         <board-form />
       </div>
-    </modal>
+    </e-modal>
 
     <categories-list />
   </div>
@@ -44,7 +44,7 @@
 import _ from 'lodash';
 import draggable from 'vuedraggable';
 import CategoriesList from '../category/List.vue';
-import Modal from '../../components/Elements/e-modal/Modal.vue';
+import eModal from '../../components/Elements/e-modal/e-modal.vue';
 import BoardForm from './Form.vue';
 import bus from '../../bus';
 
@@ -52,7 +52,7 @@ export default {
   name: 'BoardsList',
   components: {
     CategoriesList,
-    Modal,
+    eModal,
     BoardForm,
     draggable,
   },

@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'spinner',
+  name: 'e-spinner',
   props: {
     state: Boolean,
     // eslint-disable-next-line vue/require-prop-type-constructor

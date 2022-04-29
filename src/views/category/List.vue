@@ -36,11 +36,11 @@
       </div>
     </draggable>
 
-    <modal v-if="$store.getters.showCategoryModal">
+    <e-modal v-if="$store.getters.showCategoryModal">
       <div slot="content">
         <category-form></category-form>
       </div>
-    </modal>
+    </e-modal>
   </div>
 </template>
 
@@ -49,7 +49,7 @@ import _ from 'lodash';
 import draggable from 'vuedraggable';
 import CategoryForm from './Form.vue';
 import LinkList from '../link/List.vue';
-import Modal from '../../components/Elements/e-modal/Modal.vue';
+import eModal from '../../components/Elements/e-modal/e-modal.vue';
 import bus from '../../bus';
 
 export default {
@@ -57,7 +57,7 @@ export default {
   components: {
     CategoryForm,
     LinkList,
-    Modal,
+    eModal,
     draggable,
   },
   computed: {

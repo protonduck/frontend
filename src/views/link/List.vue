@@ -29,11 +29,11 @@
       </draggable>
     </ul>
 
-    <modal v-if="$store.getters.showLinkModal">
+    <e-modal v-if="$store.getters.showLinkModal">
       <div slot="content">
         <link-form></link-form>
       </div>
-    </modal>
+    </e-modal>
   </div>
 </template>
 
@@ -42,13 +42,13 @@ import draggable from 'vuedraggable';
 import _ from 'lodash';
 import LinkForm from './Form.vue';
 import bus from '../../bus';
-import Modal from '../../components/Elements/e-modal/Modal.vue';
+import eModal from '../../components/Elements/e-modal/e-modal.vue';
 
 export default {
   name: 'LinkList',
   components: {
     LinkForm,
-    Modal,
+    eModal,
     draggable,
   },
   props: {

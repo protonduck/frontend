@@ -1,8 +1,8 @@
-import Spinner from './Spinner.vue';
+import eSpinner from './e-spinner.vue';
 
 export default {
   title: 'Elements/Mix/Spinner',
-  component: Spinner,
+  component: eSpinner,
   argTypes: {
     state: {
       control: { type: 'select' },
@@ -13,8 +13,8 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { Spinner },
-  template: '<spinner v-bind="$props" />',
+  components: { eSpinner },
+  template: '<e-spinner v-bind="$props" />',
 });
 
 export const Primary = Template.bind({});

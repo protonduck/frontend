@@ -48,9 +48,9 @@
         </div>
         <div class="form-group">
           <button :disabled="isSaving" class="btn btn-success mr-2" type="submit">
-            <spinner :state="isSaving">
+            <e-spinner :state="isSaving">
               <i :class="['fas', isNewRecord ? 'fa-plus-square' : 'fa-save']"></i>
-            </spinner>
+            </e-spinner>
             {{ isNewRecord ? $t('form.add') : $t('form.save') }}
           </button>
           <button
@@ -69,9 +69,9 @@
             type="submit"
             @click.prevent="remove"
           >
-            <spinner :state="isRemoving">
+            <e-spinner :state="isRemoving">
               <i class="fas fa-trash-alt"></i>
-            </spinner>
+            </e-spinner>
             {{ $t('form.remove') }}
           </button>
         </div>
@@ -88,12 +88,12 @@ import {
   helpers,
 } from 'vuelidate/lib/validators';
 import { serverError } from '@/validators/validators';
-import Spinner from '../../components/Elements/e-spinner/Spinner.vue';
+import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import bus from '../../bus';
 
 export default {
   name: 'BoardForm',
-  components: { Spinner },
+  components: { eSpinner },
   data() {
     return {
       // form data

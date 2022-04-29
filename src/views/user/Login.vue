@@ -14,7 +14,7 @@
       </div>
     </div>
     <form @submit.prevent="login" novalidate>
-      <PDInput
+      <e-input
         id="email"
         :label-text="$t('form.email')"
         :v-obj="$v.email"
@@ -33,9 +33,9 @@
             />
           </template>
         </template>
-      </PDInput>
+      </e-input>
 
-      <PDInput
+      <e-input
         id="password"
         :label-text="$t('form.password')"
         :v-obj="$v.password"
@@ -54,7 +54,7 @@
             />
           </template>
         </template>
-      </PDInput>
+      </e-input>
 
       <button
         class="btn btn-success"
@@ -73,7 +73,7 @@ import {
   email,
   helpers,
 } from 'vuelidate/lib/validators';
-import PDInput from '@/components/Elements/e-input/Input.vue';
+import eInput from '@/components/Elements/e-input/e-input.vue';
 
 export default {
   data() {
@@ -84,7 +84,7 @@ export default {
     };
   },
   components: {
-    PDInput,
+    eInput,
   },
   methods: {
     login() {

@@ -1,8 +1,8 @@
-import PDInput from './Input.vue';
+import eInput from './e-input.vue';
 
 export default {
   title: 'Elements/Form/Input',
-  component: PDInput,
+  component: eInput,
   argTypes: {
     type: {
       control: { type: 'select' },
@@ -26,8 +26,8 @@ const InputFieldArgs = {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { PDInput },
-  template: '<PDInput v-bind="$props" />',
+  components: { eInput },
+  template: '<e-input v-bind="$props" />',
 });
 
 export const InputField = Template.bind({});
@@ -37,8 +37,8 @@ InputField.args = InputFieldArgs;
 
 const withErrorTemplate = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { PDInput },
-  template: '<PDInput v-bind="$props"><template #error><div class="invalid-feedback">Error</div></template></PDInput>',
+  components: { eInput },
+  template: '<e-input v-bind="$props"><template #error><div class="invalid-feedback">Error</div></template></e-input>',
 });
 
 const InputFieldWithErrorArgs = {

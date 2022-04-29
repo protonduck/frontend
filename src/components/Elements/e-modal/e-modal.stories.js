@@ -1,14 +1,14 @@
-import Modal from './Modal.vue';
+import eModal from './e-modal.vue';
 
 export default {
   title: 'Elements/Mix/Modal',
-  component: Modal,
+  component: eModal,
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { Modal },
-  template: '<modal><div slot="content">Test modal</div></modal>',
+  components: { eModal },
+  template: '<e-modal><div slot="content">Test modal</div></e-modal>',
 });
 
 export const Primary = Template.bind({});
