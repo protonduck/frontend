@@ -1,12 +1,6 @@
 <template>
   <div class="form-group">
-    <label
-      v-if="labelText"
-      :data-testid="labelDataTestId"
-      :for="id"
-    >
-      {{ labelText }}
-    </label>
+    <e-label :id="id" :text="labelText" :data-testid="labelDataTestId" />
     <div :class="containerClass">
       <input
         :id="id"
@@ -23,8 +17,13 @@
 </template>
 
 <script>
+import eLabel from '../e-label/e-label.vue';
+
 export default {
   name: 'e-input',
+  components: {
+    eLabel,
+  },
   props: {
     id: {
       required: true,
@@ -44,20 +43,17 @@ export default {
       ].includes(value),
     },
     labelText: {
-      required: false,
       type: String,
     },
     dataTestId: {
-      required: false,
       type: String,
     },
     labelDataTestId: {
-      required: false,
       type: String,
     },
     autocomplete: {
-      required: false,
       type: String,
+      default: 'off',
       validator: (value) => [
         'off',
         'email',
@@ -67,7 +63,6 @@ export default {
       ].includes(value),
     },
     containerClass: {
-      required: false,
       type: String,
       default: 'col-sm-3',
     },

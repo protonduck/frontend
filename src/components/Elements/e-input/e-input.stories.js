@@ -1,4 +1,5 @@
 import eInput from './e-input.vue';
+import dummyData from './e-input.data';
 
 export default {
   title: 'Elements/Form/Input',
@@ -21,16 +22,14 @@ const Template = (args, { argTypes }) => ({
   template: '<e-input v-bind="$props"><template #error><div class="invalid-feedback">Error</div></template></e-input>',
 });
 
-const params = { id: 'name', type: 'text', labelText: 'Name' };
-
 export const InputField = Template.bind({});
 InputField.args = {
-  ...params,
+  ...dummyData,
   vObj: { $error: false, $dirty: false },
 };
 
 export const inputFieldWithErrorMessage = Template.bind({});
 inputFieldWithErrorMessage.args = {
-  ...params,
+  ...dummyData,
   vObj: { $error: true },
 };
