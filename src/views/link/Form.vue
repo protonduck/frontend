@@ -27,34 +27,15 @@
           containerClass="col-sm-12"
         />
 
-        <div class="form-group" v-if="!isNewRecord">
-          <label for="link-category-id">
-            {{ $t('form.link.category_id') }}
-          </label>
-          <select
-            id="link-category-id"
-            v-model="$v.category_id.$model"
-            :class="validationCssClass($v.category_id)"
-            class="form-control"
-            @keydown="filterErrors('category_id')"
-          >
-            <option
-              v-for="(category, index) in categories"
-              :key="index"
-              :value="category.id"
-            >
-              {{ category.name }}
-            </option>
-          </select>
-          <template v-for="(validator, validatorName, index) in $v.category_id.$params">
-            <div
-              v-if="!$v.category_id[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </div>
+        <e-select
+          v-if="!isNewRecord"
+          :vObj="$v.category_id"
+          :labelText="$t('form.link.category_id')"
+          :options="categories"
+          :errors="responseErrors"
+          id="link-category-id"
+          containerClass="col-sm-12"
+        />
 
         <div class="form-group">
           <button :disabled="isSaving" class="btn btn-success mr-2" type="submit">
@@ -103,6 +84,7 @@ import bus from '../../bus';
 import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import eInput from '../../components/Elements/e-input/e-input.vue';
 import eTextarea from '../../components/Elements/e-textarea/e-textarea.vue';
+import eSelect from '../../components/Elements/e-select/e-select.vue';
 
 export default {
   name: 'LinkForm',
@@ -110,6 +92,7 @@ export default {
     eSpinner,
     eInput,
     eTextarea,
+    eSelect,
   },
   data() {
     return {
@@ -220,15 +203,6 @@ export default {
         }).finally(() => {
           this.isRemoving = false;
         });
-    },
-    validationCssClass(validation) {
-      return {
-        'is-valid': !validation.$error && validation.$dirty,
-        'is-invalid': validation.$error,
-      };
-    },
-    filterErrors(field) {
-      return this.responseErrors.filter((item) => item.field !== field);
     },
   },
   created() {

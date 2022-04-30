@@ -207,12 +207,6 @@ export default {
           this.isRemoving = false;
         });
     },
-    validationCssClass(validation) {
-      return {
-        'is-valid': !validation.$error && validation.$dirty,
-        'is-invalid': validation.$error,
-      };
-    },
   },
   created() {
     // Reset validation

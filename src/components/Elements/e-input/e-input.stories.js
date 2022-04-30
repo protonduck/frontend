@@ -19,7 +19,7 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { eInput },
-  template: '<e-input v-bind="$props"><template #error><div class="invalid-feedback">Error</div></template></e-input>',
+  template: '<e-input v-bind="$props" />',
 });
 
 export const InputField = Template.bind({});
