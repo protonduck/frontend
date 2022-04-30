@@ -51,6 +51,7 @@ export default {
         'text',
         'password',
         'email',
+        'color',
       ].includes(value),
     },
     labelText: {
