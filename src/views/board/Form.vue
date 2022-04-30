@@ -13,26 +13,13 @@
             />
         </div>
 
-        <div class="form-group">
-          <e-label for="board-image" :text="$t('form.board.image')" />
-          <textarea
-            id="board-image"
-            v-model.trim="$v.image.$model"
-            :class="validationCssClass($v.image)"
-            class="form-control"
-            rows="2"
-            type="text"
-            @keydown="filterErrors('image')"
-          ></textarea>
-          <template v-for="(validator, validatorName, index) in $v.image.$params">
-            <div
-              v-if="!$v.image[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </div>
+        <e-textarea
+          :vObj="$v.image"
+          :labelText="$t('form.board.image')"
+          :errors="responseErrors"
+          id="board-image"
+          containerClass="col-sm-12"
+        />
 
         <div class="form-group">
           <button :disabled="isSaving" class="btn btn-success mr-2" type="submit">
@@ -78,15 +65,15 @@ import {
 import { serverError } from '@/validators/validators';
 import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import bus from '../../bus';
-import eLabel from '../../components/Elements/e-label/e-label.vue';
 import eInput from '../../components/Elements/e-input/e-input.vue';
+import eTextarea from '../../components/Elements/e-textarea/e-textarea.vue';
 
 export default {
   name: 'BoardForm',
   components: {
     eSpinner,
-    eLabel,
     eInput,
+    eTextarea,
   },
   data() {
     return {
@@ -184,9 +171,6 @@ export default {
         'is-valid': !validation.$error && validation.$dirty,
         'is-invalid': validation.$error,
       };
-    },
-    filterErrors(field) {
-      return this.responseErrors.filter((item) => item.field !== field);
     },
   },
   created() {

@@ -16,28 +16,13 @@
             />
         </div>
 
-        <div class="form-group">
-          <label for="category-description">
-            {{ $t('form.description') }}
-          </label>
-          <textarea
-            id="category-description"
-            v-model.trim="$v.description.$model"
-            :class="validationCssClass($v.description)"
-            class="form-control"
-            rows="2"
-            type="text"
-            @keydown="filterErrors('description')"
-          />
-          <template v-for="(validator, validatorName, index) in $v.description.$params">
-            <div
-              v-if="!$v.description[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </div>
+        <e-textarea
+          :vObj="$v.description"
+          :labelText="$t('form.description')"
+          :errors="responseErrors"
+          id="category-description"
+          containerClass="col-sm-12"
+        />
 
         <div class="form-group">
           <e-input
@@ -104,6 +89,7 @@ import {
 import { serverError } from '@/validators/validators';
 import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import eInput from '../../components/Elements/e-input/e-input.vue';
+import eTextarea from '../../components/Elements/e-textarea/e-textarea.vue';
 import bus from '../../bus';
 
 export default {
@@ -111,6 +97,7 @@ export default {
   components: {
     eSpinner,
     eInput,
+    eTextarea,
   },
   data() {
     return {
@@ -225,9 +212,6 @@ export default {
         'is-valid': !validation.$error && validation.$dirty,
         'is-invalid': validation.$error,
       };
-    },
-    filterErrors(field) {
-      return this.responseErrors.filter((item) => item.field !== field);
     },
   },
   created() {

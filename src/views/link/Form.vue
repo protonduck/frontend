@@ -11,26 +11,13 @@
           containerClass="col-sm-12"
         />
 
-        <div class="form-group">
-          <label for="link-description">{{ $t('form.link.description') }}</label>
-          <textarea
-            id="link-description"
-            v-model.trim="$v.description.$model"
-            :class="validationCssClass($v.description)"
-            class="form-control"
-            rows="2"
-            type="text"
-            @keydown="filterErrors('description')"
-          ></textarea>
-          <template v-for="(validator, validatorName, index) in $v.description.$params">
-            <div
-              v-if="!$v.description[validatorName]"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-              :key="index"
-            />
-          </template>
-        </div>
+        <e-textarea
+          :vObj="$v.description"
+          :labelText="$t('form.link.description')"
+          :errors="responseErrors"
+          id="link-description"
+          containerClass="col-sm-12"
+        />
 
         <e-input
           :vObj="$v.url"
@@ -68,6 +55,7 @@
             />
           </template>
         </div>
+
         <div class="form-group">
           <button :disabled="isSaving" class="btn btn-success mr-2" type="submit">
             <e-spinner :state="isSaving">
@@ -114,12 +102,14 @@ import { serverError } from '@/validators/validators';
 import bus from '../../bus';
 import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import eInput from '../../components/Elements/e-input/e-input.vue';
+import eTextarea from '../../components/Elements/e-textarea/e-textarea.vue';
 
 export default {
   name: 'LinkForm',
   components: {
     eSpinner,
     eInput,
+    eTextarea,
   },
   data() {
     return {
