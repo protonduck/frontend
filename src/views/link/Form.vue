@@ -3,28 +3,14 @@
     <div class="card-header" v-text="$t(isNewRecord ? 'form.link.add' : 'form.link.update')"></div>
     <div class="card-body">
       <form method="post" @submit.prevent="submit">
-        <div class="form-group">
-          <label for="link-title">
-            {{ $t('form.link.title') }}
-          </label>
-          <input
-            id="link-title"
-            v-model.trim="$v.title.$model"
-            :class="validationCssClass($v.title)"
-            autocomplete="off"
-            class="form-control"
-            type="text"
-            @keydown="filterErrors('title')"
-          >
-          <template v-for="(validator, validatorName, index) in $v.title.$params">
-            <div
-              v-if="!$v.title[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </div>
+        <e-input
+          :vObj="$v.title"
+          :labelText="$t('form.link.title')"
+          :errors="responseErrors"
+          id="link-title"
+          containerClass="col-sm-12"
+        />
+
         <div class="form-group">
           <label for="link-description">{{ $t('form.link.description') }}</label>
           <textarea
@@ -45,28 +31,15 @@
             />
           </template>
         </div>
-        <div class="form-group">
-          <label for="link-url">
-            {{ $t('form.link.url') }}
-          </label>
-          <input
-            id="link-url"
-            v-model.trim="$v.url.$model"
-            :class="validationCssClass($v.url)"
-            autocomplete="off"
-            class="form-control"
-            type="text"
-            @keydown="filterErrors('url')"
-          >
-          <template v-for="(validator, validatorName, index) in $v.url.$params">
-            <div
-              v-if="!$v.url[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </div>
+
+        <e-input
+          :vObj="$v.url"
+          :labelText="$t('form.link.url')"
+          :errors="responseErrors"
+          id="link-url"
+          containerClass="col-sm-12"
+        />
+
         <div class="form-group" v-if="!isNewRecord">
           <label for="link-category-id">
             {{ $t('form.link.category_id') }}
@@ -140,10 +113,14 @@ import {
 import { serverError } from '@/validators/validators';
 import bus from '../../bus';
 import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
+import eInput from '../../components/Elements/e-input/e-input.vue';
 
 export default {
   name: 'LinkForm',
-  components: { eSpinner },
+  components: {
+    eSpinner,
+    eInput,
+  },
   data() {
     return {
       // form data

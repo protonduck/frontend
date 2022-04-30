@@ -7,27 +7,15 @@
     <div class="card-body">
       <form method="post" @submit.prevent="submit">
         <div class="form-group">
-          <label for="category-name">
-            {{ $t('form.name') }}
-          </label>
-          <input
+          <e-input
+            :vObj="$v.name"
+            :labelText="$t('form.name')"
+            :errors="responseErrors"
             id="category-name"
-            v-model.trim="$v.name.$model"
-            :class="validationCssClass($v.name)"
-            autocomplete="off"
-            class="form-control"
-            type="text"
-            @keydown="filterErrors('name')"
-          >
-          <template v-for="(validator, validatorName, index) in $v.name.$params">
-            <div
-              v-if="!$v.name[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
+            containerClass="col-sm-12"
             />
-          </template>
         </div>
+
         <div class="form-group">
           <label for="category-description">
             {{ $t('form.description') }}
@@ -40,7 +28,7 @@
             rows="2"
             type="text"
             @keydown="filterErrors('description')"
-          ></textarea>
+          />
           <template v-for="(validator, validatorName, index) in $v.description.$params">
             <div
               v-if="!$v.description[validatorName]"
@@ -50,45 +38,28 @@
             />
           </template>
         </div>
+
         <div class="form-group">
-          <label for="category-color">{{ $t('form.color') }}</label>
-          <input
-            id="category-color"
-            v-model.trim="$v.color.$model"
-            :class="validationCssClass($v.color)"
-            autocomplete="off"
-            class="form-control"
+          <e-input
+            :vObj="$v.color"
+            :labelText="$t('form.color')"
+            :errors="responseErrors"
             type="color"
-            @keydown="filterErrors('color')"
-          >
-          <template v-for="(validator, validatorName, index) in $v.color.$params">
-            <div
-              v-if="!$v.color[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
+            id="category-color"
+            containerClass="col-sm-12"
+          />
         </div>
+
         <div class="form-group">
-          <label for="category-icon">{{ $t('form.icon') }}</label>
-          <input
+          <e-input
+            :vObj="$v.icon"
+            :labelText="$t('form.icon')"
+            :errors="responseErrors"
             id="category-icon"
-            v-model.trim="$v.icon.$model"
-            :class="validationCssClass($v.icon)"
-            class="form-control"
-            type="text"
-            @keydown="filterErrors('icon')"
-          >
-          <template v-for="(validator, validatorName, index) in $v.icon.$params">
-            <div
-              v-if="!$v.icon[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
+            containerClass="col-sm-12"
+          />
         </div>
+
         <div class="form-group">
           <button :disabled="isSaving" class="btn btn-success mr-2" type="submit">
             <e-spinner :state="isSaving">
@@ -132,11 +103,15 @@ import {
 } from 'vuelidate/lib/validators';
 import { serverError } from '@/validators/validators';
 import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
+import eInput from '../../components/Elements/e-input/e-input.vue';
 import bus from '../../bus';
 
 export default {
   name: 'CategoryForm',
-  components: { eSpinner },
+  components: {
+    eSpinner,
+    eInput,
+  },
   data() {
     return {
       // form data

@@ -10,8 +10,16 @@
         :data-testid="dataTestId"
         :type="type"
         class="form-control"
+        @keydown="filterErrors(id)"
       />
-      <slot name="error" />
+      <template v-for="(validator, validatorName, index) in vObj.$params">
+        <div
+          v-if="!vObj[validatorName]"
+          :key="index"
+          v-t="validator && validator.message ? validator.message : validator"
+          class="invalid-feedback"
+        />
+      </template>
     </div>
   </div>
 </template>
@@ -33,6 +41,9 @@ export default {
       required: true,
       type: Object,
     },
+    errors: {
+      type: Array,
+    },
     type: {
       type: String,
       default: 'text',
@@ -45,10 +56,10 @@ export default {
     labelText: {
       type: String,
     },
-    dataTestId: {
+    labelDataTestId: {
       type: String,
     },
-    labelDataTestId: {
+    dataTestId: {
       type: String,
     },
     autocomplete: {
@@ -73,6 +84,9 @@ export default {
         'is-valid': !validation.$error && validation.$dirty,
         'is-invalid': validation.$error,
       };
+    },
+    filterErrors(field) {
+      return this.errors.filter((item) => item.field !== field);
     },
   },
 };

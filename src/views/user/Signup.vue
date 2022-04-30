@@ -19,84 +19,44 @@
         id="name"
         :label-text="$t('form.username')"
         :v-obj="$v.name"
+        :errors="responseErrors"
         autocomplete="username"
         data-test-id="signup_form_input_username"
         label-data-test-id="signup_form_label_username"
-      >
-        <template #error>
-          <template v-for="(validator, validatorName, index) in $v.name.$params">
-            <div
-              v-if="!$v.name[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </template>
-      </e-input>
+      />
 
       <e-input
         id="email"
         :label-text="$t('form.email')"
         :v-obj="$v.email"
+        :errors="responseErrors"
         autocomplete="email"
         data-test-id="signup_form_input_email"
         label-data-test-id="signup_form_label_email"
         type="email"
-      >
-        <template #error>
-          <template v-for="(validator, validatorName, index) in $v.email.$params">
-            <div
-              v-if="!$v.email[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </template>
-      </e-input>
+      />
 
       <e-input
         id="password"
         :label-text="$t('form.password')"
         :v-obj="$v.password"
+        :errors="responseErrors"
         autocomplete="new-password"
         data-test-id="signup_form_input_password"
         label-data-test-id="signup_form_label_password"
         type="password"
-      >
-        <template #error>
-          <template v-for="(validator, validatorName, index) in $v.password.$params">
-            <div
-              v-if="!$v.password[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </template>
-      </e-input>
+      />
 
       <e-input
         id="password-confirm"
         :label-text="$t('form.passwordConfirm')"
         :v-obj="$v.password_confirmation"
+        :errors="responseErrors"
         autocomplete="off"
         data-test-id="signup_form_input_password_confirmation"
         label-data-test-id="signup_form_label_password_confirmation"
         type="password"
-      >
-        <template #error>
-          <template v-for="(validator, validatorName, index) in $v.password_confirmation.$params">
-            <div
-              v-if="!$v.password_confirmation[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </template>
-      </e-input>
+      />
 
       <button
         class="btn btn-success"

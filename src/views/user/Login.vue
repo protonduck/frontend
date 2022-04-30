@@ -18,43 +18,23 @@
         id="email"
         :label-text="$t('form.email')"
         :v-obj="$v.email"
+        :errors="responseErrors"
         autocomplete="email"
         data-test-id="login_form_input_email"
         label-data-test-id="login_form_label_email"
         type="email"
-      >
-        <template #error>
-          <template v-for="(validator, validatorName, index) in $v.email.$params">
-            <div
-              v-if="!$v.email[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </template>
-      </e-input>
+      />
 
       <e-input
         id="password"
         :label-text="$t('form.password')"
         :v-obj="$v.password"
+        :errors="responseErrors"
         autocomplete="current-password"
         data-test-id="login_form_input_password"
         label-data-test-id="login_form_label_password"
         type="password"
-      >
-        <template #error>
-          <template v-for="(validator, validatorName, index) in $v.password.$params">
-            <div
-              v-if="!$v.password[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
-            />
-          </template>
-        </template>
-      </e-input>
+      />
 
       <button
         class="btn btn-success"

@@ -1,33 +1,20 @@
 <template>
   <div class="card bg-light">
-    <div class="card-header" v-text="$t(isNewRecord ? 'form.board.add' : 'form.board.update')">
-    </div>
+    <div class="card-header" v-text="$t(isNewRecord ? 'form.board.add' : 'form.board.update')" />
     <div class="card-body">
       <form method="post" @submit.prevent="submit">
         <div class="form-group">
-          <label for="board-name">{{ $t('form.board.name') }}</label>
-          <input
+          <e-input
+            :vObj="$v.name"
+            :labelText="$t('form.board.name')"
+            :errors="responseErrors"
             id="board-name"
-            v-model.trim="$v.name.$model"
-            :class="validationCssClass($v.name)"
-            autocomplete="off"
-            class="form-control"
-            type="text"
-            @keydown="filterErrors('name')"
-          >
-          <template v-for="(validator, validatorName, index) in $v.name.$params">
-            <div
-              v-if="!$v.name[validatorName]"
-              :key="index"
-              v-t="validator && validator.message ? validator.message : validator"
-              class="invalid-feedback"
+            containerClass="col-sm-12"
             />
-          </template>
         </div>
+
         <div class="form-group">
-          <label for="board-image">
-            {{ $t('form.board.image') }}
-          </label>
+          <e-label for="board-image" :text="$t('form.board.image')" />
           <textarea
             id="board-image"
             v-model.trim="$v.image.$model"
@@ -46,6 +33,7 @@
             />
           </template>
         </div>
+
         <div class="form-group">
           <button :disabled="isSaving" class="btn btn-success mr-2" type="submit">
             <e-spinner :state="isSaving">
@@ -90,10 +78,16 @@ import {
 import { serverError } from '@/validators/validators';
 import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import bus from '../../bus';
+import eLabel from '../../components/Elements/e-label/e-label.vue';
+import eInput from '../../components/Elements/e-input/e-input.vue';
 
 export default {
   name: 'BoardForm',
-  components: { eSpinner },
+  components: {
+    eSpinner,
+    eLabel,
+    eInput,
+  },
   data() {
     return {
       // form data
