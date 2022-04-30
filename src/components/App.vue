@@ -1,28 +1,20 @@
 <template>
   <div>
-    <main-menu />
+    <b-menu />
 
     <div class="container">
-      <router-view></router-view>
+      <router-view />
     </div>
   </div>
 </template>
 
 <script>
-import MainMenu from './MainMenu.vue';
+import bMenu from './Blocks/b-menu/b-menu.vue';
 
 export default {
+  name: 'app',
   components: {
-    MainMenu,
-  },
-  created() {
-    this.$http.interceptors.response.use(undefined, (err) => new Promise(() => {
-      // eslint-disable-next-line no-underscore-dangle
-      if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-        this.$store.dispatch('logout');
-      }
-      throw err;
-    }));
+    bMenu,
   },
 };
 </script>
