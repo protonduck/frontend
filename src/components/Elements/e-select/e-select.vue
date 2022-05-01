@@ -8,7 +8,6 @@
         :class="validationCssClass(vObj)"
         :data-testid="dataTestId"
         class="form-control"
-        @keydown="filterErrors(id)"
       >
         <option v-for="(option, index) in options" :key="index" :value="option.id">
           {{ option.name }}
@@ -43,9 +42,6 @@ export default {
       required: true,
       type: Object,
     },
-    errors: {
-      type: Array,
-    },
     options: {
       type: Array,
     },
@@ -69,9 +65,6 @@ export default {
         'is-valid': !validation.$error && validation.$dirty,
         'is-invalid': validation.$error,
       };
-    },
-    filterErrors(field) {
-      return this.errors.filter((item) => item.field !== field);
     },
   },
 };

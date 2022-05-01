@@ -7,7 +7,6 @@
           <e-input
             :vObj="$v.name"
             :labelText="$t('form.board.name')"
-            :errors="responseErrors"
             id="board-name"
             containerClass="col-sm-12"
             />
@@ -16,7 +15,6 @@
         <e-textarea
           :vObj="$v.image"
           :labelText="$t('form.board.image')"
-          :errors="responseErrors"
           id="board-image"
           containerClass="col-sm-12"
         />

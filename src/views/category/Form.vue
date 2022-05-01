@@ -10,7 +10,6 @@
           <e-input
             :vObj="$v.name"
             :labelText="$t('form.name')"
-            :errors="responseErrors"
             id="category-name"
             containerClass="col-sm-12"
             />
@@ -19,7 +18,6 @@
         <e-textarea
           :vObj="$v.description"
           :labelText="$t('form.description')"
-          :errors="responseErrors"
           id="category-description"
           containerClass="col-sm-12"
         />
@@ -28,7 +26,6 @@
           <e-input
             :vObj="$v.color"
             :labelText="$t('form.color')"
-            :errors="responseErrors"
             type="color"
             id="category-color"
             containerClass="col-sm-12"
@@ -39,7 +36,6 @@
           <e-input
             :vObj="$v.icon"
             :labelText="$t('form.icon')"
-            :errors="responseErrors"
             id="category-icon"
             containerClass="col-sm-12"
           />

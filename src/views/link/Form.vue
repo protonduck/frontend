@@ -6,7 +6,6 @@
         <e-input
           :vObj="$v.title"
           :labelText="$t('form.link.title')"
-          :errors="responseErrors"
           id="link-title"
           containerClass="col-sm-12"
         />
@@ -14,7 +13,6 @@
         <e-textarea
           :vObj="$v.description"
           :labelText="$t('form.link.description')"
-          :errors="responseErrors"
           id="link-description"
           containerClass="col-sm-12"
         />
@@ -22,7 +20,6 @@
         <e-input
           :vObj="$v.url"
           :labelText="$t('form.link.url')"
-          :errors="responseErrors"
           id="link-url"
           containerClass="col-sm-12"
         />
@@ -32,7 +29,6 @@
           :vObj="$v.category_id"
           :labelText="$t('form.link.category_id')"
           :options="categories"
-          :errors="responseErrors"
           id="link-category-id"
           containerClass="col-sm-12"
         />
@@ -77,6 +73,7 @@ import {
   minLength,
   maxLength,
   numeric,
+  url,
   helpers,
 } from 'vuelidate/lib/validators';
 import { serverError } from '@/validators/validators';
@@ -121,10 +118,13 @@ export default {
       serverError: serverError('description'),
     },
     category_id: {
+      required: helpers.withParams({ message: 'error.required' }, required),
       numeric,
       serverError: serverError('category_id'),
     },
     url: {
+      required: helpers.withParams({ message: 'error.required' }, required),
+      url: helpers.withParams({ message: 'error.notValidUrl' }, url),
       minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 2 } } }, minLength(2)),
       maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 2000 } } }, maxLength(2000)),
       serverError: serverError('url'),

@@ -46,6 +46,7 @@ export default {
     required: 'Поле является обязательным',
     tooShort: 'Слишком короткое (мин: {min})',
     tooLong: 'Слишком длинное (макс: {max})',
+    notValidUrl: 'Пожалуйста, введите действительный URL.',
     incorrect_login_password: 'Не верный логин или пароль.',
     email_invalid: 'Пожалуйста, введите действительный E-Mail.',
     email_not_unique: 'Аккаунт с таким E-Mail уже существует.',

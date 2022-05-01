@@ -10,7 +10,6 @@
         :data-testid="dataTestId"
         :type="type"
         class="form-control"
-        @keydown="filterErrors(id)"
       />
       <template v-for="(validator, validatorName, index) in vObj.$params">
         <div
@@ -85,9 +84,6 @@ export default {
         'is-valid': !validation.$error && validation.$dirty,
         'is-invalid': validation.$error,
       };
-    },
-    filterErrors(field) {
-      return this.errors.filter((item) => item.field !== field);
     },
   },
 };

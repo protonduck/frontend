@@ -18,7 +18,6 @@
         id="email"
         :label-text="$t('form.email')"
         :v-obj="$v.email"
-        :errors="responseErrors"
         autocomplete="email"
         data-test-id="login_form_input_email"
         label-data-test-id="login_form_label_email"
@@ -29,7 +28,6 @@
         id="password"
         :label-text="$t('form.password')"
         :v-obj="$v.password"
-        :errors="responseErrors"
         autocomplete="current-password"
         data-test-id="login_form_input_password"
         label-data-test-id="login_form_label_password"
@@ -51,6 +49,8 @@
 import {
   required,
   email,
+  minLength,
+  maxLength,
   helpers,
 } from 'vuelidate/lib/validators';
 import eInput from '@/components/Elements/e-input/e-input.vue';
@@ -98,6 +98,8 @@ export default {
     },
     password: {
       required: helpers.withParams({ message: 'error.required' }, required),
+      minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 6 } } }, minLength(6)),
+      maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 100 } } }, maxLength(100)),
     },
   },
   created() {
