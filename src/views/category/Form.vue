@@ -32,14 +32,13 @@
           />
         </div>
 
-        <div class="form-group">
-          <e-input
-            :vObj="$v.icon"
-            :labelText="$t('form.icon')"
-            id="category-icon"
-            containerClass="col-sm-12"
-          />
-        </div>
+         <e-select
+          :vObj="$v.icon"
+          :labelText="$t('form.icon')"
+          :options="icons"
+          id="category-icon"
+          containerClass="col-sm-12"
+        />
 
          <e-select
           v-if="!isNewRecord && boards.length > 1"
@@ -156,6 +155,24 @@ export default {
     },
     boards() {
       return this.$store.getters.boards;
+    },
+    icons() {
+      return [
+        { id: '', name: 'None' },
+        { id: 'fas fa-book', name: 'Book' },
+        { id: 'fab fa-btc', name: 'Bitcoin' },
+        { id: 'fas fa-chart-pie', name: 'Chart' },
+        { id: 'fa fa-graduation-cap', name: 'Education' },
+        { id: 'fa fa-envelope', name: 'E-Mail' },
+        { id: 'fa fa-gamepad', name: 'Games' },
+        { id: 'fas fa-home', name: 'Home' },
+        { id: 'fas fa-music', name: 'Music' },
+        { id: 'fas fa-dollar-sign', name: 'Money' },
+        { id: 'fa fa-percent', name: 'Percent' },
+        { id: 'fas fa-share-alt', name: 'Social' },
+        { id: 'fa fa-video', name: 'Video' },
+        { id: 'fas fa-wallet', name: 'Wallet' },
+      ];
     },
   },
   methods: {
