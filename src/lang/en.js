@@ -22,6 +22,7 @@ export default {
     color: 'Color',
     icon: 'Icon',
     board: {
+      id: 'Board',
       name: 'Name',
       image: 'Background URL',
       add: 'Add board',

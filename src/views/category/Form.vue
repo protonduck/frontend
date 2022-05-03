@@ -41,6 +41,15 @@
           />
         </div>
 
+         <e-select
+          v-if="!isNewRecord && boards.length > 1"
+          :vObj="$v.board_id"
+          :labelText="$t('form.board.id')"
+          :options="boards"
+          id="boards-id"
+          containerClass="col-sm-12"
+        />
+
         <div class="form-group">
           <button :disabled="isSaving" class="btn btn-success mr-2" type="submit">
             <e-spinner :state="isSaving">
@@ -80,12 +89,14 @@ import {
   required,
   minLength,
   maxLength,
+  numeric,
   helpers,
 } from 'vuelidate/lib/validators';
 import { serverError } from '@/validators/validators';
 import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import eInput from '../../components/Elements/e-input/e-input.vue';
 import eTextarea from '../../components/Elements/e-textarea/e-textarea.vue';
+import eSelect from '../../components/Elements/e-select/e-select.vue';
 import bus from '../../bus';
 
 export default {
@@ -94,6 +105,7 @@ export default {
     eSpinner,
     eInput,
     eTextarea,
+    eSelect,
   },
   data() {
     return {
@@ -103,6 +115,7 @@ export default {
       description: '',
       color: '',
       icon: '',
+      board_id: null,
       // states
       isSaving: false,
       isRemoving: false,
@@ -131,10 +144,18 @@ export default {
       maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 255 } } }, maxLength(255)),
       serverError: serverError('icon'),
     },
+    board_id: {
+      required: helpers.withParams({ message: 'error.required' }, required),
+      numeric,
+      serverError: serverError('board_id'),
+    },
   },
   computed: {
     isNewRecord() {
       return this.id === null;
+    },
+    boards() {
+      return this.$store.getters.boards;
     },
   },
   methods: {
@@ -151,7 +172,7 @@ export default {
         api_url: this.isNewRecord ? '/categories' : `/categories/${this.id}`,
         method: this.isNewRecord ? 'post' : 'put',
         data: {
-          board_id: this.$store.getters.activeBoardId,
+          board_id: this.isNewRecord ? this.$store.getters.activeBoardId : this.board_id,
           name: this.name,
           description: this.description,
           color: this.color,
@@ -166,7 +187,6 @@ export default {
         .catch((err) => {
           if (err.response.status === 422) {
             this.responseErrors = err.response.data;
-            // this.$v.$touch();
           }
         }).finally(() => {
           this.isSaving = false;
@@ -178,6 +198,7 @@ export default {
       this.description = '';
       this.color = '';
       this.icon = '';
+      this.board_id = null;
     },
     close() {
       this.reset();
@@ -205,8 +226,9 @@ export default {
     },
   },
   created() {
-    // Reset validation
     this.$v.$reset();
+
+    this.board_id = this.$store.getters.activeBoardId;
 
     bus.$on('edit-category', (item) => {
       this.id = item.id;

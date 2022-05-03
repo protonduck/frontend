@@ -25,7 +25,7 @@
         />
 
         <e-select
-          v-if="!isNewRecord"
+          v-if="!isNewRecord && categories.length > 1"
           :vObj="$v.category_id"
           :labelText="$t('form.link.category_id')"
           :options="categories"
@@ -167,7 +167,6 @@ export default {
         .catch((err) => {
           if (err.response.status === 422) {
             this.responseErrors = err.response.data;
-            // this.$v.$touch();
           }
         }).finally(() => {
           this.isSaving = false;
@@ -175,7 +174,7 @@ export default {
     },
     reset() {
       this.id = null;
-      this.category_id = 0;
+      this.category_id = null;
       this.title = '';
       this.description = '';
       this.url = '';
@@ -206,7 +205,6 @@ export default {
     },
   },
   created() {
-    // Reset validation
     this.$v.$reset();
 
     this.category_id = this.$store.getters.currentCategoryId;

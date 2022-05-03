@@ -22,6 +22,7 @@ export default {
     color: 'Цвет',
     icon: 'Иконка',
     board: {
+      id: 'Доска',
       name: 'Имя',
       image: 'URL картинки',
       add: 'Добавить доску',
