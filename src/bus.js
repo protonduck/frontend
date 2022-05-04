@@ -8,19 +8,20 @@ export default new Vue({
     fetchBoards() {
       this.$http.get('/boards').then((resp) => {
         const boards = resp.data;
+        let activeBoardId;
 
-        if (localStorage.getItem('active_board_id') === null) {
-          if (!this.$store.getters.activeBoardId && boards.length) {
-            this.$store.commit('change_active_board_id', boards[0].id);
-          }
-        } else {
-          boards.forEach((board) => {
-            // eslint-disable-next-line radix
-            if (board.id === parseInt(localStorage.getItem('active_board_id'))) {
-              this.$store.commit('change_active_board_id', board.id);
-            }
-          });
+        if (boards.length) {
+          activeBoardId = boards[0].id;
         }
+
+        if (localStorage.getItem('active_board_id') !== null
+          && localStorage.getItem('active_board_id') !== 'NaN'
+        ) {
+          activeBoardId = parseInt(localStorage.getItem('active_board_id'), 10);
+        }
+
+        this.$store.commit('change_active_board_id', activeBoardId);
+        localStorage.setItem('active_board_id', activeBoardId);
 
         this.$store.commit('updateBoards', boards);
 
