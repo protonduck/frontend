@@ -8,10 +8,7 @@
     @click="$emit('click')"
     class="btn mr-2"
   >
-    <slot v-if="hasSlot" />
-    <template v-else>
-      {{ text }}
-    </template>
+    <slot />
   </button>
 </template>
 
@@ -29,7 +26,6 @@ export default {
         'reset',
       ].includes(value),
     },
-    text: String,
     isDisabled: {
       type: Boolean,
       default: false,
@@ -40,11 +36,6 @@ export default {
     classes: {
       type: String,
       default: 'btn-primary',
-    },
-  },
-  methods: {
-    hasSlot(name = 'default') {
-      return !!this.$slots[name];
     },
   },
   emit: [

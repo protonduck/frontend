@@ -15,3 +15,10 @@ const Template = (args, { argTypes }) => ({
 
 export const Default = Template.bind({});
 Default.args = { ...buttonData };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  ...buttonData,
+  disabled: true,
+  classes: 'btn-secondary',
+};
