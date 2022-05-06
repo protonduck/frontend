@@ -3,7 +3,7 @@
     <div class="e-modal-mask">
       <div class="e-modal-wrapper">
         <div class="e-modal-container">
-          <slot name="content"></slot>
+          <slot />
         </div>
       </div>
     </div>

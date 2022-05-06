@@ -4,36 +4,32 @@
       <nav>
         <div class="d-flex">
           <draggable v-model="boards" class="nav nav-pills" group="boards" @change="update()">
-            <a v-for="(board) in boards" :key="board.id"
-               class="nav-item nav-link"
-               href="#" v-bind:class="{active: board.id === $store.getters.activeBoardId}"
-               @click.prevent="switchBoard(board.id)"
+            <e-link
+              v-for="(board) in boards"
+              :key="board.id"
+              :class="{ active: board.id === $store.getters.activeBoardId }"
+              @click="switchBoard(board.id)"
+              class="nav-item nav-link"
             >
               {{ board.name }}
-            </a>
+             </e-link>
           </draggable>
 
           <div class="nav nav-pills">
-            <a
-              class="nav-item nav-link"
-              href="#"
-              @click.prevent="$store.commit('toggle_board_modal', true)"
-            >
-              <i class="fa fa-plus"></i>
-            </a>
+            <e-link class="nav-item nav-link" @click="$store.commit('toggle_board_modal', true)">
+              <i class="fa fa-plus" />
+            </e-link>
 
-            <a class="nav-item nav-link" href="#" @click.prevent="edit" v-if="boards.length">
-              <i class="fa fa-edit"></i>
-            </a>
+            <e-link class="nav-item nav-link" @click="edit" v-if="boards.length">
+              <i class="fa fa-edit" />
+            </e-link>
           </div>
         </div>
       </nav>
     </div>
 
     <e-modal v-if="$store.getters.showBoardModal">
-      <div slot="content">
-        <board-form />
-      </div>
+      <board-form />
     </e-modal>
 
     <categories-list />
@@ -45,6 +41,7 @@ import _ from 'lodash';
 import draggable from 'vuedraggable';
 import CategoriesList from '../category/List.vue';
 import eModal from '../../components/Elements/e-modal/e-modal.vue';
+import eLink from '../../components/Elements/e-link/e-link.vue';
 import BoardForm from './Form.vue';
 import bus from '../../bus';
 
@@ -53,6 +50,7 @@ export default {
   components: {
     CategoriesList,
     eModal,
+    eLink,
     BoardForm,
     draggable,
   },

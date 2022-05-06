@@ -16,11 +16,11 @@
           >
             <i v-show="category.icon" :class="category.icon"></i>
             {{ category.name }}
-            <a class="btn btn-outline-light btn-sm" href="#" @click.prevent="edit(category.id)">
-              <i class="fa fa-edit"></i>
-            </a>
+            <e-link class="btn btn-outline-light btn-sm" @click="edit(category.id)">
+              <i class="fa fa-edit" />
+            </e-link>
           </div>
-          <link-list :items="category"></link-list>
+          <link-list :items="category" />
         </div>
       </div>
 
@@ -28,18 +28,16 @@
         <div class="card bg-white">
           <div class="card-header">
             <i class="fa fa-plus pr-1"></i>
-            <a href="#" @click.prevent="$store.commit('toggle_category_modal', true)">
+            <e-link @click="$store.commit('toggle_category_modal', true)">
               {{ $t('category.add') }}
-            </a>
+            </e-link>
           </div>
         </div>
       </div>
     </draggable>
 
     <e-modal v-if="$store.getters.showCategoryModal">
-      <div slot="content">
-        <category-form></category-form>
-      </div>
+      <category-form />
     </e-modal>
   </div>
 </template>
@@ -50,6 +48,7 @@ import draggable from 'vuedraggable';
 import CategoryForm from './Form.vue';
 import LinkList from '../link/List.vue';
 import eModal from '../../components/Elements/e-modal/e-modal.vue';
+import eLink from '../../components/Elements/e-link/e-link.vue';
 import bus from '../../bus';
 
 export default {
@@ -58,6 +57,7 @@ export default {
     CategoryForm,
     LinkList,
     eModal,
+    eLink,
     draggable,
   },
   computed: {

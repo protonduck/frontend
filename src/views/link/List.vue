@@ -13,26 +13,26 @@
           :key="item.id"
         >
           <div class="d-flex align-items-center">
-            <img :src="favicon(item)" alt="" height="16" width="16">
-            <a :href="item.url" :title="item.description" class="pl-3" target="_blank">
+            <img :src="favicon(item)" alt="" height="16" width="16" />
+            <e-link :href="item.url" :title="item.description" class="pl-3">
               {{ item.title }}
-            </a>
+            </e-link>
           </div>
-          <a class="btn btn-outline-light btn-sm" href="#" @click.prevent="edit(item.id)">
-            <i class="fa fa-edit"></i>
-          </a>
+          <e-link class="btn btn-outline-light btn-sm" @click="edit(item.id)">
+            <i class="fa fa-edit" />
+          </e-link>
         </li>
         <li class="list-group-item">
-          <i class="fa fa-plus pr-1"></i>
-          <a href="#" @click.prevent="add(items.id)">{{ $t('link.add') }}</a>
+          <i class="fa fa-plus pr-1" />
+          <e-link @click="add(items.id)">
+            {{ $t('link.add') }}
+          </e-link>
         </li>
       </draggable>
     </ul>
 
     <e-modal v-if="$store.getters.showLinkModal">
-      <div slot="content">
-        <link-form></link-form>
-      </div>
+      <link-form />
     </e-modal>
   </div>
 </template>
@@ -43,12 +43,14 @@ import _ from 'lodash';
 import LinkForm from './Form.vue';
 import bus from '../../bus';
 import eModal from '../../components/Elements/e-modal/e-modal.vue';
+import eLink from '../../components/Elements/e-link/e-link.vue';
 
 export default {
   name: 'LinkList',
   components: {
     LinkForm,
     eModal,
+    eLink,
     draggable,
   },
   props: {
