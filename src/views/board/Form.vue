@@ -3,14 +3,12 @@
     <div class="card-header" v-text="$t(isNewRecord ? 'form.board.add' : 'form.board.update')" />
     <div class="card-body">
       <form method="post" @submit.prevent="submit">
-        <div class="form-group">
-          <e-input
-            :vObj="$v.name"
-            :labelText="$t('form.board.name')"
-            id="board-name"
-            containerClass="col-sm-12"
-            />
-        </div>
+        <e-input
+          :vObj="$v.name"
+          :labelText="$t('form.board.name')"
+          id="board-name"
+          containerClass="col-sm-12"
+        />
 
         <e-textarea
           :vObj="$v.image"
@@ -20,33 +18,34 @@
         />
 
         <div class="form-group">
-          <button :disabled="isSaving" class="btn btn-success mr-2" type="submit">
+          <e-button :disabled="isSaving">
             <e-spinner :state="isSaving">
               <i :class="['fas', isNewRecord ? 'fa-plus-square' : 'fa-save']"></i>
             </e-spinner>
             {{ isNewRecord ? $t('form.add') : $t('form.save') }}
-          </button>
-          <button
-            :disabled="isSaving"
-            class="btn btn-secondary mr-2"
+          </e-button>
+
+          <e-button
             type="reset"
-            @click.prevent="close"
+            :disabled="isSaving"
+            @click="close"
+            classes="btn-secondary"
           >
             <i class="fas fa-times"></i>
             {{ $t('form.close') }}
-          </button>
-          <button
+          </e-button>
+
+          <e-button
             v-if="!isNewRecord"
             :disabled="isRemoving"
-            class="btn btn-danger"
-            type="submit"
-            @click.prevent="remove"
+            classes="btn-danger"
+            @click="remove"
           >
             <e-spinner :state="isRemoving">
               <i class="fas fa-trash-alt"></i>
             </e-spinner>
             {{ $t('form.remove') }}
-          </button>
+          </e-button>
         </div>
       </form>
     </div>
@@ -65,6 +64,7 @@ import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import bus from '../../bus';
 import eInput from '../../components/Elements/e-input/e-input.vue';
 import eTextarea from '../../components/Elements/e-textarea/e-textarea.vue';
+import eButton from '../../components/Elements/e-button/e-button.vue';
 
 export default {
   name: 'BoardForm',
@@ -72,6 +72,7 @@ export default {
     eSpinner,
     eInput,
     eTextarea,
+    eButton,
   },
   data() {
     return {

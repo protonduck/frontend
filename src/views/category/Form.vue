@@ -6,14 +6,12 @@
     />
     <div class="card-body">
       <form method="post" @submit.prevent="submit">
-        <div class="form-group">
-          <e-input
-            :vObj="$v.name"
-            :labelText="$t('form.name')"
-            id="category-name"
-            containerClass="col-sm-12"
-            />
-        </div>
+        <e-input
+          :vObj="$v.name"
+          :labelText="$t('form.name')"
+          id="category-name"
+          containerClass="col-sm-12"
+        />
 
         <e-textarea
           :vObj="$v.description"
@@ -22,15 +20,13 @@
           containerClass="col-sm-12"
         />
 
-        <div class="form-group">
-          <e-input
+        <e-input
             :vObj="$v.color"
             :labelText="$t('form.color')"
             type="color"
             id="category-color"
             containerClass="col-sm-12"
-          />
-        </div>
+        />
 
          <e-select
           :vObj="$v.icon"
@@ -50,33 +46,35 @@
         />
 
         <div class="form-group">
-          <button :disabled="isSaving" class="btn btn-success mr-2" type="submit">
+          <e-button id="button-save" :disabled="isSaving">
             <e-spinner :state="isSaving">
               <i :class="['fas', isNewRecord ? 'fa-plus-square' : 'fa-save']"></i>
             </e-spinner>
             {{ isNewRecord ? $t('form.add') : $t('form.save') }}
-          </button>
-          <button
-            :disabled="isSaving"
-            class="btn btn-secondary mr-2"
+          </e-button>
+
+          <e-button
+            id="button-reset"
             type="reset"
-            @click.prevent="close"
+            :disabled="isSaving"
+            classes="btn-secondary"
+            @click="close"
           >
-            <i class="fas fa-times"></i>
-            {{ $t('form.close') }}
-          </button>
-          <button
+            <i class="fas fa-times"></i> {{ $t('form.close') }}
+          </e-button>
+
+          <e-button
             v-if="!isNewRecord"
+            id="button-remove"
             :disabled="isRemoving"
-            class="btn btn-danger"
-            type="submit"
-            @click.prevent="remove"
+            classes="btn-danger"
+            @click="remove"
           >
             <e-spinner :state="isRemoving">
               <i class="fas fa-trash-alt"></i>
             </e-spinner>
             {{ $t('form.remove') }}
-          </button>
+          </e-button>
         </div>
       </form>
     </div>
@@ -96,6 +94,7 @@ import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import eInput from '../../components/Elements/e-input/e-input.vue';
 import eTextarea from '../../components/Elements/e-textarea/e-textarea.vue';
 import eSelect from '../../components/Elements/e-select/e-select.vue';
+import eButton from '../../components/Elements/e-button/e-button.vue';
 import bus from '../../bus';
 
 export default {
@@ -105,6 +104,7 @@ export default {
     eInput,
     eTextarea,
     eSelect,
+    eButton,
   },
   data() {
     return {

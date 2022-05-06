@@ -4,7 +4,7 @@
     <div :class="containerClass">
       <input
         :id="id"
-        v-model.trim="vObj.$model"
+        v-model="vObj.$model"
         :autocomplete="autocomplete"
         :class="validationCssClass(vObj)"
         :data-testid="dataTestId"
