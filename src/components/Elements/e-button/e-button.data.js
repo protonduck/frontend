@@ -1,6 +1,6 @@
 export default {
-  id: "button",
-  type: "button",
+  id: 'button',
+  type: 'button',
   disabled: false,
-  dataTestid: "data-button",
+  dataTestid: 'data-button',
 };

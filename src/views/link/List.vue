@@ -14,7 +14,7 @@
         >
           <div class="d-flex align-items-center">
             <img :src="favicon(item)" alt="" height="16" width="16" />
-            <e-link :href="item.url" :title="item.description" class="pl-3">
+            <e-link :href="item.url" :title="item.description" target="_blank" class="pl-3">
               {{ item.title }}
             </e-link>
           </div>
