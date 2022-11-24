@@ -14,7 +14,12 @@
         >
           <div class="d-flex align-items-center">
             <img :src="favicon(item)" alt="" height="16" width="16" />
-            <e-link :href="item.url" :title="item.description" target="_blank" class="pl-3">
+            <e-link
+              :href="item.url"
+              :title="item.description"
+              target="_blank"
+              class="pl-3"
+            >
               {{ item.title }}
             </e-link>
           </div>
@@ -25,7 +30,7 @@
         <li class="list-group-item">
           <i class="fa fa-plus pr-1" />
           <e-link @click="add(items.id)">
-            {{ $t('link.add') }}
+            {{ $t("link.add") }}
           </e-link>
         </li>
       </draggable>
@@ -38,58 +43,58 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable';
-import _ from 'lodash';
-import LinkForm from './Form.vue';
-import bus from '../../bus';
-import eModal from '../../components/Elements/e-modal/e-modal.vue';
-import eLink from '../../components/Elements/e-link/e-link.vue';
+import draggable from "vuedraggable";
+import _ from "lodash";
+import LinkForm from "./Form.vue";
+import bus from "../../bus";
+import eModal from "../../components/Elements/e-modal/e-modal.vue";
+import eLink from "../../components/Elements/e-link/e-link.vue";
 
 export default {
-  name: 'LinkList',
+  name: "LinkList",
   components: {
     LinkForm,
     eModal,
     eLink,
-    draggable,
+    draggable
   },
   props: {
     items: {
       required: false,
-      type: Object,
-    },
+      type: Object
+    }
   },
   methods: {
     add(categoryId) {
-      this.$store.commit('toggle_link_modal', true);
-      this.$store.commit('change_current_category_id', categoryId);
+      this.$store.commit("toggle_link_modal", true);
+      this.$store.commit("change_current_category_id", categoryId);
     },
     edit(selectedId) {
       const selectedItem = _.find(this.items.links, { id: selectedId });
 
-      this.$store.commit('toggle_link_modal', true);
+      this.$store.commit("toggle_link_modal", true);
 
       this.$nextTick(() => {
-        bus.edit('edit-link', selectedItem);
+        bus.edit("edit-link", selectedItem);
       });
     },
     update() {
-      // eslint-disable-next-line array-callback-return
       this.items.links.map((link, index) => {
-        this.$store.dispatch('save', {
+        this.$store.dispatch("save", {
           api_url: `/links/${link.id}`,
-          method: 'put',
+          method: "put",
           data: {
-            // eslint-disable-next-line no-param-reassign
-            sort: link.sort = index + 1,
-          },
+            sort: (link.sort = index + 1)
+          }
         });
       });
     },
     favicon(item) {
-      return item.favicon ? item.favicon : `https://www.google.com/s2/favicons?domain=${item.url}`;
-    },
-  },
+      return item.favicon
+        ? item.favicon
+        : `https://www.google.com/s2/favicons?domain=${item.url}`;
+    }
+  }
 };
 </script>
 

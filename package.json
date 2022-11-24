@@ -14,7 +14,6 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -37,12 +36,7 @@
     "@storybook/addon-essentials": "^6.4.20",
     "@storybook/addon-links": "^6.4.20",
     "@storybook/vue": "^6.4.20",
-    "@vue/cli-plugin-eslint": "~4.5.19",
     "@vue/cli-service": "~4.5.19",
-    "@vue/eslint-config-airbnb": "^5.0.2",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.43.2",
     "sass-loader": "^10.2.0",
     "vue-template-compiler": "^2.6.14"
