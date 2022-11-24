@@ -1,12 +1,11 @@
 <template>
   <div class="form-group">
-    <e-label :id="id" :text="labelText" :data-testid="labelDataTestId" />
+    <e-label :id="id" :text="labelText" />
     <div :class="containerClass">
       <select
         :id="id"
         v-model.trim="vObj.$model"
         :class="validationCssClass(vObj)"
-        :data-testid="dataTestId"
         class="form-control"
       >
         <option v-for="(option, index) in options" :key="index" :value="option.id">
@@ -46,12 +45,6 @@ export default {
       type: Array,
     },
     labelText: {
-      type: String,
-    },
-    labelDataTestId: {
-      type: String,
-    },
-    dataTestId: {
       type: String,
     },
     containerClass: {

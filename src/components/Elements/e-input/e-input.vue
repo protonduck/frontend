@@ -1,13 +1,12 @@
 <template>
   <div class="form-group">
-    <e-label :id="id" :text="labelText" :data-testid="labelDataTestId" />
+    <e-label :id="id" :text="labelText" />
     <div :class="containerClass">
       <input
         :id="id"
         v-model="vObj.$model"
         :autocomplete="autocomplete"
         :class="validationCssClass(vObj)"
-        :data-testid="dataTestId"
         :type="type"
         class="form-control"
       />
@@ -54,12 +53,6 @@ export default {
       ].includes(value),
     },
     labelText: {
-      type: String,
-    },
-    labelDataTestId: {
-      type: String,
-    },
-    dataTestId: {
       type: String,
     },
     autocomplete: {

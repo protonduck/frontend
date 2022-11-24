@@ -1,12 +1,11 @@
 <template>
   <div class="form-group">
-    <e-label :id="id" :text="labelText" :data-testid="labelDataTestId" />
+    <e-label :id="id" :text="labelText" />
     <div :class="containerClass">
       <textarea
         :id="id"
         :rows="rows"
         :class="validationCssClass(vObj)"
-        :data-testid="dataTestId"
         v-model.trim="vObj.$model"
         class="form-control"
       />
@@ -23,47 +22,41 @@
 </template>
 
 <script>
-import eLabel from '../e-label/e-label.vue';
+import eLabel from "../e-label/e-label.vue";
 
 export default {
-  name: 'e-textarea',
+  name: "e-textarea",
   components: {
-    eLabel,
+    eLabel
   },
   props: {
     id: {
       required: true,
-      type: String,
+      type: String
     },
     vObj: {
       required: true,
-      type: Object,
+      type: Object
     },
     rows: {
       type: Number,
-      default: 2,
+      default: 2
     },
     labelText: {
-      type: String,
-    },
-    labelDataTestId: {
-      type: String,
-    },
-    dataTestId: {
-      type: String,
+      type: String
     },
     containerClass: {
       type: String,
-      default: 'col-sm-3',
-    },
+      default: "col-sm-3"
+    }
   },
   methods: {
     validationCssClass(validation) {
       return {
-        'is-valid': !validation.$error && validation.$dirty,
-        'is-invalid': validation.$error,
+        "is-valid": !validation.$error && validation.$dirty,
+        "is-invalid": validation.$error
       };
-    },
-  },
+    }
+  }
 };
 </script>

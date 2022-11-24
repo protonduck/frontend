@@ -3,7 +3,6 @@
     :id="id"
     :type="type"
     :disabled="isDisabled"
-    :data-testid="dataTestId"
     :class="classes"
     @click="$emit('click')"
     class="btn mr-2"
@@ -29,9 +28,6 @@ export default {
     isDisabled: {
       type: Boolean,
       default: false,
-    },
-    dataTestId: {
-      type: String,
     },
     classes: {
       type: String,

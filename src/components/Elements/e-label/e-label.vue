@@ -1,5 +1,5 @@
 <template>
-  <label v-if="text" :for="id" :data-testid="dataTestId">
+  <label v-if="text" :for="id">
     {{ text }}
   </label>
 </template>
@@ -12,9 +12,6 @@ export default {
       type: String,
     },
     text: {
-      type: String,
-    },
-    dataTestId: {
       type: String,
     },
   },
