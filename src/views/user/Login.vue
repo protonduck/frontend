@@ -14,23 +14,13 @@
       </div>
     </div>
     <form @submit.prevent="login" novalidate>
-      <e-input
-        id="email"
-        :label-text="$t('form.email')"
-        :v-obj="$v.email"
-        autocomplete="email"
-        data-test-id="login_form_input_email"
-        label-data-test-id="login_form_label_email"
-        type="email"
-      />
+      <e-input id="email" :label-text="$t('form.email')" :v-obj="$v.email" autocomplete="email" type="email" />
 
       <e-input
         id="password"
         :label-text="$t('form.password')"
         :v-obj="$v.password"
         autocomplete="current-password"
-        data-test-id="login_form_input_password"
-        label-data-test-id="login_form_label_password"
         type="password"
       />
 

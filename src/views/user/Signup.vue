@@ -14,32 +14,15 @@
       </div>
     </div>
     <form @submit.prevent="register" novalidate>
-      <e-input
-        id="name"
-        :label-text="$t('form.username')"
-        :v-obj="$v.name"
-        autocomplete="username"
-        data-test-id="signup_form_input_username"
-        label-data-test-id="signup_form_label_username"
-      />
+      <e-input id="name" :label-text="$t('form.username')" :v-obj="$v.name" autocomplete="username" />
 
-      <e-input
-        id="email"
-        :label-text="$t('form.email')"
-        :v-obj="$v.email"
-        autocomplete="email"
-        data-test-id="signup_form_input_email"
-        label-data-test-id="signup_form_label_email"
-        type="email"
-      />
+      <e-input id="email" :label-text="$t('form.email')" :v-obj="$v.email" autocomplete="email" type="email" />
 
       <e-input
         id="password"
         :label-text="$t('form.password')"
         :v-obj="$v.password"
         autocomplete="new-password"
-        data-test-id="signup_form_input_password"
-        label-data-test-id="signup_form_label_password"
         type="password"
       />
 
@@ -48,8 +31,6 @@
         :label-text="$t('form.passwordConfirm')"
         :v-obj="$v.password_confirmation"
         autocomplete="off"
-        data-test-id="signup_form_input_password_confirmation"
-        label-data-test-id="signup_form_label_password_confirmation"
         type="password"
       />
 
