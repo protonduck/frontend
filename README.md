@@ -3,44 +3,33 @@
 Frontend for [Bookmarks](https://github.com/protonduck/backend).
 
 ## Project setup
+
 ```
 npm install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
 npm run serve
 ```
 
 ### Run storybook for development
+
 ```
 npm run storybook
 ```
 
 ### Compiles and minifies for production
+
 ```
 npm run build
 ```
 
-### Run linter 
+### Run linter
+
 ```
 npm run lint
-```
-
-### Running Tests
-
-Running cypress (e2e) tests:
-
-Open the browser and start the tests:
-
-```
-npm run test:e2e:open
-```
-
-Run the tests in console:
-
-```
-npm run test:e2e:run
 ```
 
 ## License

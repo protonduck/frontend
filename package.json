@@ -15,8 +15,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:e2e:open": "cypress open --config fileServerFolder=tests/e2e/cypress",
-    "test:e2e:run": "cypress run --config fileServerFolder=tests/e2e/cypress",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -42,9 +40,7 @@
     "@vue/cli-plugin-eslint": "~4.5.19",
     "@vue/cli-service": "~4.5.19",
     "@vue/eslint-config-airbnb": "^5.0.2",
-    "cypress": "^7.7.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.43.2",
