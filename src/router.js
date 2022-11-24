@@ -15,28 +15,28 @@ const router = new VueRouter({
       name: 'home',
       component: BoardsList,
       meta: {
-        requiresAuth: true,
-      },
+        requiresAuth: true
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component: Login,
+      component: Login
     },
     {
       path: '/signup',
       name: 'signup',
-      component: Signup,
+      component: Signup
     },
     {
       path: '*',
       component: BoardsList,
       meta: {
-        requiresAuth: true,
-      },
-    },
+        requiresAuth: true
+      }
+    }
   ],
-  mode: 'history',
+  mode: 'history'
 });
 
 // Set i18n locale

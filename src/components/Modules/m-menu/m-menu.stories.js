@@ -7,15 +7,15 @@ export default {
   argTypes: {
     isLoggedIn: {
       control: { type: 'select' },
-      options: [true, false],
-    },
-  },
+      options: [true, false]
+    }
+  }
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { mMenu },
-  template: '<m-menu v-bind="$props"><template #slot1>Slot 1</template><template #slot2>Slot 2</template></m-menu>',
+  template: '<m-menu v-bind="$props"><template #slot1>Slot 1</template><template #slot2>Slot 2</template></m-menu>'
 });
 
 export const Menu = Template.bind({});

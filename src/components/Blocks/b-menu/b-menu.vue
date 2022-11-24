@@ -21,7 +21,7 @@ export default {
   name: 'b-menu',
   components: {
     mMenu,
-    changeLanguage,
+    changeLanguage
   },
   computed: {
     isLoggedIn() {
@@ -34,28 +34,30 @@ export default {
             name: 'home',
             label: this.$t('menu.boards'),
             classes: 'btn btn-outline-success btn-sm',
-            isLoggedIn: true,
+            isLoggedIn: true
           },
           {
             name: 'login',
             label: this.$t('menu.login'),
             classes: 'btn btn-outline-success btn-sm',
-            isLoggedIn: false,
+            isLoggedIn: false
           },
           {
             name: 'signup',
             label: this.$t('menu.signup'),
             classes: 'btn btn-outline-primary btn-sm',
-            isLoggedIn: false,
-          },
-        ],
+            isLoggedIn: false
+          }
+        ]
       };
-    },
+    }
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout').then(() => { this.$router.push('/login'); });
-    },
-  },
+      this.$store.dispatch('logout').then(() => {
+        this.$router.push('/login');
+      });
+    }
+  }
 };
 </script>

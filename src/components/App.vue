@@ -14,7 +14,7 @@ import bMenu from './Blocks/b-menu/b-menu.vue';
 export default {
   name: 'app',
   components: {
-    bMenu,
-  },
+    bMenu
+  }
 };
 </script>

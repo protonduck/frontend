@@ -2,12 +2,7 @@
   <div class="form-group">
     <e-label :id="id" :text="labelText" />
     <div :class="containerClass">
-      <select
-        :id="id"
-        v-model.trim="vObj.$model"
-        :class="validationCssClass(vObj)"
-        class="form-control"
-      >
+      <select :id="id" v-model.trim="vObj.$model" :class="validationCssClass(vObj)" class="form-control">
         <option v-for="(option, index) in options" :key="index" :value="option.id">
           {{ option.name }}
         </option>
@@ -30,35 +25,35 @@ import eLabel from '../e-label/e-label.vue';
 export default {
   name: 'e-select',
   components: {
-    eLabel,
+    eLabel
   },
   props: {
     id: {
       required: true,
-      type: String,
+      type: String
     },
     vObj: {
       required: true,
-      type: Object,
+      type: Object
     },
     options: {
-      type: Array,
+      type: Array
     },
     labelText: {
-      type: String,
+      type: String
     },
     containerClass: {
       type: String,
-      default: 'col-sm-3',
-    },
+      default: 'col-sm-3'
+    }
   },
   methods: {
     validationCssClass(validation) {
       return {
         'is-valid': !validation.$error && validation.$dirty,
-        'is-invalid': validation.$error,
+        'is-invalid': validation.$error
       };
-    },
-  },
+    }
+  }
 };
 </script>

@@ -6,18 +6,18 @@ export default {
   argTypes: {
     state: {
       control: { type: 'select' },
-      options: [true, false],
-    },
-  },
+      options: [true, false]
+    }
+  }
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { eSpinner },
-  template: '<e-spinner v-bind="$props" />',
+  template: '<e-spinner v-bind="$props" />'
 });
 
 export const Primary = Template.bind({});
 Primary.args = {
-  state: true,
+  state: true
 };

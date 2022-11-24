@@ -1,3 +1,3 @@
 export default {
-  example: 'Hello from data.js',
+  example: 'Hello from data.js'
 };

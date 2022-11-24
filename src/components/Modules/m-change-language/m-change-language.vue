@@ -17,14 +17,14 @@ export default {
   name: 'm-change-language',
   data() {
     return {
-      selectedLanguage: 'en',
+      selectedLanguage: 'en'
     };
   },
   props: {
     languages: {
       type: Array,
-      default: () => ['en', 'ru'],
-    },
+      default: () => ['en', 'ru']
+    }
   },
   created() {
     const selectedLocale = localStorage.getItem(localeParamName);
@@ -36,8 +36,8 @@ export default {
   methods: {
     changeLanguage(language) {
       loadLanguageAsync(language);
-    },
-  },
+    }
+  }
 };
 </script>
 

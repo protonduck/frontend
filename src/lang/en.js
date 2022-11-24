@@ -3,7 +3,7 @@ export default {
     boards: 'Boards',
     login: 'Login',
     logout: 'Logout',
-    signup: 'Signup',
+    signup: 'Signup'
   },
   form: {
     name: 'Name',
@@ -26,7 +26,7 @@ export default {
       name: 'Name',
       image: 'Background URL',
       add: 'Add board',
-      update: 'Edit board',
+      update: 'Edit board'
     },
     link: {
       add: 'Add bookmark',
@@ -34,14 +34,14 @@ export default {
       title: 'Title',
       description: 'Description',
       url: 'Url',
-      category_id: 'Category',
-    },
+      category_id: 'Category'
+    }
   },
   category: {
-    add: 'Add category',
+    add: 'Add category'
   },
   link: {
-    add: 'Add bookmark',
+    add: 'Add bookmark'
   },
   error: {
     required: 'Field is required',
@@ -51,7 +51,7 @@ export default {
     notValidUrl: 'Please enter a valid URL.',
     incorrect_login_password: 'Incorrect login or password.',
     email_invalid: 'Please enter a valid E-Mail.',
-    email_not_unique: 'An account with this email already exists.',
+    email_not_unique: 'An account with this email already exists.'
   },
-  serverError: 'Server error. Something went wrong.',
+  serverError: 'Server error. Something went wrong.'
 };

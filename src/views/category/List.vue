@@ -16,10 +16,7 @@
           >
             <i v-show="category.icon" :class="category.icon"></i>
             {{ category.name }}
-            <e-link
-              class="btn btn-outline-light btn-sm"
-              @click="edit(category.id)"
-            >
+            <e-link class="btn btn-outline-light btn-sm" @click="edit(category.id)">
               <i class="fa fa-edit" />
             </e-link>
           </div>
@@ -32,7 +29,7 @@
           <div class="card-header">
             <i class="fa fa-plus pr-1"></i>
             <e-link @click="$store.commit('toggle_category_modal', true)">
-              {{ $t("category.add") }}
+              {{ $t('category.add') }}
             </e-link>
           </div>
         </div>
@@ -46,16 +43,16 @@
 </template>
 
 <script>
-import _ from "lodash";
-import draggable from "vuedraggable";
-import CategoryForm from "./Form.vue";
-import LinkList from "../link/List.vue";
-import eModal from "../../components/Elements/e-modal/e-modal.vue";
-import eLink from "../../components/Elements/e-link/e-link.vue";
-import bus from "../../bus";
+import _ from 'lodash';
+import draggable from 'vuedraggable';
+import CategoryForm from './Form.vue';
+import LinkList from '../link/List.vue';
+import eModal from '../../components/Elements/e-modal/e-modal.vue';
+import eLink from '../../components/Elements/e-link/e-link.vue';
+import bus from '../../bus';
 
 export default {
-  name: "CategoriesList",
+  name: 'CategoriesList',
   components: {
     CategoryForm,
     LinkList,
@@ -69,23 +66,23 @@ export default {
         return this.$store.getters.categories;
       },
       set(value) {
-        this.$store.commit("updateCategories", value);
+        this.$store.commit('updateCategories', value);
       }
     }
   },
   methods: {
     edit(selectedId) {
       const selectedCategory = _.find(this.categories, { id: selectedId });
-      this.$store.commit("toggle_category_modal", true);
+      this.$store.commit('toggle_category_modal', true);
       this.$nextTick(() => {
-        bus.edit("edit-category", selectedCategory);
+        bus.edit('edit-category', selectedCategory);
       });
     },
     update() {
       this.categories.map((category, index) => {
-        this.$store.dispatch("save", {
+        this.$store.dispatch('save', {
           api_url: `/categories/${category.id}`,
-          method: "put",
+          method: 'put',
           data: {
             sort: (category.sort = index + 1)
           }

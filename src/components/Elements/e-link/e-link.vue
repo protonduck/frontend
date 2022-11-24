@@ -1,12 +1,5 @@
 <template>
-  <a
-    :href="href"
-    :title="title"
-    :target="target"
-    :classes="classes"
-    @click="$emit('click')"
-    class="e-link"
-  >
+  <a :href="href" :title="title" :target="target" :classes="classes" @click="$emit('click')" class="e-link">
     <slot />
   </a>
 </template>
@@ -17,22 +10,17 @@ export default {
   props: {
     href: {
       type: String,
-      default: '#',
+      default: '#'
     },
     title: String,
     target: {
       type: String,
       default: '_self',
-      validator: (value) => [
-        '_blank',
-        '_self',
-      ].includes(value),
+      validator: (value) => ['_blank', '_self'].includes(value)
     },
-    classes: String,
+    classes: String
   },
-  emit: [
-    'click',
-  ],
+  emit: ['click']
 };
 </script>
 

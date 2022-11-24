@@ -1,6 +1,3 @@
 export default {
-  languages: [
-    'en',
-    'ru',
-  ],
+  languages: ['en', 'ru']
 };

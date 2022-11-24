@@ -1,17 +1,9 @@
 <template>
   <div class="card bg-light">
-    <div
-      class="card-header"
-      v-text="$t(isNewRecord ? 'form.addCategory' : 'form.updateCategory')"
-    />
+    <div class="card-header" v-text="$t(isNewRecord ? 'form.addCategory' : 'form.updateCategory')" />
     <div class="card-body">
       <form method="post" @submit.prevent="submit">
-        <e-input
-          :vObj="$v.name"
-          :labelText="$t('form.name')"
-          id="category-name"
-          containerClass="col-sm-12"
-        />
+        <e-input :vObj="$v.name" :labelText="$t('form.name')" id="category-name" containerClass="col-sm-12" />
 
         <e-textarea
           :vObj="$v.description"
@@ -21,14 +13,14 @@
         />
 
         <e-input
-            :vObj="$v.color"
-            :labelText="$t('form.color')"
-            type="color"
-            id="category-color"
-            containerClass="col-sm-12"
+          :vObj="$v.color"
+          :labelText="$t('form.color')"
+          type="color"
+          id="category-color"
+          containerClass="col-sm-12"
         />
 
-         <e-select
+        <e-select
           :vObj="$v.icon"
           :labelText="$t('form.icon')"
           :options="icons"
@@ -36,7 +28,7 @@
           containerClass="col-sm-12"
         />
 
-         <e-select
+        <e-select
           v-if="!isNewRecord && boards.length > 1"
           :vObj="$v.board_id"
           :labelText="$t('form.board.id')"
@@ -53,23 +45,11 @@
             {{ isNewRecord ? $t('form.add') : $t('form.save') }}
           </e-button>
 
-          <e-button
-            id="button-reset"
-            type="reset"
-            :disabled="isSaving"
-            classes="btn-secondary"
-            @click="close"
-          >
+          <e-button id="button-reset" type="reset" :disabled="isSaving" classes="btn-secondary" @click="close">
             <i class="fas fa-times"></i> {{ $t('form.close') }}
           </e-button>
 
-          <e-button
-            v-if="!isNewRecord"
-            id="button-remove"
-            :disabled="isRemoving"
-            classes="btn-danger"
-            @click="remove"
-          >
+          <e-button v-if="!isNewRecord" id="button-remove" :disabled="isRemoving" classes="btn-danger" @click="remove">
             <e-spinner :state="isRemoving">
               <i class="fas fa-trash-alt"></i>
             </e-spinner>
@@ -82,13 +62,7 @@
 </template>
 
 <script>
-import {
-  required,
-  minLength,
-  maxLength,
-  numeric,
-  helpers,
-} from 'vuelidate/lib/validators';
+import { required, minLength, maxLength, numeric, helpers } from 'vuelidate/lib/validators';
 import { serverError } from '@/validators/validators';
 import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import eInput from '../../components/Elements/e-input/e-input.vue';
@@ -104,7 +78,7 @@ export default {
     eInput,
     eTextarea,
     eSelect,
-    eButton,
+    eButton
   },
   data() {
     return {
@@ -119,7 +93,7 @@ export default {
       isSaving: false,
       isRemoving: false,
       // server errors
-      responseErrors: [],
+      responseErrors: []
     };
   },
   validations: {
@@ -127,27 +101,27 @@ export default {
       required: helpers.withParams({ message: 'error.required' }, required),
       minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 2 } } }, minLength(2)),
       maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 255 } } }, maxLength(255)),
-      serverError: serverError('name'),
+      serverError: serverError('name')
     },
     description: {
       maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 255 } } }, maxLength(255)),
-      serverError: serverError('description'),
+      serverError: serverError('description')
     },
     color: {
       minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 6 } } }, minLength(6)),
       maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 7 } } }, maxLength(7)),
-      serverError: serverError('color'),
+      serverError: serverError('color')
     },
     icon: {
       minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 2 } } }, minLength(2)),
       maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 255 } } }, maxLength(255)),
-      serverError: serverError('icon'),
+      serverError: serverError('icon')
     },
     board_id: {
       required: helpers.withParams({ message: 'error.required' }, required),
       numeric,
-      serverError: serverError('board_id'),
-    },
+      serverError: serverError('board_id')
+    }
   },
   computed: {
     isNewRecord() {
@@ -171,9 +145,9 @@ export default {
         { id: 'fa fa-percent', name: 'Percent' },
         { id: 'fas fa-share-alt', name: 'Social' },
         { id: 'fa fa-video', name: 'Video' },
-        { id: 'fas fa-wallet', name: 'Wallet' },
+        { id: 'fas fa-wallet', name: 'Wallet' }
       ];
-    },
+    }
   },
   methods: {
     submit() {
@@ -185,17 +159,18 @@ export default {
 
       this.isSaving = true;
 
-      this.$store.dispatch('save', {
-        api_url: this.isNewRecord ? '/categories' : `/categories/${this.id}`,
-        method: this.isNewRecord ? 'post' : 'put',
-        data: {
-          board_id: this.isNewRecord ? this.$store.getters.activeBoardId : this.board_id,
-          name: this.name,
-          description: this.description,
-          color: this.color,
-          icon: this.icon,
-        },
-      })
+      this.$store
+        .dispatch('save', {
+          api_url: this.isNewRecord ? '/categories' : `/categories/${this.id}`,
+          method: this.isNewRecord ? 'post' : 'put',
+          data: {
+            board_id: this.isNewRecord ? this.$store.getters.activeBoardId : this.board_id,
+            name: this.name,
+            description: this.description,
+            color: this.color,
+            icon: this.icon
+          }
+        })
         .then(() => {
           bus.fetchBoards();
           this.$store.commit('toggle_category_modal', false);
@@ -205,7 +180,8 @@ export default {
           if (err.response.status === 422) {
             this.responseErrors = err.response.data;
           }
-        }).finally(() => {
+        })
+        .finally(() => {
           this.isSaving = false;
         });
     },
@@ -224,10 +200,11 @@ export default {
     remove() {
       this.isRemoving = true;
 
-      this.$store.dispatch('save', {
-        api_url: `/categories/${this.id}`,
-        method: 'delete',
-      })
+      this.$store
+        .dispatch('save', {
+          api_url: `/categories/${this.id}`,
+          method: 'delete'
+        })
         .then(() => {
           bus.fetchBoards();
           this.$store.commit('toggle_category_modal', false);
@@ -237,10 +214,11 @@ export default {
           if (err.response.status === 422) {
             this.responseErrors = err.response.data;
           }
-        }).finally(() => {
+        })
+        .finally(() => {
           this.isRemoving = false;
         });
-    },
+    }
   },
   created() {
     this.$v.$reset();
@@ -261,6 +239,6 @@ export default {
         this.close();
       }
     });
-  },
+  }
 };
 </script>

@@ -4,12 +4,12 @@ export default {
   options: [
     {
       id: 'en',
-      name: 'EN',
+      name: 'EN'
     },
     {
       id: 'ru',
-      name: 'RU',
-    },
+      name: 'RU'
+    }
   ],
-  errors: [],
+  errors: []
 };

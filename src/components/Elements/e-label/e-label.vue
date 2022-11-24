@@ -9,12 +9,12 @@ export default {
   name: 'e-label',
   props: {
     id: {
-      type: String,
+      type: String
     },
     text: {
-      type: String,
-    },
-  },
+      type: String
+    }
+  }
 };
 </script>
 

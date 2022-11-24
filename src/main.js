@@ -1,15 +1,15 @@
-import Vue from "vue";
-import Axios from "axios";
-import VueI18n from "vue-i18n";
-import Vuelidate from "vuelidate";
-import Store, { authTokenName } from "./store";
-import App from "./components/App.vue";
-import router from "./router";
-import { i18n } from "./lang/i18n-setup";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import Vue from 'vue';
+import Axios from 'axios';
+import VueI18n from 'vue-i18n';
+import Vuelidate from 'vuelidate';
+import Store, { authTokenName } from './store';
+import App from './components/App.vue';
+import router from './router';
+import { i18n } from './lang/i18n-setup';
+import '@fortawesome/fontawesome-free/css/all.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-window.Vue = require("vue");
+window.Vue = require('vue');
 
 Vue.use(VueI18n);
 Vue.use(Vuelidate);
@@ -22,7 +22,7 @@ Vue.config.productionTip = false;
 const app = new Vue({
   i18n,
   router,
-  render: h => h(App),
+  render: (h) => h(App),
   beforeMount() {
     // authorization
     const authToken = localStorage.getItem(authTokenName);
@@ -37,14 +37,10 @@ const app = new Vue({
   created() {
     this.$http.interceptors.response.use(
       undefined,
-      err =>
+      (err) =>
         new Promise(() => {
-          if (
-            err.status === 401 &&
-            err.config &&
-            !err.config.__isRetryRequest
-          ) {
-            this.$store.dispatch("logout");
+          if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+            this.$store.dispatch('logout');
           }
           throw err;
         })
@@ -52,4 +48,4 @@ const app = new Vue({
   }
 });
 
-app.$mount("#app");
+app.$mount('#app');

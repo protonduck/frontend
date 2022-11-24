@@ -3,7 +3,7 @@
     <div class="m-menu">
       <template v-for="(item, index) in filtredMenu">
         <div class="m-menu__item" :key="index">
-          <router-link :to="{name: item.name}" :class="item.classes">
+          <router-link :to="{ name: item.name }" :class="item.classes">
             {{ item.label }}
           </router-link>
         </div>
@@ -24,23 +24,23 @@ export default {
   props: {
     menu: {
       type: Object,
-      required: true,
+      required: true
     },
     isLoggedIn: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   computed: {
     filtredMenu() {
       return this.menu.items.filter((item) => item.isLoggedIn === this.isLoggedIn);
-    },
+    }
   },
   methods: {
     hasSlot(name = 'default') {
       return !!this.$slots[name];
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -3,7 +3,7 @@ export default {
     boards: 'Доски',
     login: 'Вход',
     logout: 'Выйти',
-    signup: 'Регистрация',
+    signup: 'Регистрация'
   },
   form: {
     name: 'Название',
@@ -26,7 +26,7 @@ export default {
       name: 'Имя',
       image: 'URL картинки',
       add: 'Добавить доску',
-      update: 'Изменить доску',
+      update: 'Изменить доску'
     },
     link: {
       add: 'Добавить закладку',
@@ -34,14 +34,14 @@ export default {
       title: 'Заголовок',
       description: 'Описание',
       url: 'Ссылка',
-      category_id: 'Категория',
-    },
+      category_id: 'Категория'
+    }
   },
   category: {
-    add: 'Добавить категорию',
+    add: 'Добавить категорию'
   },
   link: {
-    add: 'Добавить закладку',
+    add: 'Добавить закладку'
   },
   error: {
     required: 'Поле является обязательным',
@@ -50,7 +50,7 @@ export default {
     notValidUrl: 'Пожалуйста, введите действительный URL.',
     incorrect_login_password: 'Не верный логин или пароль.',
     email_invalid: 'Пожалуйста, введите действительный E-Mail.',
-    email_not_unique: 'Аккаунт с таким E-Mail уже существует.',
+    email_not_unique: 'Аккаунт с таким E-Mail уже существует.'
   },
-  serverError: 'Ошибка. Что-то пошло не так.',
+  serverError: 'Ошибка. Что-то пошло не так.'
 };

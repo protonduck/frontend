@@ -4,13 +4,13 @@ import eLinkData from './e-link.data';
 export default {
   title: 'Elements/Mix/Link',
   component: eLink,
-  argTypes: {},
+  argTypes: {}
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { eLink },
-  template: '<e-link v-bind="$props">Link</e-link>',
+  template: '<e-link v-bind="$props">Link</e-link>'
 });
 
 export const Link = Template.bind({});

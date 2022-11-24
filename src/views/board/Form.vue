@@ -3,19 +3,9 @@
     <div class="card-header" v-text="$t(isNewRecord ? 'form.board.add' : 'form.board.update')" />
     <div class="card-body">
       <form method="post" @submit.prevent="submit">
-        <e-input
-          :vObj="$v.name"
-          :labelText="$t('form.board.name')"
-          id="board-name"
-          containerClass="col-sm-12"
-        />
+        <e-input :vObj="$v.name" :labelText="$t('form.board.name')" id="board-name" containerClass="col-sm-12" />
 
-        <e-textarea
-          :vObj="$v.image"
-          :labelText="$t('form.board.image')"
-          id="board-image"
-          containerClass="col-sm-12"
-        />
+        <e-textarea :vObj="$v.image" :labelText="$t('form.board.image')" id="board-image" containerClass="col-sm-12" />
 
         <div class="form-group">
           <e-button :disabled="isSaving">
@@ -25,22 +15,12 @@
             {{ isNewRecord ? $t('form.add') : $t('form.save') }}
           </e-button>
 
-          <e-button
-            type="reset"
-            :disabled="isSaving"
-            @click="close"
-            classes="btn-secondary"
-          >
+          <e-button type="reset" :disabled="isSaving" @click="close" classes="btn-secondary">
             <i class="fas fa-times"></i>
             {{ $t('form.close') }}
           </e-button>
 
-          <e-button
-            v-if="!isNewRecord"
-            :disabled="isRemoving"
-            classes="btn-danger"
-            @click="remove"
-          >
+          <e-button v-if="!isNewRecord" :disabled="isRemoving" classes="btn-danger" @click="remove">
             <e-spinner :state="isRemoving">
               <i class="fas fa-trash-alt"></i>
             </e-spinner>
@@ -53,12 +33,7 @@
 </template>
 
 <script>
-import {
-  required,
-  minLength,
-  maxLength,
-  helpers,
-} from 'vuelidate/lib/validators';
+import { required, minLength, maxLength, helpers } from 'vuelidate/lib/validators';
 import { serverError } from '@/validators/validators';
 import eSpinner from '../../components/Elements/e-spinner/e-spinner.vue';
 import bus from '../../bus';
@@ -72,7 +47,7 @@ export default {
     eSpinner,
     eInput,
     eTextarea,
-    eButton,
+    eButton
   },
   data() {
     return {
@@ -84,7 +59,7 @@ export default {
       isSaving: false,
       isRemoving: false,
       // server errors
-      responseErrors: [],
+      responseErrors: []
     };
   },
   validations: {
@@ -92,17 +67,17 @@ export default {
       required: helpers.withParams({ message: 'error.required' }, required),
       minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 2 } } }, minLength(2)),
       maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 255 } } }, maxLength(255)),
-      serverError: serverError('name'),
+      serverError: serverError('name')
     },
     image: {
       maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 255 } } }, maxLength(255)),
-      serverError: serverError('description'),
-    },
+      serverError: serverError('description')
+    }
   },
   computed: {
     isNewRecord() {
       return this.id === null;
-    },
+    }
   },
   methods: {
     submit() {
@@ -114,14 +89,15 @@ export default {
 
       this.isSaving = true;
 
-      this.$store.dispatch('save', {
-        api_url: this.isNewRecord ? '/boards' : `/boards/${this.id}`,
-        method: this.isNewRecord ? 'post' : 'put',
-        data: {
-          name: this.name,
-          image: this.image,
-        },
-      })
+      this.$store
+        .dispatch('save', {
+          api_url: this.isNewRecord ? '/boards' : `/boards/${this.id}`,
+          method: this.isNewRecord ? 'post' : 'put',
+          data: {
+            name: this.name,
+            image: this.image
+          }
+        })
         .then(() => {
           bus.fetchBoards();
           this.$store.commit('toggle_board_modal', false);
@@ -132,7 +108,8 @@ export default {
             this.responseErrors = err.response.data;
             // this.$v.$touch();
           }
-        }).finally(() => {
+        })
+        .finally(() => {
           this.isSaving = false;
         });
     },
@@ -148,10 +125,11 @@ export default {
     remove() {
       this.isRemoving = true;
 
-      this.$store.dispatch('save', {
-        api_url: `/boards/${this.id}`,
-        method: 'delete',
-      })
+      this.$store
+        .dispatch('save', {
+          api_url: `/boards/${this.id}`,
+          method: 'delete'
+        })
         .then(() => {
           bus.fetchBoards();
           localStorage.removeItem('active_board_id');
@@ -161,10 +139,11 @@ export default {
           if (err.response.status === 422) {
             this.responseErrors = err.response.data;
           }
-        }).finally(() => {
+        })
+        .finally(() => {
           this.isRemoving = false;
         });
-    },
+    }
   },
   created() {
     // Reset validation
@@ -182,6 +161,6 @@ export default {
         this.close();
       }
     });
-  },
+  }
 };
 </script>

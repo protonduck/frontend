@@ -5,21 +5,21 @@ export default {
         name: 'home',
         label: 'Boards',
         classes: 'btn btn-outline-success btn-sm',
-        isLoggedIn: true,
+        isLoggedIn: true
       },
       {
         name: 'login',
         label: 'Login',
         classes: 'btn btn-outline-success btn-sm',
-        isLoggedIn: false,
+        isLoggedIn: false
       },
       {
         name: 'signup',
         label: 'Sign up',
         classes: 'btn btn-outline-primary btn-sm',
-        isLoggedIn: false,
-      },
-    ],
+        isLoggedIn: false
+      }
+    ]
   },
-  isLoggedIn: false,
+  isLoggedIn: false
 };

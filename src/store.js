@@ -16,7 +16,7 @@ export default new Vuex.Store({
     active_board_id: 0,
     current_category_id: 0,
     boards: [],
-    categories: [],
+    categories: []
   },
   mutations: {
     auth_request(state) {
@@ -53,7 +53,7 @@ export default new Vuex.Store({
     },
     updateCategories(state, categories) {
       state.categories = categories;
-    },
+    }
   },
   actions: {
     auth(context, payload) {
@@ -61,7 +61,7 @@ export default new Vuex.Store({
         axios({
           url: payload.url,
           data: payload.data,
-          method: 'POST',
+          method: 'POST'
         })
           .then((resp) => {
             const token = resp.data.api_key;
@@ -88,7 +88,7 @@ export default new Vuex.Store({
         axios({
           url: payload.api_url,
           method: payload.method,
-          data: payload.data,
+          data: payload.data
         })
           .then((resp) => {
             resolve(resp);
@@ -97,7 +97,7 @@ export default new Vuex.Store({
             reject(err);
           });
       });
-    },
+    }
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
@@ -108,6 +108,6 @@ export default new Vuex.Store({
     activeBoardId: (state) => state.active_board_id,
     currentCategoryId: (state) => state.current_category_id,
     boards: (state) => state.boards,
-    categories: (state) => state.categories,
-  },
+    categories: (state) => state.categories
+  }
 });

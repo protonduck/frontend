@@ -11,14 +11,14 @@ export default {
   props: {
     example: {
       type: String,
-      default: '',
-    },
+      default: ''
+    }
   },
   data: () => ({}),
   computed: {},
   created() {},
   mounted() {},
-  methods: {},
+  methods: {}
 };
 </script>
 

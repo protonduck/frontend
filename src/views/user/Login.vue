@@ -1,16 +1,12 @@
 <template>
   <div>
     <h1>
-      {{ $t("menu.login") }}
+      {{ $t('menu.login') }}
     </h1>
     <div v-if="responseErrors.length > 0">
-      <div
-        v-for="(error, index) in responseErrors"
-        :key="index"
-        class="alert alert-danger"
-      >
+      <div v-for="(error, index) in responseErrors" :key="index" class="alert alert-danger">
         <span v-if="error.message === 'incorrect_login_password'">
-          {{ $t("error.incorrect_login_password") }}
+          {{ $t('error.incorrect_login_password') }}
         </span>
         <span v-else>
           {{ error.message }}
@@ -39,27 +35,21 @@
       />
 
       <button class="btn btn-success" type="submit">
-        {{ $t("menu.login") }}
+        {{ $t('menu.login') }}
       </button>
     </form>
   </div>
 </template>
 
 <script>
-import {
-  required,
-  email,
-  minLength,
-  maxLength,
-  helpers
-} from "vuelidate/lib/validators";
-import eInput from "@/components/Elements/e-input/e-input.vue";
+import { required, email, minLength, maxLength, helpers } from 'vuelidate/lib/validators';
+import eInput from '@/components/Elements/e-input/e-input.vue';
 
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       responseErrors: []
     };
   },
@@ -75,17 +65,17 @@ export default {
       }
 
       this.$store
-        .dispatch("auth", {
-          url: "/user/login",
+        .dispatch('auth', {
+          url: '/user/login',
           data: {
             email: this.email,
             password: this.password
           }
         })
         .then(() => {
-          this.$router.push("/");
+          this.$router.push('/');
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.response.status === 422) {
             this.responseErrors = err.response.data;
           }
@@ -94,19 +84,13 @@ export default {
   },
   validations: {
     email: {
-      required: helpers.withParams({ message: "error.required" }, required),
-      email: helpers.withParams({ message: "error.email_invalid" }, email)
+      required: helpers.withParams({ message: 'error.required' }, required),
+      email: helpers.withParams({ message: 'error.email_invalid' }, email)
     },
     password: {
-      required: helpers.withParams({ message: "error.required" }, required),
-      minLength: helpers.withParams(
-        { message: { path: "error.tooShort", args: { min: 6 } } },
-        minLength(6)
-      ),
-      maxLength: helpers.withParams(
-        { message: { path: "error.tooLong", args: { max: 100 } } },
-        maxLength(100)
-      )
+      required: helpers.withParams({ message: 'error.required' }, required),
+      minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 6 } } }, minLength(6)),
+      maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 100 } } }, maxLength(100))
     }
   },
   created() {

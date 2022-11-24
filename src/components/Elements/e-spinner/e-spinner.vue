@@ -16,8 +16,8 @@ export default {
   props: {
     state: {
       type: Boolean,
-      default: false,
-    },
-  },
+      default: false
+    }
+  }
 };
 </script>

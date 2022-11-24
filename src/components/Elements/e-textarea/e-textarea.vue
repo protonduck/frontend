@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import eLabel from "../e-label/e-label.vue";
+import eLabel from '../e-label/e-label.vue';
 
 export default {
-  name: "e-textarea",
+  name: 'e-textarea',
   components: {
     eLabel
   },
@@ -47,14 +47,14 @@ export default {
     },
     containerClass: {
       type: String,
-      default: "col-sm-3"
+      default: 'col-sm-3'
     }
   },
   methods: {
     validationCssClass(validation) {
       return {
-        "is-valid": !validation.$error && validation.$dirty,
-        "is-invalid": validation.$error
+        'is-valid': !validation.$error && validation.$dirty,
+        'is-invalid': validation.$error
       };
     }
   }

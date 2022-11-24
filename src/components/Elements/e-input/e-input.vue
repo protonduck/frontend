@@ -28,56 +28,45 @@ import eLabel from '../e-label/e-label.vue';
 export default {
   name: 'e-input',
   components: {
-    eLabel,
+    eLabel
   },
   props: {
     id: {
       required: true,
-      type: String,
+      type: String
     },
     vObj: {
       required: true,
-      type: Object,
+      type: Object
     },
     errors: {
-      type: Array,
+      type: Array
     },
     type: {
       type: String,
       default: 'text',
-      validator: (value) => [
-        'text',
-        'password',
-        'email',
-        'color',
-      ].includes(value),
+      validator: (value) => ['text', 'password', 'email', 'color'].includes(value)
     },
     labelText: {
-      type: String,
+      type: String
     },
     autocomplete: {
       type: String,
       default: 'off',
-      validator: (value) => [
-        'off',
-        'email',
-        'new-password',
-        'current-password',
-        'username',
-      ].includes(value),
+      validator: (value) => ['off', 'email', 'new-password', 'current-password', 'username'].includes(value)
     },
     containerClass: {
       type: String,
-      default: 'col-sm-3',
-    },
+      default: 'col-sm-3'
+    }
   },
   methods: {
     validationCssClass(validation) {
       return {
         'is-valid': !validation.$error && validation.$dirty,
-        'is-invalid': validation.$error,
+        'is-invalid': validation.$error
       };
-    },
-  },
+    }
+  }
 };
 </script>

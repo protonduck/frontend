@@ -7,29 +7,29 @@ export default {
   argTypes: {
     type: {
       control: { type: 'select' },
-      options: ['text', 'password', 'email'],
+      options: ['text', 'password', 'email']
     },
     autocomplete: {
       control: { type: 'select' },
-      options: ['off', 'email', 'new-password', 'current-password', 'username'],
-    },
-  },
+      options: ['off', 'email', 'new-password', 'current-password', 'username']
+    }
+  }
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { eInput },
-  template: '<e-input v-bind="$props" />',
+  template: '<e-input v-bind="$props" />'
 });
 
 export const InputField = Template.bind({});
 InputField.args = {
   ...dummyData,
-  vObj: { $error: false, $dirty: false },
+  vObj: { $error: false, $dirty: false }
 };
 
 export const inputFieldWithErrorMessage = Template.bind({});
 inputFieldWithErrorMessage.args = {
   ...dummyData,
-  vObj: { $error: true },
+  vObj: { $error: true }
 };

@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'e-modal',
+  name: 'e-modal'
 };
 </script>
 

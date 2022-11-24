@@ -1,16 +1,12 @@
 <template>
   <div>
     <h1>
-      {{ $t("menu.signup") }}
+      {{ $t('menu.signup') }}
     </h1>
     <div v-if="responseErrors.length > 0">
-      <div
-        v-for="(error, index) in responseErrors"
-        :key="index"
-        class="alert alert-danger"
-      >
+      <div v-for="(error, index) in responseErrors" :key="index" class="alert alert-danger">
         <span v-if="error.message === 'email_not_unique'">
-          {{ $t("error.email_not_unique") }}
+          {{ $t('error.email_not_unique') }}
         </span>
         <span v-else>
           {{ error.message }}
@@ -58,29 +54,23 @@
       />
 
       <button class="btn btn-success" type="submit">
-        {{ $t("menu.signup") }}
+        {{ $t('menu.signup') }}
       </button>
     </form>
   </div>
 </template>
 
 <script>
-import {
-  email,
-  helpers,
-  maxLength,
-  minLength,
-  required
-} from "vuelidate/lib/validators";
-import eInput from "@/components/Elements/e-input/e-input.vue";
+import { email, helpers, maxLength, minLength, required } from 'vuelidate/lib/validators';
+import eInput from '@/components/Elements/e-input/e-input.vue';
 
 export default {
   data() {
     return {
-      name: "",
-      email: "",
-      password: "",
-      password_confirmation: "",
+      name: '',
+      email: '',
+      password: '',
+      password_confirmation: '',
       is_admin: null,
       responseErrors: []
     };
@@ -104,12 +94,12 @@ export default {
       };
 
       this.$store
-        .dispatch("auth", {
-          url: "/user/signup",
+        .dispatch('auth', {
+          url: '/user/signup',
           data
         })
-        .then(() => this.$router.push("/"))
-        .catch(err => {
+        .then(() => this.$router.push('/'))
+        .catch((err) => {
           if (err.response.status === 422) {
             this.responseErrors = err.response.data;
           }
@@ -118,33 +108,21 @@ export default {
   },
   validations: {
     name: {
-      required: helpers.withParams({ message: "error.required" }, required)
+      required: helpers.withParams({ message: 'error.required' }, required)
     },
     email: {
-      required: helpers.withParams({ message: "error.required" }, required),
-      email: helpers.withParams({ message: "error.email_invalid" }, email)
+      required: helpers.withParams({ message: 'error.required' }, required),
+      email: helpers.withParams({ message: 'error.email_invalid' }, email)
     },
     password: {
-      required: helpers.withParams({ message: "error.required" }, required),
-      minLength: helpers.withParams(
-        { message: { path: "error.tooShort", args: { min: 6 } } },
-        minLength(6)
-      ),
-      maxLength: helpers.withParams(
-        { message: { path: "error.tooLong", args: { max: 100 } } },
-        maxLength(100)
-      )
+      required: helpers.withParams({ message: 'error.required' }, required),
+      minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 6 } } }, minLength(6)),
+      maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 100 } } }, maxLength(100))
     },
     password_confirmation: {
-      required: helpers.withParams({ message: "error.required" }, required),
-      minLength: helpers.withParams(
-        { message: { path: "error.tooShort", args: { min: 6 } } },
-        minLength(6)
-      ),
-      maxLength: helpers.withParams(
-        { message: { path: "error.tooLong", args: { max: 100 } } },
-        maxLength(100)
-      )
+      required: helpers.withParams({ message: 'error.required' }, required),
+      minLength: helpers.withParams({ message: { path: 'error.tooShort', args: { min: 6 } } }, minLength(6)),
+      maxLength: helpers.withParams({ message: { path: 'error.tooLong', args: { max: 100 } } }, maxLength(100))
     }
   },
   created() {

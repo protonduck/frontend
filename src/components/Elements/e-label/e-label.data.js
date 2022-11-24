@@ -1,4 +1,4 @@
 export default {
   text: 'Name',
-  id: 'name',
+  id: 'name'
 };

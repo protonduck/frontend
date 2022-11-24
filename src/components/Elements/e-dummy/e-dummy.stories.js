@@ -4,13 +4,13 @@ import dummyData from './e-dummy.data';
 export default {
   title: 'Elements/Dummy',
   component: eDummy,
-  argTypes: {},
+  argTypes: {}
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { eDummy },
-  template: '<e-dummy v-bind="$props" />',
+  template: '<e-dummy v-bind="$props" />'
 });
 
 export const Dummy = Template.bind({});
