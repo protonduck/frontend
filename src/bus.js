@@ -10,31 +10,22 @@ export default new Vue({
         .get('/boards')
         .then((resp) => {
           const boards = resp.data;
-          let activeBoard;
+          let activeBoardId;
 
           if (boards.length) {
-            activeBoard = boards[0];
+            activeBoardId = boards[0].id;
           }
 
-          // look in storage, for active board
           if (localStorage.getItem('active_board_id') !== null && localStorage.getItem('active_board_id') !== 'NaN') {
-            activeBoard = _.find(boards, { id: parseInt(localStorage.getItem('active_board_id'), 10) });
+            activeBoardId = parseInt(localStorage.getItem('active_board_id'), 10);
           }
 
-          // set active board id
-          this.$store.commit('changeActiveBoardId', activeBoard.id);
+          this.$store.commit('change_active_board_id', activeBoardId);
+          localStorage.setItem('active_board_id', activeBoardId);
 
-          // update boards list state
           this.$store.commit('updateBoards', boards);
 
-          // set active board category
-          this.$store.commit('updateCategories', {
-            id: activeBoard.id,
-            categories: activeBoard.categories
-          });
-
-          // update background image
-          document.body.style.backgroundImage = `url('${activeBoard.image}')`;
+          this.edit('board-changed');
         })
         .catch(() => {
           // do nothing

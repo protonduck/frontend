@@ -137,7 +137,9 @@ export default {
           }
         })
         .then(() => {
-          this.close();
+          bus.fetchBoards();
+          this.$store.commit('toggle_link_modal', false);
+          this.reset();
         })
         .catch((err) => {
           if (err.response.status === 422) {
@@ -158,7 +160,6 @@ export default {
     close() {
       this.reset();
       this.$store.commit('toggle_link_modal', false);
-      bus.fetchBoards();
     },
     remove() {
       this.isRemoving = true;
@@ -169,7 +170,9 @@ export default {
           method: 'delete'
         })
         .then(() => {
-          this.close();
+          bus.fetchBoards();
+          this.$store.commit('toggle_link_modal', false);
+          this.reset();
         })
         .catch((err) => {
           if (err.response.status === 422) {

@@ -5,7 +5,7 @@
       class="d-flex flex-wrap flex-auto"
       group="categories"
       handle=".category"
-      @change="updateSorting()"
+      @change="update()"
     >
       <div v-for="category in categories" :key="category.id" class="col-md-3">
         <div :style="{ borderColor: '#' + category.color }" class="card mb-3">
@@ -65,11 +65,8 @@ export default {
       get() {
         return this.$store.getters.categories;
       },
-      set(categories) {
-        this.$store.commit('updateCategories', {
-          id: this.$store.getters.activeBoardId,
-          categories: categories
-        });
+      set(value) {
+        this.$store.commit('updateCategories', value);
       }
     }
   },
@@ -81,7 +78,7 @@ export default {
         bus.edit('edit-category', selectedCategory);
       });
     },
-    updateSorting() {
+    update() {
       this.categories.map((category, index) => {
         this.$store.dispatch('save', {
           api_url: `/categories/${category.id}`,

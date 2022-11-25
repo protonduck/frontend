@@ -3,7 +3,7 @@
     <div class="boards mb-3">
       <nav>
         <div class="d-flex">
-          <draggable v-model="boards" class="nav nav-pills" group="boards" @change="updateSorting()">
+          <draggable v-model="boards" class="nav nav-pills" group="boards" @change="update()">
             <e-link
               v-for="board in boards"
               :key="board.id"
@@ -59,37 +59,31 @@ export default {
       get() {
         return this.$store.getters.boards;
       },
-      set(board) {
-        this.$store.commit('updateBoards', board);
+      set(value) {
+        this.$store.commit('updateBoards', value);
       }
-    },
-    board() {
-      return _.find(this.boards, {
-        id: this.$store.getters.activeBoardId
-      });
     }
   },
   methods: {
     edit() {
+      const selectedItem = _.find(this.$store.getters.boards, {
+        id: this.$store.getters.activeBoardId
+      });
+
       this.$store.commit('toggle_board_modal', true);
 
       this.$nextTick(() => {
-        bus.edit('edit-board', this.board);
+        bus.edit('edit-board', selectedItem);
       });
     },
     switchBoard(id) {
-      this.$store.commit('changeActiveBoardId', id);
+      this.$store.commit('change_active_board_id', id);
 
-      if (this.board !== undefined) {
-        this.$store.commit('updateCategories', {
-          id: this.board.id,
-          categories: this.board.categories
-        });
+      localStorage.setItem('active_board_id', id);
 
-        document.body.style.backgroundImage = `url('${this.board.image}')`;
-      }
+      bus.edit('board-changed');
     },
-    updateSorting() {
+    update() {
       this.boards.map((board, index) => {
         this.$store.dispatch('save', {
           api_url: `/boards/${board.id}`,
@@ -102,9 +96,20 @@ export default {
     }
   },
   created() {
-    bus.fetchBoards();
+    bus.$on('board-changed', () => {
+      const activeBoard = _.find(this.$store.getters.boards, {
+        id: this.$store.getters.activeBoardId
+      });
 
-    document.body.className = 'body_bg_image';
+      if (activeBoard !== undefined) {
+        this.$store.commit('updateCategories', activeBoard.categories);
+
+        document.body.style.backgroundImage = `url('${activeBoard.image}')`;
+        document.body.className = 'body_bg_image';
+      }
+    });
+
+    bus.fetchBoards();
   }
 };
 </script>

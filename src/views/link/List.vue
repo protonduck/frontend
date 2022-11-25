@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="list-group list-group-flush">
-      <draggable v-model="items.links" group="links" handle=".link" @change="updateSorting()">
+      <draggable v-model="items.links" group="links" handle=".link" @change="update()">
         <li
           v-for="item in items.links"
           class="list-group-item d-flex justify-content-between align-items-center link"
@@ -56,22 +56,19 @@ export default {
   },
   methods: {
     add(categoryId) {
-      this.openModal();
+      this.$store.commit('toggle_link_modal', true);
       this.$store.commit('change_current_category_id', categoryId);
     },
     edit(selectedId) {
-      this.openModal();
-
       const selectedItem = _.find(this.items.links, { id: selectedId });
+
+      this.$store.commit('toggle_link_modal', true);
 
       this.$nextTick(() => {
         bus.edit('edit-link', selectedItem);
       });
     },
-    openModal() {
-      this.$store.commit('toggle_link_modal', true);
-    },
-    updateSorting() {
+    update() {
       this.items.links.map((link, index) => {
         this.$store.dispatch('save', {
           api_url: `/links/${link.id}`,
