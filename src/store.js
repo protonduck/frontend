@@ -15,8 +15,7 @@ export default new Vuex.Store({
     show_link_modal: false,
     active_board_id: 0,
     current_category_id: 0,
-    boards: [],
-    categories: []
+    boards: []
   },
   mutations: {
     auth_request(state) {
@@ -42,7 +41,14 @@ export default new Vuex.Store({
     toggle_link_modal(state, payload) {
       state.show_link_modal = payload;
     },
-    change_active_board_id(state, payload) {
+    changeActiveBoardId(state, payload) {
+      // remove old value
+      localStorage.removeItem('active_board_id');
+
+      // save the new value
+      localStorage.setItem('active_board_id', payload);
+
+      // update state
       state.active_board_id = payload;
     },
     change_current_category_id(state, payload) {
@@ -51,8 +57,9 @@ export default new Vuex.Store({
     updateBoards(state, boards) {
       state.boards = boards;
     },
-    updateCategories(state, categories) {
-      state.categories = categories;
+    updateCategories(state, payload) {
+      let boardIndex = (index) => state.boards.findIndex((board) => board.id === index);
+      state.boards[boardIndex(payload.id)].categories = payload.categories;
     }
   },
   actions: {
@@ -108,6 +115,11 @@ export default new Vuex.Store({
     activeBoardId: (state) => state.active_board_id,
     currentCategoryId: (state) => state.current_category_id,
     boards: (state) => state.boards,
-    categories: (state) => state.categories
+    categories: (state) => {
+      if (state.boards[state.active_board_id]) {
+        let boardIndex = (index) => state.boards.findIndex((board) => board.id === index);
+        return state.boards[boardIndex(state.active_board_id)].categories;
+      }
+    }
   }
 });
