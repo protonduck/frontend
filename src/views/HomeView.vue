@@ -3,7 +3,7 @@
 
 <template>
   <main>
-    Home
+    {{ $t('site.name') }} - Home
   </main>
 </template>
 
