@@ -1,7 +1,7 @@
 <script setup>
   import { reactive } from 'vue';
+  import { useRouter } from 'vue-router';
   import { useUserStore } from '@stores/userStore';
-  import { useRouter } from 'vue-router'
   import eInput from '@elements/e-input/e-input.vue';
   import eButton from '@elements/e-button/e-button.vue';
   import apiClient from "@/apiClient";

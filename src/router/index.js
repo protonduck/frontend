@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import HomeView from '@/views/HomeView.vue';
 import { useUserStore } from '@/stores/userStore';
 
 const router = createRouter({
@@ -14,12 +14,12 @@ const router = createRouter({
     {
       path: "/login",
       name: 'login',
-      component: () => import('../views/LoginView.vue'),
+      component: () => import('@/views/LoginView.vue'),
     },
     {
       path: "/:catchAll(.*)",
       name: 'Error404',
-      component: () => import('../views/ErrorView.vue'),
+      component: () => import('@/views/ErrorView.vue'),
     },
   ]
 });
