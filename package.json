@@ -24,6 +24,7 @@
     "@rushstack/eslint-patch": "^1.1.4",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/eslint-config-prettier": "^7.0.0",
+    "bulma": "^0.9.4",
     "cors": "^2.8.5",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",

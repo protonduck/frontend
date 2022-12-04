@@ -38,10 +38,11 @@
 </script>
 
 <template>
-  <div class="login">
-    <h1>{{ $t('views.login.title') }}</h1>
+  <div class="box">
+    <h1 class="title">{{ $t('views.login.title') }}</h1>
     <form @submit.prevent="onSubmit">
       <e-input v-model="form.email" id="email" type="email" autocomplete="email" label="views.login.form.input.label" />
+      
       <e-input v-model="form.password" id="password" type="password" label="views.login.form.password.label" />
       <e-button type="submit">{{ $t('views.login.title') }}</e-button>
     </form>
@@ -49,9 +50,4 @@
 </template>
 
 <style lang="scss" scoped>
-  @import "@assets/scss/main.scss";
-
-  .login {
-    margin: $spacing-20;
-  }
 </style>

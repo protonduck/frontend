@@ -4,16 +4,6 @@
 </script>
 
 <template>
-  <div class="home">
-    <m-boards-list />
-    <m-categories-list />
-  </div>
+  <m-boards-list />
+  <m-categories-list />
 </template>
-
-<style lang="scss" scoped>
-  @import "@assets/scss/main.scss";
-
-  .home {
-    margin: $spacing-20;
-  }
-</style>

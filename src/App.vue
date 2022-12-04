@@ -11,19 +11,22 @@
 </script>
 
 <template>
-  <header>
-    <m-navigation :items="items" />
-  </header>
-  <div class="container">
-    <RouterView />
-  </div>
+    <header class="has-background-link">
+      <m-navigation :items="items" />
+    </header>
+    <div class="container mt-4">
+      <RouterView />
+    </div>
+  <footer class="footer has-background-white">
+    <div class="content has-text-centered">
+      <p>
+        Open Source <strong>Bookmark Manager Frontend</strong> by <a href="https://github.com/protonduck">ProtonDuck</a><br />
+        Made with love in <a href="https://vuejs.org">Vue.js</a> & <a href="https://bulma.io">Bulma CSS-Framework</a>
+      </p>
+    </div>
+  </footer>
 </template>
 
 <style lang="scss">
-  @import "@assets/scss/main.scss";
 
-  .container {
-    max-width: $max-width-100;
-    margin: 0 auto;
-  }
 </style>

@@ -15,9 +15,11 @@
 </script>
 
 <template>
-  <select v-model="$i18n.locale" @change="languageChanged()">
-    <option v-for="(language, index) in $i18n.availableLocales" :key="`language-${index}`" :value="language">
-      {{ language }}
-    </option>
-  </select>
+  <div class="select">
+    <select v-model="$i18n.locale" @change="languageChanged()">
+      <option v-for="(language, index) in $i18n.availableLocales" :key="`language-${index}`" :value="language">
+        {{ language }}
+      </option>
+    </select>
+  </div>
 </template>

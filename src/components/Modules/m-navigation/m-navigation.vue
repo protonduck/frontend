@@ -26,97 +26,34 @@
 </script>
 
 <template>
-  <div class="m-navigation">
-    <nav class="m-navigation__wrapper">
-      <div class="m-navigation__toggle" @click="isOpen = !isOpen">
-        {{ !isOpen ? 'open icon' : 'close icon' }}
-      </div>
+  <nav class="navbar is-link is-spaced container pl-0 pr-0" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" data-target="burgerNavigation" :aria-expanded="false" @click="isOpen = !isOpen">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
 
-      <div class="m-navigation__items" :class="{ 'm-navigation__items--hidden': !isOpen }">
+    <div id="burgerNavigation" class="navbar-menu" :class="{ 'is-active': isOpen }">
+      <div class="navbar-start">
         <template v-for="item in filtredItems()" :key="item.name">
-          <router-link :to="item.to" class="m-navigation__item" :class="{ 'm-navigation__item--active': path === item.to }">
+          <router-link :to="item.to" class="navbar-item" :class="{ 'is-active': path === item.to }">
             {{ $t(item.name) }}
           </router-link>
         </template>
-
-        <a v-if="userStore.isLoggedIn" @click="logoutUser()" class="m-navigation__item">
-          {{ $t('menu.logout') }}
-        </a>
-
-        <m-language-select class="m-navigation__item m-navigation__item--language" />
+        <m-language-select class="navbar-item" />
       </div>
-    </nav>
-  </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a v-if="userStore.isLoggedIn" @click="logoutUser()" class="button">
+              {{ $t('menu.logout') }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
 </template>
-
-<style lang="scss" scoped>
-@import "@assets/scss/main.scss";
-
-.m-navigation {
-  background-color: $color-primary;
-  padding: $spacing-10;
-  
-}
-
-.m-navigation__wrapper {
-  max-width: $max-width-100;
-  margin: 0 auto;
-}
-
-.m-navigation__toggle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @include breakpoint('s') {
-    display: none;
-  }
-}
-
-.m-navigation__items {
-  display: flex;
-  flex-direction: column;
-
-  @include breakpoint('s') {
-    flex-direction: row;
-  }
-
-  a {
-    color: $color-white;
-    text-decoration: none;
-    font-size: $size-15;
-
-    &:hover {
-      background-color: $color-blue--lighten;
-      border-radius: $spacing-5;
-      cursor: pointer;
-    }
-  }
-
-  .m-navigation__item {
-    margin: $spacing-5;
-    padding: $spacing-10;
-  }
-
-  .m-navigation__item--active {
-    background-color: $color-blue--lighten;
-    border-radius: $spacing-5;
-    cursor: pointer;
-  }
-
-  .m-navigation__item--language {
-    background-color: $color-blue--lighten;
-    border: none;
-    border-radius: $spacing-5;
-    color: $color-white;
-  }
-}
-
-.m-navigation__items--hidden {
-  display: none;
-
-  @include breakpoint('s') {
-    display: flex;
-  }
-}
-</style>
