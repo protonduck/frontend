@@ -1,5 +1,4 @@
 <script setup>
-import { RouterView } from 'vue-router'
 import mNavigation from '@modules/m-navigation/m-navigation.vue';
 import { ref } from 'vue';
 
@@ -11,19 +10,7 @@ const items = ref([
 </script>
 
 <template>
-  <header>
+  <Story title="Modules/Navigation">
     <m-navigation :items="items" />
-  </header>
-  <div class="container">
-    <RouterView />
-  </div>
+  </Story>
 </template>
-
-<style lang="scss">
-  @import "@assets/scss/main.scss";
-
-  .container {
-    max-width: $max-width-100;
-    margin: 0 auto;
-  }
-</style>
