@@ -12,7 +12,8 @@ export default defineConfig({
       '@blocks': fileURLToPath(new URL('./src/components/Blocks', import.meta.url)),
       '@elements': fileURLToPath(new URL('./src/components/Elements', import.meta.url)),
       '@modules': fileURLToPath(new URL('./src/components/Modules', import.meta.url)),
-      '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),      
+      '@stores': fileURLToPath(new URL('./src/stores', import.meta.url)),
+      '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)), 
     }
   }
 })

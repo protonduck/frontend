@@ -1,16 +1,28 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { RouterLink, useRoute } from 'vue-router'
-import mLanguageSelect from '@modules/m-language-select/m-language-select.vue';
+  import { ref, computed } from 'vue';
+  import { RouterLink, useRoute, useRouter } from 'vue-router'
+  import { useUserStore } from '@stores/userStore';
+  import mLanguageSelect from '@modules/m-language-select/m-language-select.vue';
 
-const props = defineProps({
-  items: Array,
-})
+  const userStore = useUserStore();
+  const router = useRouter();
+  const route = useRoute();
 
-const isOpen = ref(false);
+  const props = defineProps({
+    items: Array,
+  })
 
-const route = useRoute();
-const path = computed(() => route.path);
+  function filtredItems() {
+    return props.items.filter((item) => item.isLoggedIn === userStore.isLoggedIn);
+  }
+
+  async function logoutUser() {
+    userStore.logoutUser();
+    router.push('/login');
+  }
+
+  const isOpen = ref(false);
+  const path = computed(() => route.path);
 </script>
 
 <template>
@@ -21,11 +33,15 @@ const path = computed(() => route.path);
       </div>
 
       <div class="m-navigation__items" :class="{ 'm-navigation__items--hidden': !isOpen }">
-        <template v-for="item in items" :key="item.name">
+        <template v-for="item in filtredItems()" :key="item.name">
           <router-link :to="item.to" class="m-navigation__item" :class="{ 'm-navigation__item--active': path === item.to }">
             {{ $t(item.name) }}
           </router-link>
         </template>
+
+        <a v-if="userStore.isLoggedIn" @click="logoutUser()" class="m-navigation__item">
+          {{ $t('menu.logout') }}
+        </a>
 
         <m-language-select class="m-navigation__item m-navigation__item--language" />
       </div>
@@ -71,7 +87,7 @@ const path = computed(() => route.path);
     font-size: $size-15;
 
     &:hover {
-      background: $color-secondary;
+      background-color: $color-blue--lighten;
       border-radius: $spacing-5;
       cursor: pointer;
     }
@@ -83,13 +99,13 @@ const path = computed(() => route.path);
   }
 
   .m-navigation__item--active {
-    background: $color-secondary;
+    background-color: $color-blue--lighten;
     border-radius: $spacing-5;
     cursor: pointer;
   }
 
   .m-navigation__item--language {
-    background: $color-secondary;
+    background-color: $color-blue--lighten;
     border: none;
     border-radius: $spacing-5;
     color: $color-white;

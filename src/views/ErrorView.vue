@@ -6,4 +6,8 @@
 </template>
 
 <style lang="scss" scoped>
+  @import "@assets/scss/main.scss";
+  .error {
+    margin: $spacing-20;
+  }
 </style>

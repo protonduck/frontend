@@ -11,8 +11,20 @@ export default {
         home: 'Startseite',
         login: 'Login',
         signup: 'Anmelden',
+        logout: 'Abmelden',
       },
       views: {
+        login: {
+          title: 'Anmelden',
+          form: {
+            input: {
+              label: 'E-Mail',
+            },
+            password: {
+              label: 'Passwort',
+            }
+          }
+        },
         error: {
           title: 'Fehler',
           content: 'Seite nicht gefunden!',
@@ -27,9 +39,21 @@ export default {
       menu: {
         home: 'Home',
         login: 'Login',
-        signup: 'Signup',
+        signup: 'Sign up',
+        logout: 'Logout',
       },
       views: {
+        login: {
+          title: 'Login',
+          form: {
+            input: {
+              label: 'E-Mail',
+            },
+            password: {
+              label: 'Password',
+            }
+          }
+        },
         error: {
           title: 'Error',
           content: 'Page not found!',

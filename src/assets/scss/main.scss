@@ -1,19 +1,24 @@
+@use 'sass:math';
 @import "breakpoints";
 
-// calcuation: body font size 16px (1rem), 5px/16px=0.312rem;
+$base-rem: 16px;
 
-$spacing-5: 0.313rem;
-$spacing-10: 0.625rem;
-$spacing-15: 0.937rem;
-$spacing-20: 1.25rem;
-$spacing-25: 1.565rem;
-$spacing-30: 1.875rem;
+@function rem-calc($size) {
+  @return #{math.div($size, $base-rem)}rem;
+}
+
+$spacing-5: rem-calc(5px);
+$spacing-10: rem-calc(10px);
+$spacing-15: rem-calc(15px);
+$spacing-20: rem-calc(20px);
+$spacing-25: rem-calc(25px);
+$spacing-30: rem-calc(30px);
 
 // sizes
 
-$size-10: 0.625rem;
-$size-15: 0.937rem;
-$size-20: 1.25rem;
+$size-10: rem-calc(10px);
+$size-15: rem-calc(15px);
+$size-20: rem-calc(20px);
 
 // max width
 
@@ -24,10 +29,37 @@ $max-width-25: 320px;
 
 // colors
 
-$color-white: #ffffff;
-$color-black: #000000;
-$color-primary: #e95420;
-$color-secondary: #e15320;
+$color-blue: #007bff;
+$color-blue--lighten: lighten($color-blue, 5%);
+$color-blue--darken: darken($color-blue, 10%);
+
+$color-indigo: #6610f2;
+$color-purple: #6f42c1;
+$color-pink: #e83e8c;
+$color-red: #dc3545;
+$color-orange: #fd7e14;
+$color-yellow: #ffc107;
+$color-green: #28a745;
+$color-teal: #20c997;
+$color-cyan: #17a2b8;
+$color-white: #fff;
+
+$color-gray: #6c757d;
+$color-gray--lighten: lighten(#6c757d, 40%);
+
+$color-gray-dark: #343a40;
+
+$color-primary: #007bff;
+$color-secondary: #6c757d;
+$color-success: #28a745;
+$color-info: #17a2b8;
+$color-warning: #ffc107;
+$color-danger: #dc3545;
+
+$color-light: #f8f9fa;
+$color-light--darken: darken($color-light, 5%);
+
+$color-dark: #343a40;
 
 // basic styles
 
@@ -36,5 +68,9 @@ body {
   box-sizing: border-box;
   font-family: Arial,sans-serif;
   line-height: 1.5;
-  font-size: 16px;
+  font-size: $base-rem;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
 }

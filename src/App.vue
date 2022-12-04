@@ -1,13 +1,13 @@
 <script setup>
-import { RouterView } from 'vue-router'
-import mNavigation from '@modules/m-navigation/m-navigation.vue';
-import { ref } from 'vue';
+  import { RouterView } from 'vue-router'
+  import { ref } from 'vue';
+  import mNavigation from '@modules/m-navigation/m-navigation.vue';
 
-const items = ref([
-  { to: '/', name: 'menu.home' },
-  { to: '/login', name: 'menu.login' },
-  { to: '/signup', name:'menu.signup' }
-]);
+  const items = ref([
+    { to: '/', name: 'menu.home', isLoggedIn: true },
+    { to: '/login', name: 'menu.login', isLoggedIn: false },
+    // { to: '/signup', name:'menu.signup', isLoggedIn: false }
+  ]);
 </script>
 
 <template>

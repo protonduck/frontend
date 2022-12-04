@@ -1,5 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
+import { useUserStore } from '@/stores/userStore';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +8,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: { auth: true },
+    },
+    {
+      path: "/login",
+      name: 'login',
+      component: () => import('../views/LoginView.vue'),
     },
     {
       path: "/:catchAll(.*)",
@@ -15,6 +22,17 @@ const router = createRouter({
       component: () => import('../views/ErrorView.vue'),
     },
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore();
+
+  if (to.matched.some((record) => record.meta.auth) && to.name !== 'login' && !userStore.isLoggedIn) {
+    next({ name: 'login' })
+    return;
+  }
+
+  next();
+});
 
 export default router

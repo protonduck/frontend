@@ -7,11 +7,13 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js --fix --ignore-path .gitignore",
-    "story:dev": "histoire dev",
+    "story": "histoire dev",
     "story:build": "histoire build",
-    "story:preview": "histoire preview"
+    "story:preview": "histoire preview",
+    "server": "node ./mock-api/server.js"
   },
   "dependencies": {
+    "axios": "^1.2.0",
     "pinia": "^2.0.26",
     "vue": "^3.2.45",
     "vue-i18n": "^9.2.2",
@@ -24,6 +26,7 @@
     "@vue/eslint-config-prettier": "^7.0.0",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
+    "express": "^4.18.2",
     "histoire": "^0.11.7",
     "prettier": "^2.7.1",
     "sass": "^1.56.1",
