@@ -14,6 +14,7 @@ dist-ssr
 coverage
 *.local
 mock-api/temp
+.env
 
 # Editor directories and files
 .vscode/*
