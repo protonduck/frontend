@@ -1,0 +1,37 @@
+@import "breakpoints";
+
+// calcuation: body font size 16px (1rem), 5px/16px=0.312rem;
+
+$spacing-5: 0.313rem;
+$spacing-10: 0.625rem;
+$spacing-15: 0.937rem;
+$spacing-20: 1.25rem;
+$spacing-25: 1.565rem;
+
+// sizes
+
+$size-10: 0.625rem;
+$size-15: 0.937rem;
+$size-20: 1.25rem;
+
+// max width
+
+$max-width-100: 1024px;
+$max-width-75: 960px;
+$max-width-50: 640px;
+$max-width-25: 320px;
+
+// colors
+
+$color-white: #ffffff;
+$color-black: #000000;
+
+// basic styles
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial,sans-serif;
+  line-height: 1.5;
+  font-size: 16px;
+}

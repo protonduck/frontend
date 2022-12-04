@@ -11,7 +11,13 @@ export default {
         home: 'Startseite',
         login: 'Login',
         signup: 'Anmelden',
-      }
+      },
+      views: {
+        error: {
+          title: 'Fehler',
+          content: 'Seite nicht gefunden!',
+        }
+      },
     },
     // english translation
     en: {
@@ -22,7 +28,13 @@ export default {
         home: 'Home',
         login: 'Login',
         signup: 'Signup',
-      }
+      },
+      views: {
+        error: {
+          title: 'Error',
+          content: 'Page not found!',
+        }
+      },
     }
   }
 }

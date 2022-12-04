@@ -16,6 +16,6 @@ import LanguageSelect from './components/LanguageSelect.vue'
   <RouterView />
 </template>
 
-<style scoped>
-
+<style lang="scss">
+  @import "./assets/scss/main.scss";
 </style>
