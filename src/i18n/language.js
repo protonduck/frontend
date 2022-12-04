@@ -5,7 +5,7 @@ export default {
     // german translation
     de: {
       site: {
-        name: 'Bookmarks',
+        name: 'Bookmarks Manager',
       },
       menu: {
         home: 'Startseite',
@@ -22,7 +22,7 @@ export default {
     // english translation
     en: {
       site: {
-        name: 'Bookmarks',
+        name: 'Bookmarks Manager',
       },
       menu: {
         home: 'Home',

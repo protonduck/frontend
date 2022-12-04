@@ -6,7 +6,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js --fix --ignore-path .gitignore",
+    "story:dev": "histoire dev",
+    "story:build": "histoire build",
+    "story:preview": "histoire preview"
   },
   "dependencies": {
     "pinia": "^2.0.26",
@@ -15,11 +18,13 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@histoire/plugin-vue": "^0.11.7",
     "@rushstack/eslint-patch": "^1.1.4",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/eslint-config-prettier": "^7.0.0",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
+    "histoire": "^0.11.7",
     "prettier": "^2.7.1",
     "sass": "^1.56.1",
     "vite": "^3.2.4"
