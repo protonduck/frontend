@@ -39,7 +39,10 @@
       <div class="navbar-start">
         <template v-for="item in filtredItems()" :key="item.name">
           <router-link :to="item.to" class="navbar-item" :class="{ 'is-active': path === item.to }">
-            {{ $t(item.name) }}
+            <span v-if="item.icon" class="icon pr-3">
+              <font-awesome-icon :icon="item.icon" />
+            </span>
+            <span>{{ $t(item.name) }}</span>
           </router-link>
         </template>
         <m-language-select class="navbar-item" />
@@ -49,7 +52,10 @@
         <div class="navbar-item">
           <div class="buttons">
             <a v-if="userStore.isLoggedIn" @click="logoutUser()" class="button">
-              {{ $t('menu.logout') }}
+              <span class="icon pr-3">
+                <font-awesome-icon icon="fa-solid fa-right-to-bracket" />
+              </span>
+              <span>{{ $t('menu.logout') }}</span>
             </a>
           </div>
         </div>

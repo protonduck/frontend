@@ -41,9 +41,8 @@
   <div class="box">
     <h1 class="title">{{ $t('views.login.title') }}</h1>
     <form @submit.prevent="onSubmit">
-      <e-input v-model="form.email" id="email" type="email" autocomplete="email" label="views.login.form.input.label" />
-      
-      <e-input v-model="form.password" id="password" type="password" label="views.login.form.password.label" />
+      <e-input v-model="form.email" id="email" type="email" autocomplete="email" label="views.login.form.input.label" icon-left="fa-solid fa-envelope" />
+      <e-input v-model="form.password" id="password" type="password" label="views.login.form.password.label" icon-left="fa-solid fa-key" />
       <e-button type="submit">{{ $t('views.login.title') }}</e-button>
     </form>
   </div>
