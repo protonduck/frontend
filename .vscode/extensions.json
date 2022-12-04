@@ -1,3 +1,13 @@
 {
-  "recommendations": ["Vue.volar", "Vue.vscode-typescript-vue-plugin"]
+  "recommendations": [
+    "Vue.volar",
+    "Vue.vscode-typescript-vue-plugin",
+    "sdras.vue-vscode-snippets",
+    "esbenp.prettier-vscode",
+    "Gruntfuggly.todo-tree",
+    "ChakrounAnas.turbo-console-log",
+    "eamodio.gitlens",
+    "TabNine.tabnine-vscode",
+    "tombonnike.vscode-status-bar-format-toggle"
+  ]
 }
