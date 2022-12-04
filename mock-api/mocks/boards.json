@@ -1,13 +1,4 @@
 {
-  "user": [
-    {
-        "id": 36,
-        "name": "test",
-        "language": "en",
-        "premium_until": null,
-        "api_key": "api_key_123"
-    }
-  ],
   "boards": [
     {
         "id": 95,
