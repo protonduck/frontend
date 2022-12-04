@@ -15,15 +15,18 @@
       password: password.value,
     };
 
-    let response = await apiClient.loginUser(data);
-
-    if (response.status === 200 && response.data) {
-      userStore.user = response.data;
-      userStore.token = response.data.api_key;
-      
-      localStorage.setItem('user', JSON.stringify(response.data));
-      localStorage.setItem('authToken', response.data.api_key);
-    }
+    await apiClient.loginUser(data).then((response) => {
+      if (response.status === 200 && response.data) {
+        userStore.user = response.data;
+        userStore.token = response.data.api_key;
+        
+        localStorage.setItem('user', JSON.stringify(response.data));
+        localStorage.setItem('authToken', response.data.api_key);
+      }
+    }).catch(err => {
+      // TODO remove in future
+      // console.log(err);
+    });
 
     router.push('/');
   }
