@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import LanguageSelect from './components/LanguageSelect.vue'
+import LanguageSelect from '@modules/m-language-select/m-language-select.vue'
 </script>
 
 <template>
