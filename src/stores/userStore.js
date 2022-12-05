@@ -1,22 +1,17 @@
 import { defineStore } from "pinia";
-import { useBoardStore } from "@stores/boardStore";
 
 export const useUserStore = defineStore('userStore', {
   state: () => {
     return {
-      user: JSON.parse(localStorage.getItem('user')) || [],
-      token: localStorage.getItem('authToken') || '',
+      user: JSON.parse(localStorage.getItem('user')) || null,
+      token: localStorage.getItem('authToken') || null,
     }
   },
   actions: {
     async logoutUser() {
-      this.user = [];
-      this.token = '';
       localStorage.removeItem('user');
       localStorage.removeItem('authToken');
-
-      const boardStore = useBoardStore();
-      boardStore.clearBoards();
+      location.reload();
     },
     async setUser(user) {
       this.user = user;
