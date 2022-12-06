@@ -1,23 +1,23 @@
 <script setup>
-  import { computed } from 'vue'
-  import { useBoardStore } from '@stores/boardStore';
-  import storage from '@plugins/storage';
+import { computed } from 'vue';
+import { useBoardStore } from '@stores/boardStore';
+import storage from '@plugins/storage';
 
-  const boardStore = useBoardStore();
+const boardStore = useBoardStore();
 
-  boardStore.fetchBoards();
+boardStore.fetchBoards();
 
-  const boards = computed(() => boardStore.getAll);
-  const activeBoardId = computed(() => boardStore.getActiveBoardId);
+const boards = computed(() => boardStore.getAll);
+const activeBoardId = computed(() => boardStore.getActiveBoardId);
 
-  function switchBoard(selectedBoardId) {
-    boardStore.setActiveBoard(selectedBoardId);
-    storage.setItem('selectedBoardId', selectedBoardId);
-  }
+function switchBoard(selectedBoardId) {
+  boardStore.setActiveBoard(selectedBoardId);
+  storage.setItem('selectedBoardId', selectedBoardId);
+}
 
-  if (storage.getItem('selectedBoardId')) {
-    boardStore.setActiveBoard(parseInt(storage.getItem('selectedBoardId'), 10));
-  }
+if (storage.getItem('selectedBoardId')) {
+  boardStore.setActiveBoard(parseInt(storage.getItem('selectedBoardId'), 10));
+}
 </script>
 
 <template>

@@ -1,39 +1,39 @@
 <script setup>
-  const props = defineProps({
-    id: {
-      required: true,
-      type: String
-    },
-    type: {
-      type: String,
-      default: 'text',
-      validator: (value) => ['text', 'password', 'email', 'color', 'hidden'].includes(value)
-    },
-    label: {
-      type: String,
-      default: '',
-    },
-    modelValue: {
-      type: String,
-      default: '',
-    },
-    autocomplete: {
-      type: String,
-      default: 'off',
-      validator: (value) => ['off', 'email', 'new-password', 'current-password', 'username'].includes(value)
-    },
-    iconLeft: {
-      type: String,
-      default: '',
-    },
-    iconRight: {
-      type: String,
-      default: '',
-    },
-    errorMessage: {
-      type: String,
-    },
-  })
+const props = defineProps({
+  id: {
+    required: true,
+    type: String,
+  },
+  type: {
+    type: String,
+    default: 'text',
+    validator: (value) => ['text', 'password', 'email', 'color', 'hidden'].includes(value),
+  },
+  label: {
+    type: String,
+    default: '',
+  },
+  modelValue: {
+    type: String,
+    default: '',
+  },
+  autocomplete: {
+    type: String,
+    default: 'off',
+    validator: (value) => ['off', 'email', 'new-password', 'current-password', 'username'].includes(value),
+  },
+  iconLeft: {
+    type: String,
+    default: '',
+  },
+  iconRight: {
+    type: String,
+    default: '',
+  },
+  errorMessage: {
+    type: String,
+  },
+});
 </script>
 
 <template>

@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import apiClient from "@/apiClient";
+import { defineStore } from 'pinia';
+import apiClient from '@/apiClient';
 import storage from '@plugins/storage';
 
 export const useBoardStore = defineStore('boardStore', {
@@ -7,7 +7,7 @@ export const useBoardStore = defineStore('boardStore', {
     return {
       boards: [],
       activeBoardId: storage.getItem('activeBoardId') || '',
-    }
+    };
   },
   actions: {
     async fetchBoards() {
@@ -33,7 +33,7 @@ export const useBoardStore = defineStore('boardStore', {
     },
     async clearBoards() {
       this.boards = [];
-    }
+    },
   },
   getters: {
     getAll: (state) => {
@@ -41,10 +41,10 @@ export const useBoardStore = defineStore('boardStore', {
     },
     getBoard: (state) => (id) => state.boards.find((item) => item.id === id),
     getBoardIndex: (state) => {
-      return (index) => state.boards.findIndex((item) => item.id === index)
+      return (index) => state.boards.findIndex((item) => item.id === index);
     },
     getActiveBoardId(state) {
       return state.activeBoardId;
-    }
+    },
   },
 });

@@ -1,34 +1,41 @@
 <script setup>
-  import { ref, computed } from 'vue';
-  import { RouterLink, useRoute, useRouter } from 'vue-router'
-  import { useUserStore } from '@stores/userStore';
-  import mLanguageSelect from '@modules/m-language-select/m-language-select.vue';
+import { ref, computed } from 'vue';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
+import { useUserStore } from '@stores/userStore';
+import mLanguageSelect from '@modules/m-language-select/m-language-select.vue';
 
-  const userStore = useUserStore();
-  const router = useRouter();
-  const route = useRoute();
+const userStore = useUserStore();
+const router = useRouter();
+const route = useRoute();
 
-  const props = defineProps({
-    items: Array,
-  })
+const props = defineProps({
+  items: Array,
+});
 
-  function filtredItems() {
-    return props.items.filter((item) => item.isLoggedIn === userStore.isLoggedIn);
-  }
+function filtredItems() {
+  return props.items.filter((item) => item.isLoggedIn === userStore.isLoggedIn);
+}
 
-  async function logoutUser() {
-    userStore.logoutUser();
-    router.push('/login');
-  }
+async function logoutUser() {
+  userStore.logoutUser();
+  router.push('/login');
+}
 
-  const isOpen = ref(false);
-  const path = computed(() => route.path);
+const isOpen = ref(false);
+const path = computed(() => route.path);
 </script>
 
 <template>
   <nav class="navbar is-link is-spaced container pl-0 pr-0" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a role="button" class="navbar-burger" aria-label="menu" data-target="burgerNavigation" :aria-expanded="false" @click="isOpen = !isOpen">
+      <a
+        role="button"
+        class="navbar-burger"
+        aria-label="menu"
+        data-target="burgerNavigation"
+        :aria-expanded="false"
+        @click="isOpen = !isOpen"
+      >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>

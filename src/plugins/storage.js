@@ -12,5 +12,5 @@ export default {
     if (storage.length) {
       storage.clear();
     }
-  }
+  },
 };

@@ -1,4 +1,4 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 import storage from '@plugins/storage';
 
 export const useUserStore = defineStore('userStore', {
@@ -6,7 +6,7 @@ export const useUserStore = defineStore('userStore', {
     return {
       user: storage.getItem('user', true) || null,
       token: storage.getItem('authToken') || null,
-    }
+    };
   },
   actions: {
     async logoutUser() {
@@ -23,7 +23,7 @@ export const useUserStore = defineStore('userStore', {
   },
   getters: {
     getUser: (state) => {
-      return state.user;  
+      return state.user;
     },
     getToken: (state) => {
       return state.token;

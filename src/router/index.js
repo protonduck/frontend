@@ -12,27 +12,27 @@ const router = createRouter({
       meta: { auth: true },
     },
     {
-      path: "/login",
+      path: '/login',
       name: 'login',
       component: () => import('@/views/LoginView.vue'),
     },
     {
-      path: "/:catchAll(.*)",
+      path: '/:catchAll(.*)',
       name: 'Error404',
       component: () => import('@/views/ErrorView.vue'),
     },
-  ]
+  ],
 });
 
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore();
 
   if (to.matched.some((record) => record.meta.auth) && to.name !== 'login' && !userStore.isLoggedIn) {
-    next({ name: 'login' })
+    next({ name: 'login' });
     return;
   }
 
   next();
 });
 
-export default router
+export default router;

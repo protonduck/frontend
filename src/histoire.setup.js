@@ -8,10 +8,10 @@ import fontAwesome from '@plugins/fontAwesome';
 import '@assets/scss/main.scss';
 
 export const setupVue3 = defineSetupVue3(({ app }) => {
-    app.use(router);
+  app.use(router);
 
-    // use plugins
-    app.use(i18n);
-    app.use(pinia);
-    app.use(fontAwesome);
+  // use plugins
+  app.use(i18n);
+  app.use(pinia);
+  app.use(fontAwesome);
 });

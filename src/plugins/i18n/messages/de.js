@@ -24,12 +24,12 @@ export default {
             required: 'Passwort erforderlich.',
             min: 'Password muss mindestens {min} Zeichen lang sein',
           },
-        }
-      }
+        },
+      },
     },
     error: {
       title: 'Fehler',
       content: 'Seite nicht gefunden!',
-    }
+    },
   },
-}
+};

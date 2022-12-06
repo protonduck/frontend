@@ -1,11 +1,11 @@
 <script setup>
-  const props = defineProps({
-    links: Array,
-  });
+const props = defineProps({
+  links: Array,
+});
 
-  function favicon(link) {
-    return link.favicon ? link.favicon : `https://www.google.com/s2/favicons?domain=${link.url}`;
-  }
+function favicon(link) {
+  return link.favicon ? link.favicon : `https://www.google.com/s2/favicons?domain=${link.url}`;
+}
 </script>
 
 <template>

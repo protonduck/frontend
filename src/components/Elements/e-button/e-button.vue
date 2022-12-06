@@ -1,25 +1,27 @@
 <script setup>
-  import { computed } from 'vue'
+import { computed } from 'vue';
 
-  const props = defineProps({
-    type: {
-      type: String,
-      default: 'submit',
-      validator: (value) => ['button', 'submit', 'reset'].includes(value)
-    },
-    isDisabled: {
-      type: Boolean,
-      default: false
-    },
-    layout: {
-      type: String,
-      default: 'primary',
-    },
-  })
+const props = defineProps({
+  type: {
+    type: String,
+    default: 'submit',
+    validator: (value) => ['button', 'submit', 'reset'].includes(value),
+  },
+  isDisabled: {
+    type: Boolean,
+    default: false,
+  },
+  layout: {
+    type: String,
+    default: 'primary',
+  },
+});
 
-  const classes = computed(() => [{
+const classes = computed(() => [
+  {
     'is-primary': props.layout === 'primary',
-  }]);
+  },
+]);
 </script>
 
 <template>

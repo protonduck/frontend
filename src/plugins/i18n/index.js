@@ -9,11 +9,11 @@ const i18n = createI18n({
   messages: {
     en,
     de,
-  }
+  },
 });
 
 export default {
   install: (app) => {
     app.use(i18n);
-  }
+  },
 };

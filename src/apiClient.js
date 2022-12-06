@@ -13,25 +13,25 @@ const apiClient = axios.create({
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-  }
+  },
 });
 
 // add auth token to request
-apiClient.interceptors.request.use(request => {
+apiClient.interceptors.request.use((request) => {
   if (!authToken) {
     const userStore = useUserStore();
     authToken = userStore.getToken;
   }
-  
+
   request.headers.Authorization = `Bearer ${authToken}`;
 
   return request;
-})
+});
 
 // logout user when response is 401
 apiClient.interceptors.response.use(
-  response => response,
-  error => {
+  (response) => response,
+  (error) => {
     if (error.response.status === 401) {
       authToken = null;
       const userStore = useUserStore();
@@ -51,5 +51,5 @@ export default {
       email: data.email,
       password: data.password,
     });
-  }
-}
+  },
+};
