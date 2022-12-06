@@ -19,17 +19,17 @@ const props = defineProps({
 
 const classes = computed(() => [
   {
-    'is-primary': props.layout === 'primary',
+    'is-link': props.layout === 'primary',
+    'is-link is-light': props.layout === 'link-light',
+    'is-text': props.layout === 'text',
   },
 ]);
 </script>
 
 <template>
-  <div class="field">
-    <div class="control">
-      <button :type="type" :disabled="isDisabled" @click="$emit('click')" class="button" :class="classes">
-        <slot />
-      </button>
-    </div>
+  <div class="control">
+    <button :type="type" :disabled="isDisabled" @click="$emit('click')" class="button" :class="classes">
+      <slot />
+    </button>
   </div>
 </template>

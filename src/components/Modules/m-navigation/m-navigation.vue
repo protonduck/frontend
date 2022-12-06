@@ -45,18 +45,18 @@ const path = computed(() => route.path);
     <div id="burgerNavigation" class="navbar-menu" :class="{ 'is-active': isOpen }">
       <div class="navbar-start">
         <template v-for="item in filtredItems()" :key="item.name">
-          <router-link :to="item.to" class="navbar-item" :class="{ 'is-active': path === item.to }">
+          <router-link :to="item.to" class="navbar-item mr-3" :class="{ 'is-active': path === item.to }">
             <span v-if="item.icon" class="icon pr-3">
               <font-awesome-icon :icon="item.icon" />
             </span>
             <span>{{ $t(item.name) }}</span>
           </router-link>
         </template>
-        <m-language-select class="navbar-item" />
       </div>
 
       <div class="navbar-end">
         <div class="navbar-item">
+          <m-language-select class="navbar-item" />
           <div class="buttons">
             <a v-if="userStore.isLoggedIn" @click="logoutUser()" class="button">
               <span class="icon pr-3">

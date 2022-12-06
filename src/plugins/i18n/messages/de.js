@@ -1,35 +1,70 @@
-export default {
-  site: {
-    name: 'Bookmarks Manager',
+let site = {
+  name: 'Bookmarks Manager',
+};
+
+let menu = {
+  home: 'Startseite',
+  login: 'Anmelden',
+  register: 'Registrieren',
+  logout: 'Abmelden',
+};
+
+let form = {
+  email: {
+    label: 'E-Mail',
+    error: {
+      required: 'Muss eine gültige E-Mail-Adresse sein',
+    },
   },
-  menu: {
-    home: 'Startseite',
-    login: 'Login',
-    signup: 'Anmelden',
-    logout: 'Abmelden',
+  password: {
+    label: 'Passwort',
+    error: {
+      required: 'Passwort erforderlich.',
+    },
   },
-  views: {
-    login: {
-      title: 'Anmelden',
-      form: {
-        email: {
-          label: 'E-Mail',
-          error: {
-            required: 'Muss eine gültige E-Mail-Adresse sein',
-          },
-        },
-        password: {
-          label: 'Passwort',
-          error: {
-            required: 'Passwort erforderlich.',
-            min: 'Password muss mindestens {min} Zeichen lang sein',
-          },
-        },
+};
+
+let login = {
+  title: 'Anmelden',
+  form: {
+    email: form.email,
+    password: form.password,
+    button: 'Anmelden',
+  },
+};
+
+let register = {
+  title: 'Registrieren',
+  form: {
+    name: {
+      label: 'Name',
+      error: {
+        required: 'Name ist erforderlich.',
       },
     },
-    error: {
-      title: 'Fehler',
-      content: 'Seite nicht gefunden!',
+    passwordConfirm: {
+      ...form.password,
+      label: 'Passwort bestätigen',
+      error: {
+        notMatch: 'Passwörter stimmen nicht überein.',
+      },
     },
+    email: form.email,
+    password: form.password,
+    button: 'Registrieren',
   },
+  disallow: 'Die Registrierung neuer Benutzer ist deaktiviert.',
+};
+
+let error = {
+  title: 'Fehler',
+  content: 'Seite nicht gefunden!',
+};
+
+export default {
+  site,
+  menu,
+  login,
+  register,
+  error,
 };

@@ -53,9 +53,9 @@ const props = defineProps({
         :class="{ 'is-danger': errorMessage }"
         class="input"
       />
-      <span v-if="errorMessage" class="has-text-danger is-size-7">
+      <p v-if="errorMessage" class="help is-danger">
         {{ $t(errorMessage) }}
-      </span>
+      </p>
       <span v-if="iconLeft" class="icon is-small is-left">
         <font-awesome-icon :icon="iconLeft" />
       </span>

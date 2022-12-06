@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useUserStore } from '@stores/userStore';
 import storage from '@plugins/storage';
+import env from '@plugins/helper/env';
 
 let authToken;
 
@@ -9,7 +10,7 @@ if (storage.getItem('authToken')) {
 }
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: env.getItem('VITE_API_BASE_URL'),
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -48,6 +49,13 @@ export default {
   },
   loginUser(data) {
     return apiClient.post('/user/login', {
+      email: data.email,
+      password: data.password,
+    });
+  },
+  registerUser(data) {
+    return apiClient.post('/user/signup', {
+      name: data.name,
       email: data.email,
       password: data.password,
     });
