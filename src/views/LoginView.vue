@@ -6,6 +6,7 @@
   import eInput from '@elements/e-input/e-input.vue';
   import eButton from '@elements/e-button/e-button.vue';
   import apiClient from "@/apiClient";
+  import storage from '@plugins/storage';
 
   const userStore = useUserStore();
   const router = useRouter();
@@ -29,8 +30,8 @@
         userStore.user = response.data;
         userStore.token = response.data.api_key;
         
-        localStorage.setItem('user', JSON.stringify(response.data));
-        localStorage.setItem('authToken', response.data.api_key);
+        storage.setItem('user', response.data, true);
+        storage.setItem('authToken', response.data.api_key);
 
         router.push('/');
       }

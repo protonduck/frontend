@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useUserStore } from '@stores/userStore';
+import storage from '@plugins/storage';
 
 let authToken;
 
-if (localStorage.getItem('authToken')) {
-  authToken = localStorage.getItem('authToken');
+if (storage.getItem('authToken')) {
+  authToken = storage.getItem('authToken');
 }
 
 const apiClient = axios.create({

@@ -1,16 +1,17 @@
 import { defineStore } from "pinia";
+import storage from '@plugins/storage';
 
 export const useUserStore = defineStore('userStore', {
   state: () => {
     return {
-      user: JSON.parse(localStorage.getItem('user')) || null,
-      token: localStorage.getItem('authToken') || null,
+      user: storage.getItem('user', true) || null,
+      token: storage.getItem('authToken') || null,
     }
   },
   actions: {
     async logoutUser() {
-      localStorage.removeItem('user');
-      localStorage.removeItem('authToken');
+      storage.removeItem('user');
+      storage.removeItem('authToken');
       location.reload();
     },
     async setUser(user) {

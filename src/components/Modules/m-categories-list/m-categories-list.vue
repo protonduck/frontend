@@ -2,12 +2,13 @@
 import { computed } from 'vue'
 import { useBoardStore } from '@stores/boardStore';
 import mLinksList from '@modules/m-links-list/m-links-list.vue';
+import storage from '@plugins/storage';
 
 const store = useBoardStore()
 const categories = computed(() => store.getBoard(store.getActiveBoardId)?.categories)
 
-if (localStorage.getItem('selectedBoardId')) {
-  store.setActiveBoard(parseInt(localStorage.getItem('selectedBoardId'), 10));
+if (storage.getItem('selectedBoardId')) {
+  store.setActiveBoard(parseInt(storage.getItem('selectedBoardId'), 10));
 }
 </script>
 

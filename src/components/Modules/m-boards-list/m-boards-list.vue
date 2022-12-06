@@ -1,6 +1,7 @@
 <script setup>
   import { computed } from 'vue'
   import { useBoardStore } from '@stores/boardStore';
+  import storage from '@plugins/storage';
 
   const boardStore = useBoardStore();
 
@@ -11,11 +12,11 @@
 
   function switchBoard(selectedBoardId) {
     boardStore.setActiveBoard(selectedBoardId);
-    localStorage.setItem('selectedBoardId', selectedBoardId);
+    storage.setItem('selectedBoardId', selectedBoardId);
   }
 
-  if (localStorage.getItem('selectedBoardId')) {
-    boardStore.setActiveBoard(parseInt(localStorage.getItem('selectedBoardId'), 10));
+  if (storage.getItem('selectedBoardId')) {
+    boardStore.setActiveBoard(parseInt(storage.getItem('selectedBoardId'), 10));
   }
 </script>
 

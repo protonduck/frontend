@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 import apiClient from "@/apiClient";
+import storage from '@plugins/storage';
 
 export const useBoardStore = defineStore('boardStore', {
   state: () => {
     return {
       boards: [],
-      activeBoardId: localStorage.getItem('activeBoardId') || '',
+      activeBoardId: storage.getItem('activeBoardId') || '',
     }
   },
   actions: {

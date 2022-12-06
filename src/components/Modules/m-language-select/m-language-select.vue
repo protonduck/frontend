@@ -1,18 +1,19 @@
 <script setup>
+  import storage from '@plugins/storage';
   import { useI18n } from 'vue-i18n';
 
   const { t, locale } = useI18n();
 
   // update on change language
   function languageChanged() {
-    localStorage.setItem('locale', locale.value);
+    storage.setItem('locale', locale.value);
     document.querySelector('html').setAttribute('lang', locale.value);
     document.title = t('site.name')
   }
 
-  // load selected language from localStorage
-  if (localStorage.getItem('locale')) {
-    locale.value = localStorage.getItem('locale');
+  // load selected language from storage
+  if (storage.getItem('locale')) {
+    locale.value = storage.getItem('locale');
   }
 </script>
 
