@@ -12,11 +12,18 @@ export default {
     login: {
       title: 'Login',
       form: {
-        input: {
+        email: {
           label: 'E-Mail',
+          error: {
+            required: 'Valid E-Mail required.',
+          },
         },
         password: {
           label: 'Password',
+          error: {
+            required: 'Password required.',
+            min: 'Password must be at least {min} characters.',
+          },
         }
       }
     },

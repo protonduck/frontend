@@ -14,7 +14,7 @@
       default: '',
     },
     modelValue: {
-      type: [String, Number],
+      type: String,
       default: '',
     },
     autocomplete: {
@@ -30,6 +30,9 @@
       type: String,
       default: '',
     },
+    errorMessage: {
+      type: String,
+    },
   })
 </script>
 
@@ -39,7 +42,20 @@
       <label v-if="label" :for="id">{{ $t(label) }}</label>
     </div>
     <div class="control" :class="{ 'has-icons-left': iconLeft, 'has-icons-right': iconRight }">
-      <input v-bind="$attrs" :id="id" :type="type" :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" :placeholder="$t(label)" :autocomplete="autocomplete" class="input" />
+      <input
+        v-bind="$attrs"
+        :id="id"
+        :type="type"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        :placeholder="$t(label)"
+        :autocomplete="autocomplete"
+        :class="{ 'is-danger': errorMessage }"
+        class="input"
+      />
+      <span v-if="errorMessage" class="has-text-danger is-size-7">
+        {{ $t(errorMessage) }}
+      </span>
       <span v-if="iconLeft" class="icon is-small is-left">
         <font-awesome-icon :icon="iconLeft" />
       </span>

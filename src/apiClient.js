@@ -36,6 +36,8 @@ apiClient.interceptors.response.use(
       const userStore = useUserStore();
       userStore.logoutUser();
     }
+
+    return Promise.reject(error);
   }
 );
 
