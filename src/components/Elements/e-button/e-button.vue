@@ -21,6 +21,8 @@ const classes = computed(() => [
   {
     'is-link': props.layout === 'primary',
     'is-link is-light': props.layout === 'link-light',
+    'is-link is-danger': props.layout === 'link-danger',
+    'is-link is-light is-danger': props.layout === 'link-light-danger',
     'is-text': props.layout === 'text',
   },
 ]);

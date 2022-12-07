@@ -28,15 +28,13 @@ const onSubmit = handleSubmit(async (values) => {
   await apiClient
     .registerUser(values)
     .then((response) => {
-      if (response.status === 200 && response.data) {
-        userStore.user = response.data;
-        userStore.token = response.data.api_key;
+      userStore.user = response.data;
+      userStore.token = response.data.api_key;
 
-        storage.setItem('user', response.data, true);
-        storage.setItem('authToken', response.data.api_key);
+      storage.setItem('user', response.data, true);
+      storage.setItem('authToken', response.data.api_key);
 
-        router.push('/');
-      }
+      router.push('/');
     })
     .catch((err) => {
       if (err.response.data) {

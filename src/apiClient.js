@@ -60,4 +60,12 @@ export default {
       password: data.password,
     });
   },
+  addBoard(data) {
+    return apiClient.post('/boards', {
+      name: data.name,
+    });
+  },
+  removeBoard(id) {
+    return apiClient.delete(`/boards/${id}`);
+  },
 };

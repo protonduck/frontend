@@ -6,7 +6,7 @@ export const useBoardStore = defineStore('boardStore', {
   state: () => {
     return {
       boards: [],
-      activeBoardId: storage.getItem('activeBoardId') || '',
+      activeBoardId: storage.getItem('activeBoardId') || null,
     };
   },
   actions: {
@@ -18,21 +18,36 @@ export const useBoardStore = defineStore('boardStore', {
       }
     },
     async addBoard(data) {
-      if (this.getBoardIndex(data.id) === -1) {
-        this.boards.push({});
-      }
+      if (!data) return;
+
+      this.boards.push(data);
     },
     async editBoard(data) {
-      this.boards[this.getBoardIndex(data.id)] = data;
+      if (!data.id || !data.payload) return;
+
+      const index = this.findIndexById(id);
+
+      if (index !== -1) {
+        this.boards[index] = data;
+      }
     },
-    async removeBoard(data) {
-      this.boards = this.boards.filter((item) => item.id === data.id);
+    async removeBoard(id) {
+      this.boards = this.boards.filter((item) => item.id !== id);
+      this.clearActiveBoard();
     },
     async setActiveBoard(id) {
       this.activeBoardId = id;
+      storage.setItem('selectedBoardId', id);
+    },
+    async clearActiveBoard() {
+      this.activeBoardId = null;
+      storage.removeItem('selectedBoardId');
     },
     async clearBoards() {
       this.boards = [];
+    },
+    findIndexById(id) {
+      return this.items.findIndex((item) => item.id === id);
     },
   },
   getters: {
@@ -40,9 +55,6 @@ export const useBoardStore = defineStore('boardStore', {
       return state.boards;
     },
     getBoard: (state) => (id) => state.boards.find((item) => item.id === id),
-    getBoardIndex: (state) => {
-      return (index) => state.boards.findIndex((item) => item.id === index);
-    },
     getActiveBoardId(state) {
       return state.activeBoardId;
     },
