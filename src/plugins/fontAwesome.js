@@ -8,11 +8,12 @@ import {
   faHome,
   faUserPlus,
   faUser,
+  faDownload,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default {
   install: (app) => {
-    library.add(faHeart, faEnvelope, faKey, faRightToBracket, faHome, faUserPlus, faUser);
+    library.add(faHeart, faEnvelope, faKey, faRightToBracket, faHome, faUserPlus, faUser, faDownload);
     app.component('font-awesome-icon', FontAwesomeIcon);
   },
 };

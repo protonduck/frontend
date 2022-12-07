@@ -7,6 +7,7 @@ let menu = {
   login: 'Anmelden',
   register: 'Registrieren',
   logout: 'Abmelden',
+  export: 'Alle bookmarks als JSON Datei exportieren',
 };
 
 let form = {

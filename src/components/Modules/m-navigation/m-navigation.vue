@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import { useUserStore } from '@stores/userStore';
 import mLanguageSelect from '@modules/m-language-select/m-language-select.vue';
+import mExport from '@modules/m-export/m-export.vue';
 
 const userStore = useUserStore();
 const router = useRouter();
@@ -56,6 +57,7 @@ const path = computed(() => route.path);
 
       <div class="navbar-end">
         <div class="navbar-item">
+          <m-export />
           <m-language-select class="navbar-item" />
           <div class="buttons">
             <a v-if="userStore.isLoggedIn" @click="logoutUser()" class="button">
