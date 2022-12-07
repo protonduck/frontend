@@ -57,7 +57,7 @@ const path = computed(() => route.path);
 
       <div class="navbar-end">
         <div class="navbar-item">
-          <m-export />
+          <m-export v-if="userStore.isLoggedIn" />
           <m-language-select class="navbar-item" />
           <div class="buttons">
             <a v-if="userStore.isLoggedIn" @click="logoutUser()" class="button">
