@@ -16,7 +16,7 @@ const validationSchema = object().shape({
   password: string().required('login.form.password.error.required').min(6),
 });
 
-const { handleSubmit, errors } = useForm({ validationSchema });
+const { handleSubmit, errors, setFieldError } = useForm({ validationSchema });
 
 const onSubmit = handleSubmit(async (values) => {
   await apiClient
@@ -33,9 +33,13 @@ const onSubmit = handleSubmit(async (values) => {
       }
     })
     .catch((err) => {
-      // TODO handle server error
-      // https://vee-validate.logaretm.com/v4/guide/composition-api/handling-forms#setting-errors-manually
-      // console.log('Server errors: ', err);
+      if (err.response.data) {
+        err.response.data.forEach((error) => {
+          if (error.message === 'incorrect_login_password') {
+            setFieldError(error.field, 'serverErrors.incorrect_login_password');
+          }
+        });
+      }
     });
 });
 

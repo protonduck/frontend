@@ -22,7 +22,7 @@ const validationSchema = yupObject().shape({
     .oneOf([yupRef('password')], 'register.form.passwordConfirm.error.notMatch'),
 });
 
-const { handleSubmit, errors } = useForm({ validationSchema });
+const { handleSubmit, errors, setFieldError } = useForm({ validationSchema });
 
 const onSubmit = handleSubmit(async (values) => {
   await apiClient
@@ -39,9 +39,13 @@ const onSubmit = handleSubmit(async (values) => {
       }
     })
     .catch((err) => {
-      // TODO handle server error
-      // https://vee-validate.logaretm.com/v4/guide/composition-api/handling-forms#setting-errors-manually
-      console.log('Server errors: ', err);
+      if (err.response.data) {
+        err.response.data.forEach((error) => {
+          if (['email_invalid', 'email_not_unique'].includes(error.message)) {
+            setFieldError(error.field, 'serverErrors.' + error.message);
+          }
+        });
+      }
     });
 });
 

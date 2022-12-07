@@ -25,6 +25,12 @@ let form = {
   },
 };
 
+let serverErrors = {
+  incorrect_login_password: 'Login oder passwort ist falsch.',
+  email_invalid: form.email.error.required,
+  email_not_unique: 'E-Mail ist bereits vergeben.',
+};
+
 let login = {
   title: 'Anmelden',
   form: {
@@ -68,4 +74,5 @@ export default {
   login,
   register,
   error,
+  serverErrors,
 };
