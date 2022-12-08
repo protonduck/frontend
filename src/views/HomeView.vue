@@ -4,6 +4,8 @@ import mCategoriesList from '@modules/m-categories-list/m-categories-list.vue';
 </script>
 
 <template>
-  <m-boards-list />
-  <m-categories-list />
+  <div class="section">
+    <m-boards-list />
+    <m-categories-list />
+  </div>
 </template>

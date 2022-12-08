@@ -14,7 +14,7 @@ const items = ref([
   <header class="has-background-link">
     <m-navigation :items="items" />
   </header>
-  <div class="container mt-4">
+  <div class="container">
     <RouterView />
   </div>
   <footer class="footer has-background-white">

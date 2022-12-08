@@ -56,51 +56,57 @@ const disableRegister = ref(env.getItem('VITE_DISABLE_REGISTER') === 'false');
 </script>
 
 <template>
-  <div class="box">
-    <h1 class="title">{{ $t('register.title') }}</h1>
-    <form v-if="disableRegister" @submit="onSubmit" novalidate>
-      <e-input
-        v-model="name"
-        :errorMessage="errors.name"
-        id="name"
-        autocomplete="username"
-        label="register.form.name.label"
-        icon-left="fa-solid fa-user"
-      />
-      <e-input
-        v-model="email"
-        :errorMessage="errors.email"
-        id="email"
-        type="email"
-        autocomplete="email"
-        label="register.form.email.label"
-        icon-left="fa-solid fa-envelope"
-      />
-      <e-input
-        v-model="password"
-        :errorMessage="errors.password"
-        id="password"
-        type="password"
-        label="register.form.password.label"
-        icon-left="fa-solid fa-key"
-      />
-      <e-input
-        v-model="passwordConfirm"
-        :errorMessage="errors.passwordConfirm"
-        id="passwordConfirm"
-        type="password"
-        label="register.form.passwordConfirm.label"
-        icon-left="fa-solid fa-key"
-      />
-      <div class="field is-grouped">
-        <e-button type="submit">
-          {{ $t('register.form.button') }}
-        </e-button>
-        <e-button type="button" layout="text" @click="router.push('/login')">
-          {{ $t('login.form.button') }}
-        </e-button>
+  <div class="section">
+    <h1 class="title has-text-centered">{{ $t('register.title') }}</h1>
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <form v-if="disableRegister" @submit="onSubmit" novalidate>
+          <e-input
+            v-model="name"
+            :errorMessage="errors.name"
+            id="name"
+            autocomplete="username"
+            label="register.form.name.label"
+            icon-left="fa-solid fa-user"
+          />
+          <e-input
+            v-model="email"
+            :errorMessage="errors.email"
+            id="email"
+            type="email"
+            autocomplete="email"
+            label="register.form.email.label"
+            icon-left="fa-solid fa-envelope"
+          />
+          <e-input
+            v-model="password"
+            :errorMessage="errors.password"
+            id="password"
+            type="password"
+            label="register.form.password.label"
+            icon-left="fa-solid fa-key"
+          />
+          <e-input
+            v-model="passwordConfirm"
+            :errorMessage="errors.passwordConfirm"
+            id="passwordConfirm"
+            type="password"
+            label="register.form.passwordConfirm.label"
+            icon-left="fa-solid fa-key"
+          />
+          <div class="field is-grouped is-grouped-centered pt-3">
+            <e-button type="submit">
+              {{ $t('register.form.button') }}
+            </e-button>
+            <e-button type="button" layout="text" @click="router.push('/login')">
+              {{ $t('login.form.button') }}
+            </e-button>
+          </div>
+        </form>
+        <div v-else>
+          {{ $t('register.disallow') }}
+        </div>
       </div>
-    </form>
-    <div v-else>{{ $t('register.disallow') }}</div>
+    </div>
   </div>
 </template>

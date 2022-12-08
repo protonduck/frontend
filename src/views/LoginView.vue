@@ -46,34 +46,38 @@ const { value: password } = useField('password');
 </script>
 
 <template>
-  <div class="box">
-    <h1 class="title">{{ $t('login.title') }}</h1>
-    <form @submit="onSubmit" novalidate>
-      <e-input
-        v-model="email"
-        :errorMessage="errors.email"
-        id="email"
-        type="email"
-        autocomplete="email"
-        label="login.form.email.label"
-        icon-left="fa-solid fa-envelope"
-      />
-      <e-input
-        v-model="password"
-        :errorMessage="errors.password"
-        id="password"
-        type="password"
-        label="login.form.password.label"
-        icon-left="fa-solid fa-key"
-      />
-      <div class="field is-grouped">
-        <e-button type="submit">
-          {{ $t('login.form.button') }}
-        </e-button>
-        <e-button type="button" layout="text" @click="router.push('/register')">
-          {{ $t('register.form.button') }}
-        </e-button>
+  <div class="section">
+    <h1 class="title has-text-centered">{{ $t('login.title') }}</h1>
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <form @submit="onSubmit" novalidate>
+          <e-input
+            v-model="email"
+            :errorMessage="errors.email"
+            id="email"
+            type="email"
+            autocomplete="email"
+            label="login.form.email.label"
+            icon-left="fa-solid fa-envelope"
+          />
+          <e-input
+            v-model="password"
+            :errorMessage="errors.password"
+            id="password"
+            type="password"
+            label="login.form.password.label"
+            icon-left="fa-solid fa-key"
+          />
+          <div class="field is-grouped is-grouped-centered pt-3">
+            <e-button type="submit">
+              {{ $t('login.form.button') }}
+            </e-button>
+            <e-button type="button" layout="text" @click="router.push('/register')">
+              {{ $t('register.form.button') }}
+            </e-button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
 </template>
