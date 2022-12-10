@@ -65,6 +65,11 @@ export default {
       name: data.name,
     });
   },
+  editBoard(data) {
+    return apiClient.put(`/boards/${data.id}`, {
+      name: data.name,
+    });
+  },
   removeBoard(id) {
     return apiClient.delete(`/boards/${id}`);
   },

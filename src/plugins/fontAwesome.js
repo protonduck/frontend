@@ -12,6 +12,8 @@ import {
   faPlus,
   faClose,
   faTrash,
+  faPen,
+  faSpinner,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default {
@@ -27,7 +29,9 @@ export default {
       faDownload,
       faPlus,
       faClose,
-      faTrash
+      faTrash,
+      faPen,
+      faSpinner
     );
     app.component('font-awesome-icon', FontAwesomeIcon);
   },

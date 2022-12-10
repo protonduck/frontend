@@ -1,21 +1,19 @@
 <script setup>
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useBoardStore } from '@stores/boardStore';
 import apiClient from '@/apiClient';
 import mModal from '@modules/m-modal/m-modal.vue';
 import eButton from '@elements/e-button/e-button.vue';
 
 const boardStore = useBoardStore();
-
-const props = defineProps({
-  id: Number,
-});
+const { activeBoardId } = storeToRefs(useBoardStore());
 
 async function removeBoard() {
   await apiClient
-    .removeBoard(props.id)
+    .removeBoard(activeBoardId.value)
     .then(() => {
-      boardStore.removeBoard(props.id);
+      boardStore.removeBoard(activeBoardId.value);
     })
     .catch((err) => {
       /*

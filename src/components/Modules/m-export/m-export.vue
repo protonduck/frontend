@@ -1,13 +1,13 @@
 <script setup>
+import { storeToRefs } from 'pinia';
 import { useBoardStore } from '@stores/boardStore';
 
 function exportToFile() {
-  const boardStore = useBoardStore();
-  
-  let boards = boardStore.getAll;
+  const { boards } = storeToRefs(useBoardStore());
+
   let data = [];
 
-  boards.forEach((board) => {
+  boards.value.forEach((board) => {
     let categories = [];
 
     board.categories.forEach((category) => {

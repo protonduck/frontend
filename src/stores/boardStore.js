@@ -3,36 +3,41 @@ import apiClient from '@/apiClient';
 import storage from '@plugins/storage';
 
 export const useBoardStore = defineStore('boardStore', {
-  state: () => {
-    return {
-      boards: [],
-      activeBoardId: storage.getItem('activeBoardId') || null,
-    };
-  },
+  state: () => ({
+    boards: [],
+    activeBoardId: storage.getItem('activeBoardId') || null,
+    isLoading: false,
+  }),
   actions: {
     async fetchBoards() {
-      let response = await apiClient.getBoards();
+      this.isLoading = true;
 
-      if (response.status === 200 && response.data) {
-        this.boards = response.data;
-      }
+      await apiClient
+        .getBoards()
+        .then((response) => {
+          this.boards = response.data;
+          this.isLoading = false;
+
+          return response;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+
+          return err.response.data;
+        });
     },
-    async addBoard(data) {
-      if (!data) return;
-
-      this.boards.push(data);
+    async addBoard(board) {
+      this.boards.push(board);
     },
-    async editBoard(data) {
-      if (!data.id || !data.payload) return;
-
-      const index = this.findIndexById(id);
+    async editBoard(board) {
+      const index = this.findIndexById(board.id);
 
       if (index !== -1) {
-        this.boards[index] = data;
+        this.boards[index] = board;
       }
     },
     async removeBoard(id) {
-      this.boards = this.boards.filter((item) => item.id !== id);
+      this.boards = this.boards.filter((board) => board.id !== id);
       this.clearActiveBoard();
     },
     async setActiveBoard(id) {
@@ -47,15 +52,14 @@ export const useBoardStore = defineStore('boardStore', {
       this.boards = [];
     },
     findIndexById(id) {
-      return this.items.findIndex((item) => item.id === id);
+      return this.boards.findIndex((board) => board.id === id);
     },
   },
   getters: {
-    getAll: (state) => {
-      return state.boards;
+    getBoardById: (state) => {
+      return (id) => state.boards.find((board) => board.id === id);
     },
-    getBoard: (state) => (id) => state.boards.find((item) => item.id === id),
-    getActiveBoardId(state) {
+    getActiveBoardId: (state) => {
       return state.activeBoardId;
     },
   },

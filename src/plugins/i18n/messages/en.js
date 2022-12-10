@@ -7,6 +7,7 @@ let menu = {
   login: 'Login',
   register: 'Register',
   logout: 'Logout',
+  export: 'Alle bookmarks als JSON Datei exportieren',
 };
 
 // TODO: add translations

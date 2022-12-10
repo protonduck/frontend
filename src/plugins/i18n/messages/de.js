@@ -97,6 +97,18 @@ let removeBoard = {
   info: 'Board und alle zugehörtige Kategorien und Links endgültig löschen?',
 };
 
+let editBoard = {
+  title: 'Board ändern',
+  form: {
+    name: form.boardName,
+    button: {
+      edit: 'Ändern',
+      save: 'Speichern',
+      cancel: 'Abbrechen',
+    },
+  },
+};
+
 let error = {
   title: 'Fehler',
   content: 'Seite nicht gefunden!',
@@ -108,6 +120,7 @@ export default {
   login,
   register,
   addBoard,
+  editBoard,
   removeBoard,
   error,
   serverErrors,

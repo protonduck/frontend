@@ -11,9 +11,9 @@ import '@assets/scss/main.scss';
 const app = createApp(App);
 
 // use plugins
-app.use(fontAwesome);
 app.use(pinia);
 app.use(i18n);
+app.use(fontAwesome);
 
 app.use(router);
 

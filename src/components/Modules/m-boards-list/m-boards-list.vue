@@ -1,16 +1,18 @@
 <script setup>
-import { computed } from 'vue';
+import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useBoardStore } from '@stores/boardStore';
 import storage from '@plugins/storage';
 import mAddBoard from '@modules/m-add-board/m-add-board.vue';
 import mRemoveBoard from '@modules/m-remove-board/m-remove-board.vue';
+import mEditBoard from '@modules/m-edit-board/m-edit-board.vue';
 
 const boardStore = useBoardStore();
+const { boards, activeBoardId } = storeToRefs(useBoardStore());
 
-boardStore.fetchBoards();
-
-const boards = computed(() => boardStore.getAll);
-const activeBoardId = computed(() => boardStore.getActiveBoardId);
+onMounted(() => {
+  boardStore.fetchBoards();
+});
 
 function switchBoard(selectedBoardId) {
   boardStore.setActiveBoard(selectedBoardId);
@@ -34,7 +36,8 @@ if (storage.getItem('selectedBoardId')) {
         <a>{{ board.name }}</a>
       </li>
       <m-add-board />
-      <m-remove-board v-if="activeBoardId" :id="activeBoardId" />
+      <m-edit-board v-if="activeBoardId" />
+      <m-remove-board v-if="activeBoardId" />
     </ul>
   </div>
   <div v-if="boards.length === 0" class="notification is-warning is-light">

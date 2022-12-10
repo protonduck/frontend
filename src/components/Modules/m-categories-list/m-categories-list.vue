@@ -1,15 +1,12 @@
 <script setup>
+import { storeToRefs } from 'pinia';
 import { computed } from 'vue';
 import { useBoardStore } from '@stores/boardStore';
 import mLinksList from '@modules/m-links-list/m-links-list.vue';
-import storage from '@plugins/storage';
 
 const store = useBoardStore();
-const categories = computed(() => store.getBoard(store.getActiveBoardId)?.categories);
-
-if (storage.getItem('selectedBoardId')) {
-  store.setActiveBoard(parseInt(storage.getItem('selectedBoardId'), 10));
-}
+const { activeBoardId } = storeToRefs(useBoardStore());
+const categories = computed(() => store.getBoardById(activeBoardId.value)?.categories);
 </script>
 
 <template>
