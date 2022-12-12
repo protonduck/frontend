@@ -29,5 +29,3 @@ const items = ref([
     </div>
   </footer>
 </template>
-
-<style lang="scss"></style>

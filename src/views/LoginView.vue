@@ -28,7 +28,7 @@ const onSubmit = handleSubmit(async (values) => {
       storage.setItem('user', response.data, true);
       storage.setItem('authToken', response.data.api_key);
 
-      router.push('/');
+      router.push({ name: 'home' });
     })
     .catch((err) => {
       if (err.response.data) {
@@ -72,7 +72,7 @@ const { value: password } = useField('password');
             <e-button type="submit">
               {{ $t('login.form.button') }}
             </e-button>
-            <e-button type="button" layout="text" @click="router.push('/register')">
+            <e-button type="button" layout="text" @click="router.push({ name: 'register' })">
               {{ $t('register.form.button') }}
             </e-button>
           </div>

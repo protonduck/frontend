@@ -1,13 +1,12 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { RouterLink, useRoute, useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { RouterLink, useRouter } from 'vue-router';
 import { useUserStore } from '@stores/userStore';
 import mLanguageSelect from '@modules/m-language-select/m-language-select.vue';
 import mExport from '@modules/m-export/m-export.vue';
 
 const userStore = useUserStore();
 const router = useRouter();
-const route = useRoute();
 
 const props = defineProps({
   items: Array,
@@ -19,11 +18,10 @@ function filtredItems() {
 
 async function logoutUser() {
   userStore.logoutUser();
-  router.push('/login');
+  router.push({ name: 'login' });
 }
 
 const isOpen = ref(false);
-const path = computed(() => route.path);
 </script>
 
 <template>
@@ -46,7 +44,7 @@ const path = computed(() => route.path);
     <div id="burgerNavigation" class="navbar-menu" :class="{ 'is-active': isOpen }">
       <div class="navbar-start">
         <template v-for="item in filtredItems()" :key="item.name">
-          <router-link :to="item.to" class="navbar-item mr-3" :class="{ 'is-active': path === item.to }">
+          <router-link :to="item.to" active-class="is-active" class="navbar-item mr-3">
             <span v-if="item.icon" class="icon pr-3">
               <font-awesome-icon :icon="item.icon" />
             </span>

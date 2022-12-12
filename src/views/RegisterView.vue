@@ -34,7 +34,7 @@ const onSubmit = handleSubmit(async (values) => {
       storage.setItem('user', response.data, true);
       storage.setItem('authToken', response.data.api_key);
 
-      router.push('/');
+      router.push({ name: 'home' });
     })
     .catch((err) => {
       if (err.response.data) {
@@ -98,7 +98,7 @@ const disableRegister = ref(env.getItem('VITE_DISABLE_REGISTER') === 'false');
             <e-button type="submit">
               {{ $t('register.form.button') }}
             </e-button>
-            <e-button type="button" layout="text" @click="router.push('/login')">
+            <e-button type="button" layout="text" @click="router.push({ name: 'home' })">
               {{ $t('login.form.button') }}
             </e-button>
           </div>
