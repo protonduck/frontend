@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useBoardStore } from '@stores/boardStore';
-import { useField, useForm, Form } from 'vee-validate';
+import { useField, useForm } from 'vee-validate';
 import { object, string } from 'yup';
 import apiClient from '@/apiClient';
 import mModal from '@modules/m-modal/m-modal.vue';
@@ -10,18 +11,14 @@ import eButton from '@elements/e-button/e-button.vue';
 import eInput from '@elements/e-input/e-input.vue';
 
 const boardStore = useBoardStore();
-
-// let board = computed(() => boardStore.getBoardById(boardStore.getActiveBoardId));
-// console.log(board);
-
-console.log(boardStore.getBoardById(boardStore.getActiveBoardId)?.name);
+const { activeBoardId } = storeToRefs(useBoardStore());
 
 const { handleSubmit, errors, setFieldError } = useForm({
   validationSchema: object().shape({
     name: string().required('editBoard.form.name.error.required'),
   }),
   initialValues: {
-    name: boardStore.getBoardById(boardStore.getActiveBoardId)?.name,
+    name: '',
   },
 });
 

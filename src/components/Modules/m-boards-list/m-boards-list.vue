@@ -26,15 +26,16 @@ if (storage.getItem('selectedBoardId')) {
 <template>
   <div class="tabs is-centered is-boxed is-medium">
     <ul>
-      <li
-        v-if="boards.length"
-        v-for="board in boards"
-        :key="board.id"
-        @click="switchBoard(board.id)"
-        :class="{ 'is-active': board.id === activeBoardId }"
-      >
-        <a>{{ board.name }}</a>
-      </li>
+      <template v-if="boards.length">
+        <li
+          v-for="board in boards"
+          :key="board.id"
+          @click="switchBoard(board.id)"
+          :class="{ 'is-active': board.id === activeBoardId }"
+        >
+          <a>{{ board.name }}</a>
+        </li>
+      </template>
       <m-add-board />
       <m-edit-board v-if="activeBoardId" />
       <m-remove-board v-if="activeBoardId" />
