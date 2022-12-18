@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from '@/views/HomeView.vue';
 import { useUserStore } from '@/stores/userStore';
+import HomeView from '@/views/HomeView.vue';
+import LoginView from '@/views/LoginView.vue';
+import RegisterView from '@/views/RegisterView.vue';
+import ErrorView from '@/views/ErrorView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,17 +17,17 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('@/views/LoginView.vue'),
+      component: LoginView,
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('@/views/RegisterView.vue'),
+      component: RegisterView,
     },
     {
       path: '/:catchAll(.*)',
       name: 'Error404',
-      component: () => import('@/views/ErrorView.vue'),
+      component: ErrorView,
     },
   ],
 });
