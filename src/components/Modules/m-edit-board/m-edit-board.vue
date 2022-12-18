@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useBoardStore } from '@stores/boardStore';
 import { useField, useForm } from 'vee-validate';
@@ -13,7 +13,26 @@ import eInput from '@elements/e-input/e-input.vue';
 const boardStore = useBoardStore();
 const { activeBoardId } = storeToRefs(useBoardStore());
 
-const { handleSubmit, errors, setFieldError } = useForm({
+onMounted(async () => {
+  await boardStore.fetchBoards();
+
+  setBoardName();
+});
+
+watch(
+  () => activeBoardId.value,
+  () => setBoardName()
+);
+
+const setBoardName = () => {
+  resetForm({
+    values: {
+      name: boardStore.getBoardById(activeBoardId.value)?.name,
+    },
+  });
+};
+
+const { handleSubmit, errors, setFieldError, resetForm } = useForm({
   validationSchema: object().shape({
     name: string().required('editBoard.form.name.error.required'),
   }),

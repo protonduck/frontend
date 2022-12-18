@@ -1,5 +1,4 @@
 <script setup>
-import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useBoardStore } from '@stores/boardStore';
 import storage from '@plugins/storage';
@@ -9,10 +8,6 @@ import mEditBoard from '@modules/m-edit-board/m-edit-board.vue';
 
 const boardStore = useBoardStore();
 const { boards, activeBoardId } = storeToRefs(useBoardStore());
-
-onMounted(() => {
-  boardStore.fetchBoards();
-});
 
 function switchBoard(selectedBoardId) {
   boardStore.setActiveBoard(selectedBoardId);
