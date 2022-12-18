@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useField, useForm } from 'vee-validate';
 import { object, string } from 'yup';
@@ -25,22 +25,7 @@ const { boards, activeBoardId } = storeToRefs(useBoardStore());
 
 onMounted(async () => {
   await boardStore.fetchBoards();
-
-  setBoardName();
 });
-
-watch(
-  () => activeBoardId.value,
-  () => setBoardName()
-);
-
-const setBoardName = () => {
-  resetForm({
-    values: {
-      name: boardStore.getBoardById(activeBoardId.value)?.name,
-    },
-  });
-};
 
 const validationSchema = object().shape({
   name: string().required('addBoard.form.name.error.required'),
@@ -53,6 +38,16 @@ const { value: name } = useField('name');
 // add board
 
 let showAddModal = ref(false);
+
+function onAddClick() {
+  resetForm({
+    values: {
+      name: '',
+    },
+  });
+
+  showAddModal.value = true;
+}
 
 const addBoard = handleSubmit(async (values, { resetForm }) => {
   await apiClient
@@ -76,6 +71,16 @@ const addBoard = handleSubmit(async (values, { resetForm }) => {
 // edit board
 
 let showEditModal = ref(false);
+
+function onEditClick() {
+  resetForm({
+    values: {
+      name: boardStore.getBoardById(activeBoardId.value)?.name,
+    },
+  });
+
+  showEditModal.value = true;
+}
 
 const editBoard = handleSubmit(async (values) => {
   await apiClient
@@ -132,12 +137,12 @@ async function removeBoard() {
           <a>{{ board.name }}</a>
         </li>
       </template>
-      <a :title="$t('addBoard.form.button.add')" @click="showAddModal = true">
+      <a :title="$t('addBoard.form.button.add')" @click="onAddClick()">
         <span class="icon">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </span>
       </a>
-      <a v-if="activeBoardId" :title="$t('editBoard.form.button.edit')" @click="showEditModal = true">
+      <a v-if="activeBoardId" :title="$t('editBoard.form.button.edit')" @click="onEditClick()">
         <span class="icon">
           <font-awesome-icon icon="fa-solid fa-pen" />
         </span>
