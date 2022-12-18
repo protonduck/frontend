@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
-import apiClient from '@/apiClient';
+import { apiClient } from '@/apiClient';
 import storage from '@plugins/storage';
 
 export const useBoardStore = defineStore('boardStore', {
   state: () => ({
     boards: [],
+    errors: [],
     activeBoardId: storage.getItem('activeBoardId') || null,
     isLoading: false,
   }),
@@ -13,32 +14,76 @@ export const useBoardStore = defineStore('boardStore', {
       this.isLoading = true;
 
       await apiClient
-        .getBoards()
+        .get('/boards')
         .then((response) => {
           this.boards = response.data;
           this.isLoading = false;
-
-          return response;
         })
         .catch((err) => {
           this.isLoading = false;
 
-          return err.response.data;
+          this.errors = {
+            status: err.response.data.status,
+            message: err.response.data.message,
+          };
         });
     },
     async addBoard(board) {
-      this.boards.push(board);
+      await apiClient
+        .post('/boards', {
+          name: board.name,
+        })
+        .then((response) => {
+          this.boards.push(response.data);
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+
+          this.errors = {
+            status: err.response.data.status,
+            message: err.response.data.message,
+          };
+        });
     },
     async editBoard(board) {
-      const index = this.findIndexById(board.id);
+      await apiClient
+        .put(`/boards/${board.id}`, {
+          name: board.name,
+        })
+        .then((response) => {
+          const index = this.findIndexById(board.id);
 
-      if (index !== -1) {
-        this.boards[index] = board;
-      }
+          if (index !== -1) {
+            this.boards[index] = response.data;
+          }
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+
+          this.errors = {
+            status: err.response.data.status,
+            message: err.response.data.message,
+          };
+        });
     },
     async removeBoard(id) {
-      this.boards = this.boards.filter((board) => board.id !== id);
-      this.clearActiveBoard();
+      await apiClient
+        .delete(`/boards/${id}`)
+        .then(() => {
+          this.boards = this.boards.filter((board) => board.id !== id);
+          this.clearActiveBoard();
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+
+          this.errors = {
+            status: err.response.data.status,
+            message: err.response.data.message,
+          };
+        });
     },
     async setActiveBoard(id) {
       this.activeBoardId = id;

@@ -5,11 +5,11 @@ import { useField, useForm } from 'vee-validate';
 import { object, string } from 'yup';
 import { useBoardStore } from '@stores/boardStore';
 import storage from '@plugins/storage';
-import apiClient from '@/apiClient';
 import mModal from '@modules/m-modal/m-modal.vue';
 import eButton from '@elements/e-button/e-button.vue';
 import eInput from '@elements/e-input/e-input.vue';
 import mSpinner from '@modules/m-spinner/m-spinner.vue';
+import mNotification from '@modules/m-notification/m-notification.vue';
 
 const boardStore = useBoardStore();
 
@@ -21,7 +21,7 @@ if (storage.getItem('selectedBoardId')) {
   boardStore.setActiveBoard(parseInt(storage.getItem('selectedBoardId'), 10));
 }
 
-const { boards, activeBoardId } = storeToRefs(useBoardStore());
+const { boards, activeBoardId, errors: apiErrors } = storeToRefs(useBoardStore());
 
 onMounted(async () => {
   await boardStore.fetchBoards();
@@ -31,7 +31,7 @@ const validationSchema = object().shape({
   name: string().required('addBoard.form.name.error.required'),
 });
 
-const { handleSubmit, errors, setFieldError, resetForm } = useForm({ validationSchema });
+const { handleSubmit, errors, resetForm } = useForm({ validationSchema });
 
 const { value: name } = useField('name');
 
@@ -41,27 +41,14 @@ let showAddModal = ref(false);
 
 function onAddClick() {
   resetForm({
-    values: {
-      name: '',
-    },
+    values: { name: '' },
   });
 
   showAddModal.value = true;
 }
 
 const addBoard = handleSubmit(async (values, { resetForm }) => {
-  await apiClient
-    .addBoard(values)
-    .then((response) => {
-      boardStore.addBoard(response.data);
-    })
-    .catch((err) => {
-      if (err.response.data) {
-        err.response.data.forEach((error) => {
-          setFieldError(error.field, 'serverErrors.' + error.message);
-        });
-      }
-    });
+  await boardStore.addBoard(values);
 
   resetForm();
 
@@ -83,18 +70,7 @@ function onEditClick() {
 }
 
 const editBoard = handleSubmit(async (values) => {
-  await apiClient
-    .editBoard({ ...values, id: activeBoardId.value })
-    .then((response) => {
-      boardStore.editBoard(response.data);
-    })
-    .catch((err) => {
-      if (err.response.data) {
-        err.response.data.forEach((error) => {
-          setFieldError(error.field, 'serverErrors.' + error.message);
-        });
-      }
-    });
+  boardStore.editBoard({ ...values, id: activeBoardId.value });
 
   showEditModal.value = false;
 });
@@ -104,20 +80,7 @@ const editBoard = handleSubmit(async (values) => {
 let showRemoveModal = ref(false);
 
 async function removeBoard() {
-  await apiClient
-    .removeBoard(activeBoardId.value)
-    .then(() => {
-      boardStore.removeBoard(activeBoardId.value);
-    })
-    .catch((err) => {
-      /*
-      if (err.response.data) {
-        err.response.data.forEach((error) => {
-          'serverErrors.' + error.message
-        });
-      }
-      */
-    });
+  boardStore.removeBoard(activeBoardId.value);
 
   showRemoveModal.value = false;
 }
@@ -154,6 +117,8 @@ async function removeBoard() {
       </a>
     </ul>
   </div>
+
+  <m-notification :item="apiErrors" />
 
   <div v-if="boards.length === 0" class="notification is-warning is-light">
     {{ $t('site.boardsList.info') }}

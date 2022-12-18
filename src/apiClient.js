@@ -9,7 +9,7 @@ if (storage.getItem('authToken')) {
   authToken = storage.getItem('authToken');
 }
 
-const apiClient = axios.create({
+export const apiClient = axios.create({
   baseURL: env.getItem('VITE_API_BASE_URL'),
   headers: {
     Accept: 'application/json',
@@ -44,9 +44,6 @@ apiClient.interceptors.response.use(
 );
 
 export default {
-  getBoards() {
-    return apiClient.get('/boards');
-  },
   loginUser(data) {
     return apiClient.post('/user/login', {
       email: data.email,
@@ -59,18 +56,5 @@ export default {
       email: data.email,
       password: data.password,
     });
-  },
-  addBoard(data) {
-    return apiClient.post('/boards', {
-      name: data.name,
-    });
-  },
-  editBoard(data) {
-    return apiClient.put(`/boards/${data.id}`, {
-      name: data.name,
-    });
-  },
-  removeBoard(id) {
-    return apiClient.delete(`/boards/${id}`);
   },
 };
