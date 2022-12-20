@@ -31,7 +31,7 @@ const validationSchema = object().shape({
   name: string().required('addBoard.form.name.error.required'),
 });
 
-const { handleSubmit, errors, resetForm } = useForm({ validationSchema });
+const { handleSubmit, errors, resetForm, setFieldError } = useForm({ validationSchema });
 
 const { value: name } = useField('name');
 
@@ -50,9 +50,15 @@ function onAddClick() {
 const addBoard = handleSubmit(async (values, { resetForm }) => {
   await boardStore.addBoard(values);
 
-  resetForm();
+  if (apiErrors.value.length !== 0) {
+    apiErrors.value.forEach((error) => {
+      setFieldError(error.field, 'serverErrors.' + error.message);
+    });
+  } else {
+    resetForm();
 
-  showAddModal.value = false;
+    showAddModal.value = false;
+  }
 });
 
 // edit board
@@ -70,9 +76,15 @@ function onEditClick() {
 }
 
 const editBoard = handleSubmit(async (values) => {
-  boardStore.editBoard({ ...values, id: activeBoardId.value });
+  await boardStore.editBoard({ ...values, id: activeBoardId.value });
 
-  showEditModal.value = false;
+  if (apiErrors.value.length !== 0) {
+    apiErrors.value.forEach((error) => {
+      setFieldError(error.field, 'serverErrors.' + error.message);
+    });
+  } else {
+    showEditModal.value = false;
+  }
 });
 
 // remove board
@@ -80,9 +92,15 @@ const editBoard = handleSubmit(async (values) => {
 let showRemoveModal = ref(false);
 
 async function removeBoard() {
-  boardStore.removeBoard(activeBoardId.value);
+  await boardStore.removeBoard(activeBoardId.value);
 
-  showRemoveModal.value = false;
+  if (apiErrors.value.length !== 0) {
+    apiErrors.value.forEach((error) => {
+      setFieldError(error.field, 'serverErrors.' + error.message);
+    });
+  } else {
+    showRemoveModal.value = false;
+  }
 }
 </script>
 
@@ -118,8 +136,6 @@ async function removeBoard() {
     </ul>
   </div>
 
-  <m-notification :item="apiErrors" />
-
   <div v-if="boards.length === 0" class="notification is-warning is-light">
     {{ $t('site.boardsList.info') }}
   </div>
@@ -129,6 +145,7 @@ async function removeBoard() {
       {{ $t('addBoard.title') }}
     </template>
     <template v-slot:content>
+      <m-notification :item="apiErrors" />
       <form @submit.prevent="addBoard()" novalidate>
         <e-input v-model="name" :errorMessage="errors.name" id="name" label="addBoard.form.name.label" />
         <e-button type="submit">
@@ -143,6 +160,7 @@ async function removeBoard() {
       {{ $t('editBoard.title') }}
     </template>
     <template v-slot:content>
+      <m-notification :item="apiErrors" />
       <form @submit.prevent="editBoard()" novalidate>
         <e-input v-model="name" :errorMessage="errors.name" id="name" label="editBoard.form.name.label" />
         <e-button type="submit">
@@ -155,6 +173,7 @@ async function removeBoard() {
   <m-modal v-model="showRemoveModal" @cancel="showRemoveModal = false">
     <template v-slot:title>{{ $t('removeBoard.title') }}</template>
     <template v-slot:content>
+      <m-notification :item="apiErrors" />
       <div class="block has-text-danger">
         <p>{{ $t('removeBoard.info') }}</p>
       </div>

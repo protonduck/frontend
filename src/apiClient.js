@@ -43,18 +43,4 @@ apiClient.interceptors.response.use(
   }
 );
 
-export default {
-  loginUser(data) {
-    return apiClient.post('/user/login', {
-      email: data.email,
-      password: data.password,
-    });
-  },
-  registerUser(data) {
-    return apiClient.post('/user/signup', {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    });
-  },
-};
+export default {};

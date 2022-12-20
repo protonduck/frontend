@@ -1,16 +1,16 @@
 <script setup>
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@stores/userStore';
 import { useField, useForm } from 'vee-validate';
 import { object as yupObject, string as yupString, ref as yupRef } from 'yup';
 import eInput from '@elements/e-input/e-input.vue';
 import eButton from '@elements/e-button/e-button.vue';
-import apiClient from '@/apiClient';
-import storage from '@plugins/storage';
 import env from '@plugins/helper/env';
 
 const userStore = useUserStore();
+const { errors: apiErrors } = storeToRefs(useUserStore());
 const router = useRouter();
 
 const validationSchema = yupObject().shape({
@@ -25,26 +25,15 @@ const validationSchema = yupObject().shape({
 const { handleSubmit, errors, setFieldError } = useForm({ validationSchema });
 
 const onSubmit = handleSubmit(async (values) => {
-  await apiClient
-    .registerUser(values)
-    .then((response) => {
-      userStore.user = response.data;
-      userStore.token = response.data.api_key;
+  await userStore.registerUser(values);
 
-      storage.setItem('user', response.data, true);
-      storage.setItem('authToken', response.data.api_key);
-
-      router.push({ name: 'home' });
-    })
-    .catch((err) => {
-      if (err.response.data) {
-        err.response.data.forEach((error) => {
-          if (['email_invalid', 'email_not_unique'].includes(error.message)) {
-            setFieldError(error.field, 'serverErrors.' + error.message);
-          }
-        });
-      }
+  if (apiErrors.value.length !== 0) {
+    apiErrors.value.forEach((error) => {
+      setFieldError(error.field, 'serverErrors.' + error.message);
     });
+  } else {
+    router.push({ name: 'home' });
+  }
 });
 
 const { value: name } = useField('name');

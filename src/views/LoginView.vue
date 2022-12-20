@@ -1,15 +1,16 @@
 <script setup>
+import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@stores/userStore';
 import { useField, useForm } from 'vee-validate';
 import { object, string } from 'yup';
 import eInput from '@elements/e-input/e-input.vue';
 import eButton from '@elements/e-button/e-button.vue';
-import apiClient from '@/apiClient';
-import storage from '@plugins/storage';
 
 const userStore = useUserStore();
 const router = useRouter();
+
+const { errors: apiErrors } = storeToRefs(useUserStore());
 
 const validationSchema = object().shape({
   email: string().required('login.form.email.error.required').email('login.form.email.error.required'),
@@ -19,26 +20,15 @@ const validationSchema = object().shape({
 const { handleSubmit, errors, setFieldError } = useForm({ validationSchema });
 
 const onSubmit = handleSubmit(async (values) => {
-  await apiClient
-    .loginUser(values)
-    .then((response) => {
-      userStore.user = response.data;
-      userStore.token = response.data.api_key;
+  await userStore.loginUser(values);
 
-      storage.setItem('user', response.data, true);
-      storage.setItem('authToken', response.data.api_key);
-
-      router.push({ name: 'home' });
-    })
-    .catch((err) => {
-      if (err.response.data) {
-        err.response.data.forEach((error) => {
-          if (error.message === 'incorrect_login_password') {
-            setFieldError(error.field, 'serverErrors.incorrect_login_password');
-          }
-        });
-      }
+  if (apiErrors.value.length !== 0) {
+    apiErrors.value.forEach((error) => {
+      setFieldError(error.field, 'serverErrors.' + error.message);
     });
+  } else {
+    router.push({ name: 'home' });
+  }
 });
 
 const { value: email } = useField('email');

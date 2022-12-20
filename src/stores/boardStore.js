@@ -16,16 +16,14 @@ export const useBoardStore = defineStore('boardStore', {
       await apiClient
         .get('/boards')
         .then((response) => {
+          this.errors = [];
           this.boards = response.data;
           this.isLoading = false;
         })
         .catch((err) => {
           this.isLoading = false;
 
-          this.errors = {
-            status: err.response.data.status,
-            message: err.response.data.message,
-          };
+          this.errors = err.response.data;
         });
     },
     async addBoard(board) {
@@ -34,16 +32,14 @@ export const useBoardStore = defineStore('boardStore', {
           name: board.name,
         })
         .then((response) => {
+          this.errors = [];
           this.boards.push(response.data);
           this.isLoading = false;
         })
         .catch((err) => {
           this.isLoading = false;
 
-          this.errors = {
-            status: err.response.data.status,
-            message: err.response.data.message,
-          };
+          this.errors = err.response.data;
         });
     },
     async editBoard(board) {
@@ -52,6 +48,8 @@ export const useBoardStore = defineStore('boardStore', {
           name: board.name,
         })
         .then((response) => {
+          this.errors = [];
+
           const index = this.findIndexById(board.id);
 
           if (index !== -1) {
@@ -62,16 +60,14 @@ export const useBoardStore = defineStore('boardStore', {
         .catch((err) => {
           this.isLoading = false;
 
-          this.errors = {
-            status: err.response.data.status,
-            message: err.response.data.message,
-          };
+          this.errors = err.response.data;
         });
     },
     async removeBoard(id) {
       await apiClient
         .delete(`/boards/${id}`)
         .then(() => {
+          this.errors = [];
           this.boards = this.boards.filter((board) => board.id !== id);
           this.clearActiveBoard();
           this.isLoading = false;
@@ -79,10 +75,7 @@ export const useBoardStore = defineStore('boardStore', {
         .catch((err) => {
           this.isLoading = false;
 
-          this.errors = {
-            status: err.response.data.status,
-            message: err.response.data.message,
-          };
+          this.errors = err.response.data;
         });
     },
     async setActiveBoard(id) {
