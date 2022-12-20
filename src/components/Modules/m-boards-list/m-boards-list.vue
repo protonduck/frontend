@@ -28,7 +28,7 @@ onMounted(async () => {
 });
 
 const validationSchema = object().shape({
-  name: string().required('addBoard.form.name.error.required'),
+  name: string().required('mBoardList.form.name.error.required'),
 });
 
 const { handleSubmit, errors, resetForm, setFieldError } = useForm({ validationSchema });
@@ -37,14 +37,13 @@ const { value: name } = useField('name');
 
 // add board
 
-let showAddModal = ref(false);
-
 function onAddClick() {
   resetForm({
     values: { name: '' },
   });
 
-  showAddModal.value = true;
+  isEdit.value = false;
+  showModal.value = true;
 }
 
 const addBoard = handleSubmit(async (values, { resetForm }) => {
@@ -57,13 +56,11 @@ const addBoard = handleSubmit(async (values, { resetForm }) => {
   } else {
     resetForm();
 
-    showAddModal.value = false;
+    showModal.value = false;
   }
 });
 
 // edit board
-
-let showEditModal = ref(false);
 
 function onEditClick() {
   resetForm({
@@ -72,7 +69,8 @@ function onEditClick() {
     },
   });
 
-  showEditModal.value = true;
+  isEdit.value = true;
+  showModal.value = true;
 }
 
 const editBoard = handleSubmit(async (values) => {
@@ -83,7 +81,7 @@ const editBoard = handleSubmit(async (values) => {
       setFieldError(error.field, 'serverErrors.' + error.message);
     });
   } else {
-    showEditModal.value = false;
+    showModal.value = false;
   }
 });
 
@@ -102,6 +100,9 @@ async function removeBoard() {
     showRemoveModal.value = false;
   }
 }
+
+let showModal = ref(false);
+let isEdit = ref(false);
 </script>
 
 <template>
@@ -118,17 +119,17 @@ async function removeBoard() {
           <a>{{ board.name }}</a>
         </li>
       </template>
-      <a :title="$t('addBoard.form.button.add')" @click="onAddClick()">
+      <a :title="$t('mBoardList.form.button.add')" @click="onAddClick()">
         <span class="icon">
           <font-awesome-icon icon="fa-solid fa-plus" />
         </span>
       </a>
-      <a v-if="activeBoardId" :title="$t('editBoard.form.button.edit')" @click="onEditClick()">
+      <a v-if="activeBoardId" :title="$t('mBoardList.form.button.edit')" @click="onEditClick()">
         <span class="icon">
           <font-awesome-icon icon="fa-solid fa-pen" />
         </span>
       </a>
-      <a v-if="activeBoardId" :title="$t('removeBoard.form.button.remove')" @click="showRemoveModal = true">
+      <a v-if="activeBoardId" :title="$t('mBoardList.form.button.remove')" @click="showRemoveModal = true">
         <span class="icon">
           <font-awesome-icon icon="fa-solid fa-trash" />
         </span>
@@ -137,49 +138,34 @@ async function removeBoard() {
   </div>
 
   <div v-if="boards.length === 0" class="notification is-warning is-light">
-    {{ $t('site.boardsList.info') }}
+    {{ $t('mBoardList.info.add') }}
   </div>
 
-  <m-modal v-model="showAddModal" @cancel="showAddModal = false">
+  <m-modal v-model="showModal" @cancel="showModal = false">
     <template v-slot:title>
-      {{ $t('addBoard.title') }}
+      {{ !isEdit ? $t('mBoardList.title.add') : $t('mBoardList.title.edit') }}
     </template>
     <template v-slot:content>
       <m-notification :item="apiErrors" />
-      <form @submit.prevent="addBoard()" novalidate>
-        <e-input v-model="name" :errorMessage="errors.name" id="name" label="addBoard.form.name.label" />
+      <form @submit.prevent="!isEdit ? addBoard() : editBoard()" novalidate>
+        <e-input v-model="name" :errorMessage="errors.name" id="name" label="mBoardList.form.name.label" />
         <e-button type="submit">
-          {{ $t('addBoard.form.button.save') }}
-        </e-button>
-      </form>
-    </template>
-  </m-modal>
-
-  <m-modal v-model="showEditModal" @cancel="showEditModal = false">
-    <template v-slot:title>
-      {{ $t('editBoard.title') }}
-    </template>
-    <template v-slot:content>
-      <m-notification :item="apiErrors" />
-      <form @submit.prevent="editBoard()" novalidate>
-        <e-input v-model="name" :errorMessage="errors.name" id="name" label="editBoard.form.name.label" />
-        <e-button type="submit">
-          {{ $t('editBoard.form.button.save') }}
+          {{ $t('mBoardList.form.button.save') }}
         </e-button>
       </form>
     </template>
   </m-modal>
 
   <m-modal v-model="showRemoveModal" @cancel="showRemoveModal = false">
-    <template v-slot:title>{{ $t('removeBoard.title') }}</template>
+    <template v-slot:title>{{ $t('mBoardList.title.remove') }}</template>
     <template v-slot:content>
       <m-notification :item="apiErrors" />
       <div class="block has-text-danger">
-        <p>{{ $t('removeBoard.info') }}</p>
+        <p>{{ $t('mBoardList.info.remove') }}</p>
       </div>
       <form @submit.prevent="removeBoard()" novalidate>
         <e-button layout="link-danger" type="submit">
-          {{ $t('removeBoard.form.button.remove') }}
+          {{ $t('mBoardList.form.button.remove') }}
         </e-button>
       </form>
     </template>

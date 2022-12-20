@@ -1,8 +1,8 @@
+import { mBoardList } from '@modules/m-boards-list/i18n/de.js';
+import { mExport } from '@modules/m-export/i18n/de.js';
+
 let site = {
   name: 'Bookmarks Manager',
-  boardsList: {
-    info: 'Klicke auf das "+" Zeichen, um ein neues Board anzulegen!',
-  },
 };
 
 let menu = {
@@ -10,7 +10,6 @@ let menu = {
   login: 'Anmelden',
   register: 'Registrieren',
   logout: 'Abmelden',
-  export: 'Alle bookmarks als JSON Datei exportieren',
 };
 
 let form = {
@@ -24,12 +23,6 @@ let form = {
     label: 'Passwort',
     error: {
       required: 'Passwort erforderlich.',
-    },
-  },
-  boardName: {
-    label: 'Board name',
-    error: {
-      required: 'Board name ist erforderlich.',
     },
   },
 };
@@ -72,43 +65,6 @@ let register = {
   disallow: 'Die Registrierung neuer Benutzer ist deaktiviert.',
 };
 
-let addBoard = {
-  title: 'Board hinzufügen',
-  form: {
-    name: form.boardName,
-    button: {
-      add: 'Board hinzufügen',
-      save: 'Speichern',
-      cancel: 'Abbrechen',
-    },
-  },
-};
-
-let removeBoard = {
-  title: 'Board löschen',
-  form: {
-    name: form.boardName,
-    button: {
-      remove: 'Ja, genau!',
-      save: 'Speichern',
-      cancel: 'Abbrechen',
-    },
-  },
-  info: 'Board und alle zugehörtige Kategorien und Links endgültig löschen?',
-};
-
-let editBoard = {
-  title: 'Board ändern',
-  form: {
-    name: form.boardName,
-    button: {
-      edit: 'Ändern',
-      save: 'Speichern',
-      cancel: 'Abbrechen',
-    },
-  },
-};
-
 let error = {
   title: 'Fehler',
   content: 'Seite nicht gefunden!',
@@ -119,9 +75,11 @@ export default {
   menu,
   login,
   register,
-  addBoard,
-  editBoard,
-  removeBoard,
   error,
   serverErrors,
+  /*
+    Modules
+  */
+  mBoardList,
+  mExport,
 };

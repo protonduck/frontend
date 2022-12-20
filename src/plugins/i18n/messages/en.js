@@ -1,3 +1,5 @@
+import { mExport } from '@modules/m-export/i18n/en.js';
+
 let site = {
   name: 'Bookmarks Manager',
 };
@@ -7,7 +9,6 @@ let menu = {
   login: 'Login',
   register: 'Register',
   logout: 'Logout',
-  export: 'Alle bookmarks als JSON Datei exportieren',
 };
 
 // TODO: add translations
@@ -15,4 +16,5 @@ let menu = {
 export default {
   site,
   menu,
+  mExport,
 };

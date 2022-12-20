@@ -38,7 +38,7 @@ function exportToFile() {
 </script>
 
 <template>
-  <a @click="exportToFile()" :title="$t('menu.export')" class="button is-link">
+  <a @click="exportToFile()" :title="$t('mExport.title')" class="button is-link">
     <font-awesome-icon icon="fa-solid fa-download" />
   </a>
 </template>
