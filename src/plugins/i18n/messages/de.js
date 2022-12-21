@@ -1,4 +1,5 @@
 import { mBoardList } from '@modules/m-boards-list/i18n/de.js';
+import { mCategoriesList } from '@modules/m-categories-list/i18n/de.js';
 import { mExport } from '@modules/m-export/i18n/de.js';
 
 let site = {
@@ -81,5 +82,6 @@ export default {
     Modules
   */
   mBoardList,
+  mCategoriesList,
   mExport,
 };

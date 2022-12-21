@@ -7,8 +7,10 @@ export const useBoardStore = defineStore('boardStore', {
     boards: [],
     errors: [],
     activeBoardId: storage.getItem('activeBoardId') || null,
+    activeCategoryId: null,
     isLoading: false,
   }),
+  // Boards
   actions: {
     async fetchBoards() {
       this.isLoading = true;
@@ -91,6 +93,78 @@ export const useBoardStore = defineStore('boardStore', {
     },
     findIndexById(id) {
       return this.boards.findIndex((board) => board.id === id);
+    },
+    // Category
+    async addCategory(category) {
+      await apiClient
+        .post('/categories', {
+          board_id: category.board_id,
+          name: category.name,
+        })
+        .then((response) => {
+          this.errors = [];
+
+          const boardIndex = this.findIndexById(category.board_id);
+
+          if (boardIndex !== -1) {
+            this.boards[boardIndex].categories.push(response.data);
+          }
+
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+
+          this.errors = err.response.data;
+        });
+    },
+    async editCategory(category) {
+      await apiClient
+        .put(`/categories/${category.id}`, {
+          name: category.name,
+        })
+        .then((response) => {
+          this.errors = [];
+
+          const boardIndex = this.findIndexById(category.board_id);
+
+          if (boardIndex !== -1) {
+            let categoryIndex = this.boards[boardIndex].categories.findIndex((item) => item.id === category.id);
+
+            if (categoryIndex !== -1) {
+              this.boards[boardIndex].categories[categoryIndex] = response.data;
+            }
+          }
+
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+
+          this.errors = err.response.data;
+        });
+    },
+    async removeCategory(category) {
+      await apiClient
+        .delete(`/categories/${category.id}`)
+        .then(() => {
+          this.errors = [];
+
+          const boardIndex = this.findIndexById(category.board_id);
+
+          if (boardIndex !== -1) {
+            this.boards[boardIndex].categories = this.boards[boardIndex].categories.filter(
+              (item) => item.id !== category.id
+            );
+          }
+
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+
+          this.errors = err.response.data;
+        });
     },
   },
   getters: {

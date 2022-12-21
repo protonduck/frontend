@@ -35,6 +35,9 @@ const { handleSubmit, errors, resetForm, setFieldError } = useForm({ validationS
 
 const { value: name } = useField('name');
 
+let showModal = ref(false);
+let isEdit = ref(false);
+
 // add board
 
 function onAddClick() {
@@ -100,9 +103,6 @@ async function removeBoard() {
     showRemoveModal.value = false;
   }
 }
-
-let showModal = ref(false);
-let isEdit = ref(false);
 </script>
 
 <template>
