@@ -101,6 +101,7 @@ export const useBoardStore = defineStore('boardStore', {
         .post('/categories', {
           board_id: category.board_id,
           name: category.name,
+          description: category.description,
         })
         .then((response) => {
           this.errors = [];
@@ -123,6 +124,7 @@ export const useBoardStore = defineStore('boardStore', {
       await apiClient
         .put(`/categories/${category.id}`, {
           name: category.name,
+          description: category.description,
         })
         .then((response) => {
           this.errors = [];
@@ -174,6 +176,7 @@ export const useBoardStore = defineStore('boardStore', {
           category_id: link.category_id,
           title: link.title,
           url: link.url,
+          description: link.description,
         })
         .then((response) => {
           this.errors = [];
@@ -202,6 +205,7 @@ export const useBoardStore = defineStore('boardStore', {
           category_id: link.category_id,
           title: link.title,
           url: link.url,
+          description: link.description,
         })
         .then((response) => {
           this.errors = [];

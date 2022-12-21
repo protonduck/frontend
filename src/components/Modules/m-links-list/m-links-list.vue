@@ -7,6 +7,7 @@ import { useBoardStore } from '@stores/boardStore';
 import mModal from '@modules/m-modal/m-modal.vue';
 import eButton from '@elements/e-button/e-button.vue';
 import eInput from '@elements/e-input/e-input.vue';
+import eTextarea from '@elements/e-textarea/e-textarea.vue';
 import mSpinner from '@modules/m-spinner/m-spinner.vue';
 import mNotification from '@modules/m-notification/m-notification.vue';
 
@@ -16,12 +17,14 @@ const { activeBoardId, activeLinkId, errors: apiErrors } = storeToRefs(useBoardS
 const validationSchema = object().shape({
   title: string().required('mLinksList.form.title.error.required'),
   url: string().required('mLinksList.form.url.error.required'),
+  description: string(),
 });
 
 const { handleSubmit, errors, resetForm, setFieldError } = useForm({ validationSchema });
 
 const { value: title } = useField('title');
 const { value: url } = useField('url');
+const { value: description } = useField('description');
 
 let showModal = ref(false);
 let isEdit = ref(false);
@@ -39,7 +42,7 @@ function favicon(link) {
 
 function onAddClick() {
   resetForm({
-    values: { title: '' },
+    values: { title: '', description: '' },
   });
 
   isEdit.value = false;
@@ -71,6 +74,7 @@ function onEditClick(link) {
     values: {
       title: link.title,
       url: link.url,
+      description: link.description,
     },
   });
 
@@ -142,11 +146,17 @@ async function removeLink() {
       <form @submit.prevent="!isEdit ? addLink() : editLink()" novalidate>
         <e-input v-model="title" :errorMessage="errors.title" id="title" label="mLinksList.form.title.label" />
         <e-input v-model="url" :errorMessage="errors.url" id="url" label="mLinksList.form.url.label" />
+        <e-textarea
+          v-model="description"
+          :errorMessage="errors.description"
+          id="description"
+          label="mLinksList.form.description.label"
+        />
         <div class="field is-grouped pt-3">
           <e-button type="submit">
             {{ $t('mLinksList.form.button.save') }}
           </e-button>
-          <e-button v-if="isEdit" type="button" layout="link-light-danger" @click="removeLink()">
+          <e-button v-show="isEdit" type="button" layout="link-light-danger" @click="removeLink()">
             {{ $t('mLinksList.form.button.remove') }}
           </e-button>
         </div>

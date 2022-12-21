@@ -7,6 +7,7 @@ import { useBoardStore } from '@stores/boardStore';
 import mModal from '@modules/m-modal/m-modal.vue';
 import eButton from '@elements/e-button/e-button.vue';
 import eInput from '@elements/e-input/e-input.vue';
+import eTextarea from '@elements/e-textarea/e-textarea.vue';
 import mSpinner from '@modules/m-spinner/m-spinner.vue';
 import mNotification from '@modules/m-notification/m-notification.vue';
 import mLinksList from '@modules/m-links-list/m-links-list.vue';
@@ -16,11 +17,13 @@ const { activeBoardId, activeCategoryId, errors: apiErrors } = storeToRefs(useBo
 
 const validationSchema = object().shape({
   name: string().required('mCategoriesList.form.name.error.required'),
+  description: string(),
 });
 
 const { handleSubmit, errors, resetForm, setFieldError } = useForm({ validationSchema });
 
 const { value: name } = useField('name');
+const { value: description } = useField('description');
 
 let showModal = ref(false);
 let isEdit = ref(false);
@@ -29,7 +32,7 @@ let isEdit = ref(false);
 
 function onAddClick() {
   resetForm({
-    values: { name: '' },
+    values: { name: '', description: '' },
   });
 
   isEdit.value = false;
@@ -56,6 +59,7 @@ function onEditClick(category) {
   resetForm({
     values: {
       name: category.name,
+      description: category.description,
     },
   });
 
@@ -133,11 +137,17 @@ async function removeCategory() {
       <m-notification :item="apiErrors" />
       <form @submit.prevent="!isEdit ? addCategory() : editCategory()" novalidate>
         <e-input v-model="name" :errorMessage="errors.name" id="name" label="mCategoriesList.form.name.label" />
+        <e-textarea
+          v-model="description"
+          :errorMessage="errors.description"
+          id="description"
+          label="mCategoriesList.form.description.label"
+        />
         <div class="field is-grouped pt-3">
           <e-button type="submit">
             {{ $t('mCategoriesList.form.button.save') }}
           </e-button>
-          <e-button type="button" layout="link-light-danger" @click="removeCategory()">
+          <e-button v-show="isEdit" type="button" layout="link-light-danger" @click="removeCategory()">
             {{ $t('mCategoriesList.form.button.remove') }}
           </e-button>
         </div>

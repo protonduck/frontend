@@ -6,7 +6,7 @@ export const mBoardList = {
   },
   form: {
     name: {
-      label: 'Board name',
+      label: 'Name',
       error: {
         required: 'Board name ist erforderlich.',
       },

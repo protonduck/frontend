@@ -5,10 +5,13 @@ export const mCategoriesList = {
   },
   form: {
     name: {
-      label: 'Kategorie name',
+      label: 'Name',
       error: {
         required: 'Kategorie name ist erforderlich.',
       },
+    },
+    description: {
+      label: 'Beschreibung',
     },
     button: {
       add: 'Kategorie hinzufügen',

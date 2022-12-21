@@ -5,16 +5,19 @@ export const mLinksList = {
   },
   form: {
     title: {
-      label: 'Link name',
+      label: 'Titel',
       error: {
-        required: 'Link name ist erforderlich.',
+        required: 'Link Titel ist erforderlich.',
       },
     },
     url: {
-      label: 'Link url',
+      label: 'URL',
       error: {
-        required: 'Link url ist erforderlich.',
+        required: 'URL ist erforderlich.',
       },
+    },
+    description: {
+      label: 'Beschreibung',
     },
     button: {
       add: 'Link hinzufügen',
