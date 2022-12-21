@@ -8,6 +8,7 @@ export const useBoardStore = defineStore('boardStore', {
     errors: [],
     activeBoardId: storage.getItem('activeBoardId') || null,
     activeCategoryId: null,
+    activeLinkId: null,
     isLoading: false,
   }),
   // Boards
@@ -156,6 +157,101 @@ export const useBoardStore = defineStore('boardStore', {
             this.boards[boardIndex].categories = this.boards[boardIndex].categories.filter(
               (item) => item.id !== category.id
             );
+          }
+
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+
+          this.errors = err.response.data;
+        });
+    },
+    // Links
+    async addLink(link) {
+      await apiClient
+        .post('/links', {
+          category_id: link.category_id,
+          title: link.title,
+          url: link.url,
+        })
+        .then((response) => {
+          this.errors = [];
+
+          const boardIndex = this.findIndexById(link.board_id);
+
+          if (boardIndex !== -1) {
+            let categoryIndex = this.boards[boardIndex].categories.findIndex((item) => item.id === link.category_id);
+
+            if (categoryIndex !== -1) {
+              this.boards[boardIndex].categories[categoryIndex].links.push(response.data);
+            }
+          }
+
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+
+          this.errors = err.response.data;
+        });
+    },
+    async editLink(link) {
+      await apiClient
+        .put(`/links/${link.id}`, {
+          category_id: link.category_id,
+          title: link.title,
+          url: link.url,
+        })
+        .then((response) => {
+          this.errors = [];
+
+          const boardIndex = this.findIndexById(link.board_id);
+
+          if (boardIndex !== -1) {
+            let categoryIndex = this.boards[boardIndex].categories.findIndex((item) => item.id === link.category_id);
+
+            if (categoryIndex !== -1) {
+              let linkIndex = this.boards[boardIndex].categories[categoryIndex].links.findIndex(
+                (item) => item.id === link.id
+              );
+
+              if (linkIndex !== -1) {
+                this.boards[boardIndex].categories[categoryIndex].links[linkIndex] = response.data;
+              }
+            }
+          }
+
+          this.isLoading = false;
+        })
+        .catch((err) => {
+          this.isLoading = false;
+
+          this.errors = err.response.data;
+        });
+    },
+    async removeLink(link) {
+      await apiClient
+        .delete(`/links/${link.id}`)
+        .then(() => {
+          this.errors = [];
+
+          const boardIndex = this.findIndexById(link.board_id);
+
+          if (boardIndex !== -1) {
+            let categoryIndex = this.boards[boardIndex].categories.findIndex((item) => item.id === link.category_id);
+
+            if (categoryIndex !== -1) {
+              let linkIndex = this.boards[boardIndex].categories[categoryIndex].links.findIndex(
+                (item) => item.id === link.id
+              );
+
+              if (linkIndex !== -1) {
+                this.boards[boardIndex].categories[categoryIndex].links = this.boards[boardIndex].categories[
+                  categoryIndex
+                ].links.filter((item) => item.id !== link.id);
+              }
+            }
           }
 
           this.isLoading = false;

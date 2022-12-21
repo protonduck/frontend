@@ -108,7 +108,7 @@ async function removeCategory() {
             </span>
           </div>
         </header>
-        <m-links-list v-if="category.links" :links="category.links" />
+        <m-links-list v-if="category.links" :links="category.links" :category-id="category.id" />
       </div>
     </div>
     <div class="column is-3" @click="onAddClick">
