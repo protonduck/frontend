@@ -2,7 +2,7 @@
 
 Frontend for [Bookmarks](https://github.com/protonduck/backend).
 
-![bookmarks-v2](https://user-images.githubusercontent.com/1236892/209205301-0d32268a-97ef-4271-a3f5-9d915ffe4da9.png)
+![bookmarks-v2](https://user-images.githubusercontent.com/1236892/209207964-aa0191ae-ca66-4f0b-97f9-123718d1d951.png)
 
 ## Project setup
 
