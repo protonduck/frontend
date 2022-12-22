@@ -1,12 +1,13 @@
 <script setup>
 import { ref } from 'vue';
-import { RouterLink, useRouter } from 'vue-router';
+import { RouterLink, useRouter, useRoute } from 'vue-router';
 import { useUserStore } from '@stores/userStore';
 import mLanguageSelect from '@modules/m-language-select/m-language-select.vue';
 import mExport from '@modules/m-export/m-export.vue';
 
 const userStore = useUserStore();
 const router = useRouter();
+const route = useRoute();
 
 const props = defineProps({
   items: Array,
@@ -55,7 +56,7 @@ const isOpen = ref(false);
 
       <div class="navbar-end">
         <div class="navbar-item">
-          <m-export v-if="userStore.isLoggedIn" />
+          <m-export v-if="userStore.isLoggedIn && route.name === 'home'" />
           <m-language-select class="navbar-item" />
           <div class="buttons">
             <a v-if="userStore.isLoggedIn" @click="logoutUser()" class="button">

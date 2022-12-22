@@ -92,6 +92,12 @@ const editBoard = handleSubmit(async (values) => {
 
 let showRemoveModal = ref(false);
 
+function onRemoveClick() {
+  isEdit.value = false;
+  showModal.value = false;
+  showRemoveModal.value = true;
+}
+
 async function removeBoard() {
   await boardStore.removeBoard(activeBoardId.value);
 
@@ -129,11 +135,6 @@ async function removeBoard() {
           <font-awesome-icon icon="fa-solid fa-pen-to-square" />
         </span>
       </a>
-      <a v-if="activeBoardId" :title="$t('mBoardList.form.button.remove')" @click="showRemoveModal = true">
-        <span class="icon">
-          <font-awesome-icon icon="fa-solid fa-trash" />
-        </span>
-      </a>
     </ul>
   </div>
 
@@ -149,9 +150,14 @@ async function removeBoard() {
       <m-notification :item="apiErrors" />
       <form @submit.prevent="!isEdit ? addBoard() : editBoard()" novalidate>
         <e-input v-model="name" :errorMessage="errors.name" id="name" label="mBoardList.form.name.label" />
-        <e-button type="submit">
-          {{ $t('mBoardList.form.button.save') }}
-        </e-button>
+        <div class="field is-grouped pt-3">
+          <e-button type="submit">
+            {{ $t('mBoardList.form.button.save') }}
+          </e-button>
+          <e-button v-show="isEdit" type="button" layout="link-light-danger" @click="onRemoveClick()">
+            {{ $t('mBoardList.form.button.remove') }}
+          </e-button>
+        </div>
       </form>
     </template>
   </m-modal>
