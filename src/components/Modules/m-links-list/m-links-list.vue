@@ -125,12 +125,12 @@ async function removeLink() {
       <a :href="link.url" :title="link.description" target="_blank">
         {{ link.title }}
       </a>
-      <span class="icon has-text-grey-lighter" @click="onEditClick(link)">
+      <span class="icon has-text-grey-lighter cursor-pointer" @click="onEditClick(link)">
         <font-awesome-icon icon="fa-solid fa-pen" />
       </span>
     </div>
   </div>
-  <div class="panel-block is-justify-content-space-between" @click="onAddClick">
+  <div class="panel-block is-justify-content-space-between cursor-pointer" @click="onAddClick">
     <span>
       <font-awesome-icon icon="fa-solid fa-plus" />
       {{ $t('mLinksList.form.button.add') }}
@@ -164,3 +164,9 @@ async function removeLink() {
     </template>
   </m-modal>
 </template>
+
+<style lang="scss" scoped>
+.cursor-pointer {
+  cursor: pointer;
+}
+</style>

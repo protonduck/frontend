@@ -130,13 +130,13 @@ const categoryIcons = ref([
     <m-spinner :is-loading="boardStore.isLoading" />
     <div v-for="category in boardStore.getBoardById(activeBoardId)?.categories" :key="category.id" class="column is-3">
       <div class="panel">
-        <header class="panel-heading p-1">
+        <header class="panel-heading p-1 cursor-pointer" @click="onEditClick(category)">
           <div class="card-header-title is-justify-content-space-between">
             <span v-show="category.icon" class="icon">
               <font-awesome-icon :icon="category.icon" />
             </span>
             <span>{{ category.name }}</span>
-            <span class="icon has-text-grey-light" @click="onEditClick(category)">
+            <span class="icon has-text-grey-light">
               <font-awesome-icon icon="fa-solid fa-pen-to-square" />
             </span>
           </div>
@@ -144,7 +144,7 @@ const categoryIcons = ref([
         <m-links-list v-if="category.links" :links="category.links" :category-id="category.id" />
       </div>
     </div>
-    <div class="column is-3" @click="onAddClick">
+    <div class="column is-3 cursor-pointer" @click="onAddClick">
       <div class="panel">
         <header class="panel-heading p-1">
           <div class="card-header-title">
@@ -206,3 +206,9 @@ const categoryIcons = ref([
     </template>
   </m-modal>
 </template>
+
+<style lang="scss" scoped>
+.cursor-pointer {
+  cursor: pointer;
+}
+</style>
