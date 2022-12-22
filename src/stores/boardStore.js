@@ -277,5 +277,28 @@ export const useBoardStore = defineStore('boardStore', {
     getActiveBoardId: (state) => {
       return state.activeBoardId;
     },
+    totalBoardsCount: (state) => {
+      return state.boards.length;
+    },
+    totalCategoriesCount: (state) => {
+      let count = 0;
+
+      state.boards.forEach((board) => {
+        count += board.categories.length;
+      });
+
+      return count;
+    },
+    totalLinksCount: (state) => {
+      let count = 0;
+
+      state.boards.forEach((board) => {
+        board.categories.forEach((category) => {
+          count += category.links.length;
+        });
+      });
+
+      return count;
+    },
   },
 });

@@ -9,6 +9,7 @@ let menu = {
   login: 'Login',
   register: 'Register',
   logout: 'Logout',
+  stats: 'Statistics',
 };
 
 // TODO: add translations

@@ -5,6 +5,7 @@ import mNavigation from '@modules/m-navigation/m-navigation.vue';
 
 const items = ref([
   { to: '/', name: 'menu.home', isLoggedIn: true, icon: 'fa-solid fa-home' },
+  { to: '/stats', name: 'menu.stats', isLoggedIn: true, icon: 'fa-solid fa-chart-pie' },
   { to: '/login', name: 'menu.login', isLoggedIn: false, icon: 'fa-solid fa-right-to-bracket' },
   { to: '/register', name: 'menu.register', isLoggedIn: false, icon: 'fa-solid fa-user-plus' },
 ]);

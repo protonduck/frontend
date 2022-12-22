@@ -12,6 +12,7 @@ let menu = {
   login: 'Anmelden',
   register: 'Registrieren',
   logout: 'Abmelden',
+  stats: 'Statistik',
 };
 
 let form = {
@@ -67,6 +68,16 @@ let register = {
   disallow: 'Die Registrierung neuer Benutzer ist deaktiviert.',
 };
 
+let stats = {
+  title: 'Statistik',
+  table: {
+    totalBoardTitle: 'Anzahl der Boards',
+    totalCategoriesTitle: 'Anzahl der Kategorien',
+    totalLinksTitle: 'Anzahl der Links',
+  },
+  info: 'Zu wenig Daten.',
+};
+
 let error = {
   title: 'Fehler',
   content: 'Seite nicht gefunden!',
@@ -77,6 +88,7 @@ export default {
   menu,
   login,
   register,
+  stats,
   error,
   serverErrors,
   /*
