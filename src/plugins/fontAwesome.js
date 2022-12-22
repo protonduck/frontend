@@ -14,6 +14,16 @@ import {
   faTrash,
   faPen,
   faSpinner,
+  faBook,
+  faChartPie,
+  faBuildingColumns,
+  faGamepad,
+  faMusic,
+  faPercent,
+  faVideo,
+  faWallet,
+  faShareNodes,
+  faPenToSquare,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default {
@@ -31,7 +41,17 @@ export default {
       faClose,
       faTrash,
       faPen,
-      faSpinner
+      faSpinner,
+      faBook,
+      faChartPie,
+      faBuildingColumns,
+      faGamepad,
+      faMusic,
+      faPercent,
+      faVideo,
+      faWallet,
+      faShareNodes,
+      faPenToSquare
     );
     app.component('font-awesome-icon', FontAwesomeIcon);
   },

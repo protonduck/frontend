@@ -13,6 +13,9 @@ export const mCategoriesList = {
     description: {
       label: 'Beschreibung',
     },
+    icon: {
+      label: 'Icon',
+    },
     button: {
       add: 'Kategorie hinzufügen',
       edit: 'Kategorie ändern',
@@ -24,5 +27,20 @@ export const mCategoriesList = {
   info: {
     add: 'Klicke auf das "+" Zeichen, um ein neue Kategorie anzulegen!',
     remove: 'Kategorie und alle zugehörtige Links endgültig löschen?',
+  },
+  icons: {
+    none: 'Kein',
+    book: 'Buch',
+    chart: 'Diagram',
+    education: 'Bildung',
+    email: 'E-Mail',
+    games: 'Spiele',
+    home: 'Haus',
+    music: 'Musik',
+    money: 'Geld',
+    percent: 'Prozent',
+    share: 'Teilen',
+    video: 'Video',
+    wallet: 'Wallet',
   },
 };

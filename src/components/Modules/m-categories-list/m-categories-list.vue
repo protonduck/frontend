@@ -3,11 +3,13 @@ import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useField, useForm } from 'vee-validate';
 import { object, string } from 'yup';
+import { useI18n } from 'vue-i18n';
 import { useBoardStore } from '@stores/boardStore';
 import mModal from '@modules/m-modal/m-modal.vue';
 import eButton from '@elements/e-button/e-button.vue';
 import eInput from '@elements/e-input/e-input.vue';
 import eTextarea from '@elements/e-textarea/e-textarea.vue';
+import eSelect from '@elements/e-select/e-select.vue';
 import mSpinner from '@modules/m-spinner/m-spinner.vue';
 import mNotification from '@modules/m-notification/m-notification.vue';
 import mLinksList from '@modules/m-links-list/m-links-list.vue';
@@ -17,13 +19,15 @@ const { activeBoardId, activeCategoryId, errors: apiErrors } = storeToRefs(useBo
 
 const validationSchema = object().shape({
   name: string().required('mCategoriesList.form.name.error.required'),
-  description: string(),
+  description: string().nullable(),
+  icon: string().nullable(),
 });
 
 const { handleSubmit, errors, resetForm, setFieldError } = useForm({ validationSchema });
 
 const { value: name } = useField('name');
 const { value: description } = useField('description');
+const { value: icon } = useField('icon');
 
 let showModal = ref(false);
 let isEdit = ref(false);
@@ -32,7 +36,7 @@ let isEdit = ref(false);
 
 function onAddClick() {
   resetForm({
-    values: { name: '', description: '' },
+    values: { name: '', description: '', icon: '' },
   });
 
   isEdit.value = false;
@@ -60,6 +64,7 @@ function onEditClick(category) {
     values: {
       name: category.name,
       description: category.description,
+      icon: category.icon,
     },
   });
 
@@ -97,6 +102,24 @@ async function removeCategory() {
     showModal.value = false;
   }
 }
+
+const { t } = useI18n();
+
+const categoryIcons = ref([
+  { id: '', name: t('mCategoriesList.icons.none') },
+  { id: 'fa-solid fa-book', name: t('mCategoriesList.icons.book') },
+  { id: 'fa-solid fa-chart-pie', name: t('mCategoriesList.icons.chart') },
+  { id: 'fa-solid fa-building-columns', name: t('mCategoriesList.icons.education') },
+  { id: 'fa-solid fa-envelope', name: t('mCategoriesList.icons.email') },
+  { id: 'fa-solid fa-gamepad', name: t('mCategoriesList.icons.games') },
+  { id: 'fa-solid fa-home', name: t('mCategoriesList.icons.home') },
+  { id: 'fa-solid fa-music', name: t('mCategoriesList.icons.music') },
+  { id: 'fa-solid fa-money-bill', name: t('mCategoriesList.icons.money') },
+  { id: 'fa-solid fa-percent', name: t('mCategoriesList.icons.percent') },
+  { id: 'fa-solid fa-share-nodes', name: t('mCategoriesList.icons.share') },
+  { id: 'fa-solid fa-video', name: t('mCategoriesList.icons.video') },
+  { id: 'fa-solid fa-wallet', name: t('mCategoriesList.icons.wallet') },
+]);
 </script>
 
 <template>
@@ -106,9 +129,12 @@ async function removeCategory() {
       <div class="panel">
         <header class="panel-heading p-1">
           <div class="card-header-title is-justify-content-space-between">
+            <span v-show="category.icon" class="icon">
+              <font-awesome-icon :icon="category.icon" />
+            </span>
             <span>{{ category.name }}</span>
             <span class="icon has-text-grey-light" @click="onEditClick(category)">
-              <font-awesome-icon icon="fa-solid fa-pen" />
+              <font-awesome-icon icon="fa-solid fa-pen-to-square" />
             </span>
           </div>
         </header>
@@ -142,6 +168,13 @@ async function removeCategory() {
           :errorMessage="errors.description"
           id="description"
           label="mCategoriesList.form.description.label"
+        />
+        <e-select
+          v-model="icon"
+          :options="categoryIcons"
+          :errorMessage="errors.icon"
+          id="name"
+          label="mCategoriesList.form.icon.label"
         />
         <div class="field is-grouped pt-3">
           <e-button type="submit">

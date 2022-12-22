@@ -17,7 +17,7 @@ const { activeBoardId, activeLinkId, errors: apiErrors } = storeToRefs(useBoardS
 const validationSchema = object().shape({
   title: string().required('mLinksList.form.title.error.required'),
   url: string().required('mLinksList.form.url.error.required'),
-  description: string(),
+  description: string().nullable(),
 });
 
 const { handleSubmit, errors, resetForm, setFieldError } = useForm({ validationSchema });

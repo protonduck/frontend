@@ -126,7 +126,7 @@ async function removeBoard() {
       </a>
       <a v-if="activeBoardId" :title="$t('mBoardList.form.button.edit')" @click="onEditClick()">
         <span class="icon">
-          <font-awesome-icon icon="fa-solid fa-pen" />
+          <font-awesome-icon icon="fa-solid fa-pen-to-square" />
         </span>
       </a>
       <a v-if="activeBoardId" :title="$t('mBoardList.form.button.remove')" @click="showRemoveModal = true">

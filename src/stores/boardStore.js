@@ -102,6 +102,7 @@ export const useBoardStore = defineStore('boardStore', {
           board_id: category.board_id,
           name: category.name,
           description: category.description,
+          icon: category.icon,
         })
         .then((response) => {
           this.errors = [];
@@ -125,6 +126,7 @@ export const useBoardStore = defineStore('boardStore', {
         .put(`/categories/${category.id}`, {
           name: category.name,
           description: category.description,
+          icon: category.icon,
         })
         .then((response) => {
           this.errors = [];
