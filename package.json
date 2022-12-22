@@ -1,44 +1,43 @@
 {
-  "name": "frontend",
-  "description": "Frontend for open source bookmark manager ProtonDuck.",
-  "keywords": [
-    "bookmark-manager",
-    "bookmark",
-    "frontend",
-    "vuejs"
-  ],
-  "homepage": "https://github.com/protonduck",
-  "version": "1.2.1",
+  "name": "bookmarks-frontend",
+  "version": "0.0.0",
   "private": true,
-  "license": "AGPL-3.0-only",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js --fix --ignore-path .gitignore",
+    "story": "histoire dev",
+    "story:build": "histoire build",
+    "story:preview": "histoire preview",
+    "server": "node ./mock-api/server.js"
   },
   "dependencies": {
-    "axios": "^0.21.4",
-    "bootstrap": "^4.6.0",
-    "lodash": "^4.17.20",
-    "vue": "^2.6.14",
-    "vue-i18n": "^8.26.5",
-    "vue-loader": "^15.9.8",
-    "vue-router": "^3.5.2",
-    "vuedraggable": "^2.24.3",
-    "vuelidate": "^0.7.6",
-    "vuex": "^3.6.2"
+    "@fortawesome/fontawesome-svg-core": "^6.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.2.1",
+    "@fortawesome/vue-fontawesome": "^3.0.2",
+    "axios": "^1.2.0",
+    "pinia": "^2.0.28",
+    "vee-validate": "^4.5.8",
+    "vue": "^3.2.45",
+    "vue-final-modal": "^3.4.11",
+    "vue-i18n": "^9.2.2",
+    "vue-router": "^4.1.6",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@fortawesome/fontawesome-free": "^5.15.4",
-    "@storybook/addon-actions": "^6.4.20",
-    "@storybook/addon-essentials": "^6.4.20",
-    "@storybook/addon-links": "^6.4.20",
-    "@storybook/vue": "^6.4.20",
-    "@vue/cli-service": "~4.5.19",
-    "sass": "^1.43.2",
-    "sass-loader": "^10.2.0",
-    "vue-template-compiler": "^2.6.14"
+    "@histoire/plugin-vue": "^0.11.9",
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@vitejs/plugin-vue": "^3.2.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "bulma": "^0.9.4",
+    "cors": "^2.8.5",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "express": "^4.18.2",
+    "histoire": "^0.11.9",
+    "prettier": "^2.7.1",
+    "sass": "^1.56.1",
+    "vite": "^3.2.4"
   }
 }

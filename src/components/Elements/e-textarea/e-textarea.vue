@@ -1,62 +1,51 @@
+<script setup>
+const props = defineProps({
+  id: {
+    required: true,
+    type: String,
+  },
+  rows: {
+    type: Number,
+    default: 2,
+  },
+  cols: {
+    type: Number,
+    default: 50,
+  },
+  label: {
+    type: String,
+    default: '',
+  },
+  modelValue: {
+    type: String,
+    default: '',
+  },
+  errorMessage: {
+    type: String,
+  },
+});
+</script>
+
 <template>
-  <div class="form-group">
-    <e-label :id="id" :text="labelText" />
-    <div :class="containerClass">
+  <div class="field">
+    <div class="label">
+      <label v-if="label" :for="id">{{ $t(label) }}</label>
+    </div>
+    <div class="control">
       <textarea
+        v-bind="$attrs"
         :id="id"
         :rows="rows"
-        :class="validationCssClass(vObj)"
-        v-model.trim="vObj.$model"
-        class="form-control"
+        :cols="cols"
+        :value="modelValue"
+        :placeholder="$t(label)"
+        :class="{ 'is-danger': errorMessage }"
+        @input="$emit('update:modelValue', $event.target.value)"
+        class="textarea"
       />
-      <template v-for="(validator, validatorName, index) in vObj.$params">
-        <div
-          v-if="!vObj[validatorName]"
-          :key="index"
-          v-t="validator && validator.message ? validator.message : validator"
-          class="invalid-feedback"
-        />
-      </template>
+      <p v-if="errorMessage" class="help is-danger">
+        {{ $t(errorMessage) }}
+      </p>
     </div>
   </div>
 </template>
-
-<script>
-import eLabel from '../e-label/e-label.vue';
-
-export default {
-  name: 'e-textarea',
-  components: {
-    eLabel
-  },
-  props: {
-    id: {
-      required: true,
-      type: String
-    },
-    vObj: {
-      required: true,
-      type: Object
-    },
-    rows: {
-      type: Number,
-      default: 2
-    },
-    labelText: {
-      type: String
-    },
-    containerClass: {
-      type: String,
-      default: 'col-sm-3'
-    }
-  },
-  methods: {
-    validationCssClass(validation) {
-      return {
-        'is-valid': !validation.$error && validation.$dirty,
-        'is-invalid': validation.$error
-      };
-    }
-  }
-};
-</script>

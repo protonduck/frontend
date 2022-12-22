@@ -1,4 +1,4 @@
-## ProtonDuck - Open Source Bookmark Manager (frontend)
+# ProtonDuck - Open Source Bookmark Manager (frontend)
 
 Frontend for [Bookmarks](https://github.com/protonduck/backend).
 
@@ -6,31 +6,43 @@ Frontend for [Bookmarks](https://github.com/protonduck/backend).
 
 ## Project setup
 
-```
+```sh
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compile and Hot-Reload for Development
 
-```
-npm run serve
-```
-
-### Run storybook for development
-
-```
-npm run storybook
+```sh
+npm run dev
 ```
 
-### Compiles and minifies for production
+### Run mock API server for development
 
 ```
+npm run server
+```
+
+### Run Histoire for development
+
+```
+npm run story
+```
+
+### Compile and Minify for Production
+
+```sh
 npm run build
+```
+
+### Lint
+
+```sh
+npm run lint
 ```
 
 ## License
 
-This project is licensed under the AGPL-3.0 License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Contributing
 

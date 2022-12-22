@@ -1,30 +1,37 @@
-<template>
-  <button :id="id" :type="type" :disabled="isDisabled" :class="classes" @click="$emit('click')" class="btn mr-2">
-    <slot />
-  </button>
-</template>
+<script setup>
+import { computed } from 'vue';
 
-<script>
-export default {
-  name: 'e-button',
-  props: {
-    id: String,
-    type: {
-      type: String,
-      default: 'submit',
-      validator: (value) => ['button', 'submit', 'reset'].includes(value)
-    },
-    isDisabled: {
-      type: Boolean,
-      default: false
-    },
-    classes: {
-      type: String,
-      default: 'btn-primary'
-    }
+const props = defineProps({
+  type: {
+    type: String,
+    default: 'submit',
+    validator: (value) => ['button', 'submit', 'reset'].includes(value),
   },
-  emit: ['click']
-};
+  isDisabled: {
+    type: Boolean,
+    default: false,
+  },
+  layout: {
+    type: String,
+    default: 'primary',
+  },
+});
+
+const classes = computed(() => [
+  {
+    'is-link': props.layout === 'primary',
+    'is-link is-light': props.layout === 'link-light',
+    'is-link is-danger': props.layout === 'link-danger',
+    'is-link is-light is-danger': props.layout === 'link-light-danger',
+    'is-text': props.layout === 'text',
+  },
+]);
 </script>
 
-<style scoped lang="scss" src="./e-button.scss" />
+<template>
+  <div class="control">
+    <button :type="type" :disabled="isDisabled" @click="$emit('click')" class="button" :class="classes">
+      <slot />
+    </button>
+  </div>
+</template>

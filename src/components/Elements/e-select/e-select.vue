@@ -1,59 +1,63 @@
+<script setup>
+const props = defineProps({
+  id: {
+    required: true,
+    type: String,
+  },
+  label: {
+    type: String,
+    default: '',
+  },
+  options: {
+    type: Array,
+    default: () => [],
+  },
+  modelValue: {
+    type: String,
+    default: '',
+  },
+  iconLeft: {
+    type: String,
+    default: '',
+  },
+  iconRight: {
+    type: String,
+    default: '',
+  },
+  errorMessage: {
+    type: String,
+  },
+});
+</script>
+
 <template>
-  <div class="form-group">
-    <e-label :id="id" :text="labelText" />
-    <div :class="containerClass">
-      <select :id="id" v-model.trim="vObj.$model" :class="validationCssClass(vObj)" class="form-control">
-        <option v-for="(option, index) in options" :key="index" :value="option.id">
-          {{ option.name }}
-        </option>
-      </select>
-      <template v-for="(validator, validatorName, index) in vObj.$params">
-        <div
-          v-if="!vObj[validatorName]"
-          :key="index"
-          v-t="validator && validator.message ? validator.message : validator"
-          class="invalid-feedback"
-        />
-      </template>
+  <div class="field">
+    <div class="label">
+      <label v-if="label" :for="id">{{ $t(label) }}</label>
+    </div>
+    <div class="control" :class="{ 'has-icons-left': iconLeft, 'has-icons-right': iconRight }">
+      <div class="select">
+        <select
+          v-bind="$attrs"
+          :value="modelValue"
+          :id="id"
+          :class="{ 'is-danger': errorMessage }"
+          @change="$emit('update:modelValue', $event.target.value)"
+        >
+          <option v-for="(option, index) in options" :key="`option-${index}`" :value="option.id">
+            {{ option.name }}
+          </option>
+        </select>
+      </div>
+      <p v-if="errorMessage" class="help is-danger">
+        {{ $t(errorMessage) }}
+      </p>
+      <span v-if="iconLeft" class="icon is-small is-left">
+        <font-awesome-icon :icon="iconLeft" />
+      </span>
+      <span v-if="iconRight" class="icon is-small is-right">
+        <font-awesome-icon :icon="iconRight" />
+      </span>
     </div>
   </div>
 </template>
-
-<script>
-import eLabel from '../e-label/e-label.vue';
-
-export default {
-  name: 'e-select',
-  components: {
-    eLabel
-  },
-  props: {
-    id: {
-      required: true,
-      type: String
-    },
-    vObj: {
-      required: true,
-      type: Object
-    },
-    options: {
-      type: Array
-    },
-    labelText: {
-      type: String
-    },
-    containerClass: {
-      type: String,
-      default: 'col-sm-3'
-    }
-  },
-  methods: {
-    validationCssClass(validation) {
-      return {
-        'is-valid': !validation.$error && validation.$dirty,
-        'is-invalid': validation.$error
-      };
-    }
-  }
-};
-</script>

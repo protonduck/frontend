@@ -1,51 +1,20 @@
-import Vue from 'vue';
-import Axios from 'axios';
-import VueI18n from 'vue-i18n';
-import Vuelidate from 'vuelidate';
-import Store, { authTokenName } from './store';
-import App from './components/App.vue';
-import router from './router';
-import { i18n } from './lang/i18n-setup';
-import '@fortawesome/fontawesome-free/css/all.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { createApp } from 'vue';
+import App from '@/App.vue';
+import router from '@/router';
+import i18n from '@plugins/i18n';
+import pinia from '@plugins/pinia';
+import fontAwesome from '@plugins/fontAwesome';
 
-window.Vue = require('vue');
+// import main scss styles
+import '@assets/scss/main.scss';
 
-Vue.use(VueI18n);
-Vue.use(Vuelidate);
+const app = createApp(App);
 
-Vue.prototype.$store = Store;
-Vue.prototype.$http = Axios;
+// use plugins
+app.use(pinia);
+app.use(i18n);
+app.use(fontAwesome);
 
-Vue.config.productionTip = false;
+app.use(router);
 
-const app = new Vue({
-  i18n,
-  router,
-  render: (h) => h(App),
-  beforeMount() {
-    // authorization
-    const authToken = localStorage.getItem(authTokenName);
-
-    if (authToken) {
-      Vue.prototype.$http.defaults.headers.common.Authorization = `Bearer ${authToken}`;
-    }
-
-    // set BaseURL for axios
-    Vue.prototype.$http.defaults.baseURL = process.env.VUE_APP_API_URL;
-  },
-  created() {
-    this.$http.interceptors.response.use(
-      undefined,
-      (err) =>
-        new Promise(() => {
-          if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-            this.$store.dispatch('logout');
-          }
-          throw err;
-        })
-    );
-  }
-});
-
-app.$mount('#app');
+app.mount('#app');
