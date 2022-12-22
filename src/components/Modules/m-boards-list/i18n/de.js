@@ -21,6 +21,6 @@ export const mBoardList = {
   },
   info: {
     add: 'Klicke auf das "+" Zeichen, um ein neues Board anzulegen!',
-    remove: 'Board und alle zugehörtige Kategorien und Links endgültig löschen?',
+    remove: 'Board und alle zugehörige Kategorien und Links endgültig löschen?',
   },
 };
