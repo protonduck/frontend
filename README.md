@@ -1,6 +1,8 @@
 # ProtonDuck - Open Source Bookmark Manager (frontend)
 
-Frontend for [Bookmarks](https://github.com/protonduck/backend).
+Frontend for [Bookmarks](https://github.com/protonduck/backend)
+
+Made with ❤️ in [Vue.js 3](https://vuejs.org/) & [Bulma CSS-Framework](https://bulma.io)
 
 ![bookmarks-v2](https://user-images.githubusercontent.com/1236892/209207964-aa0191ae-ca66-4f0b-97f9-123718d1d951.png)
 
