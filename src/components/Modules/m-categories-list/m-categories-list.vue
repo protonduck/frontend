@@ -15,12 +15,13 @@ import mNotification from '@modules/m-notification/m-notification.vue';
 import mLinksList from '@modules/m-links-list/m-links-list.vue';
 
 const boardStore = useBoardStore();
-const { activeBoardId, activeCategoryId, errors: apiErrors } = storeToRefs(useBoardStore());
+const { activeBoardId, activeCategoryId, boards, errors: apiErrors } = storeToRefs(useBoardStore());
 
 const validationSchema = object().shape({
   name: string().required('mCategoriesList.form.name.error.required'),
   description: string().nullable(),
   icon: string().nullable(),
+  board_id: string(),
 });
 
 const { handleSubmit, errors, resetForm, setFieldError } = useForm({ validationSchema });
@@ -28,6 +29,7 @@ const { handleSubmit, errors, resetForm, setFieldError } = useForm({ validationS
 const { value: name } = useField('name');
 const { value: description } = useField('description');
 const { value: icon } = useField('icon');
+const { value: board_id } = useField('board_id');
 
 let showModal = ref(false);
 let isEdit = ref(false);
@@ -36,7 +38,7 @@ let isEdit = ref(false);
 
 function onAddClick() {
   resetForm({
-    values: { name: '', description: '', icon: '' },
+    values: { name: '', description: '', icon: '', board_id: '' },
   });
 
   isEdit.value = false;
@@ -65,6 +67,7 @@ function onEditClick(category) {
       name: category.name,
       description: category.description,
       icon: category.icon,
+      board_id: category.board_id,
     },
   });
 
@@ -77,7 +80,7 @@ const editCategory = handleSubmit(async (values) => {
   await boardStore.editCategory({
     ...values,
     id: activeCategoryId.value,
-    board_id: activeBoardId.value,
+    board_id: board_id.value,
   });
 
   if (apiErrors.value.length !== 0) {
@@ -173,8 +176,16 @@ const categoryIcons = ref([
           v-model="icon"
           :options="categoryIcons"
           :errorMessage="errors.icon"
-          id="name"
+          id="icon"
           label="mCategoriesList.form.icon.label"
+        />
+        <e-select
+          v-if="isEdit"
+          v-model="board_id"
+          :options="boards"
+          :errorMessage="errors.board_id"
+          id="board_id"
+          label="mCategoriesList.form.board_id.label"
         />
         <div class="field is-grouped pt-3">
           <e-button type="submit">

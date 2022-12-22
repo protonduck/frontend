@@ -16,6 +16,9 @@ export const mCategoriesList = {
     icon: {
       label: 'Icon',
     },
+    board_id: {
+      label: 'Board',
+    },
     button: {
       add: 'Kategorie hinzufügen',
       edit: 'Kategorie ändern',

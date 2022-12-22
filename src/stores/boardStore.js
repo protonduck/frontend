@@ -127,6 +127,7 @@ export const useBoardStore = defineStore('boardStore', {
           name: category.name,
           description: category.description,
           icon: category.icon,
+          board_id: category.board_id,
         })
         .then((response) => {
           this.errors = [];
