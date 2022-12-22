@@ -2,7 +2,9 @@
 
 Frontend for [Bookmarks](https://github.com/protonduck/backend).
 
-## Project Setup
+![bookmarks-frontend-v1](https://user-images.githubusercontent.com/1236892/209202687-4088fc5c-5eed-46ed-9f44-3dc4f085d68a.png)
+
+## Project setup
 
 ```sh
 npm install
