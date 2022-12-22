@@ -126,7 +126,7 @@ const categoryIcons = ref([
 </script>
 
 <template>
-  <div class="columns is-multiline">
+  <div v-if="boards.length && activeBoardId" class="columns is-multiline">
     <m-spinner :is-loading="boardStore.isLoading" />
     <div v-for="category in boardStore.getBoardById(activeBoardId)?.categories" :key="category.id" class="column is-3">
       <div class="panel">
@@ -156,6 +156,13 @@ const categoryIcons = ref([
         </header>
       </div>
     </div>
+  </div>
+
+  <div
+    v-if="boards.length && !boardStore.getBoardById(activeBoardId)?.categories.length && !activeBoardId"
+    class="notification is-warning is-light"
+  >
+    {{ $t('mCategoriesList.info.select') }}
   </div>
 
   <m-modal v-model="showModal" @cancel="showModal = false">

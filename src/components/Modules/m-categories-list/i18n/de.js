@@ -29,6 +29,7 @@ export const mCategoriesList = {
   },
   info: {
     add: 'Klicke auf das "+" Zeichen, um ein neue Kategorie anzulegen!',
+    select: 'Wähle ein Board aus, um es zu bearbeiten oder eine neue Kategorie anzulegen!',
     remove: 'Kategorie und alle zugehörtige Links endgültig löschen?',
   },
   icons: {

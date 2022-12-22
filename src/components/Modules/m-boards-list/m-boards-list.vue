@@ -10,6 +10,7 @@ import eButton from '@elements/e-button/e-button.vue';
 import eInput from '@elements/e-input/e-input.vue';
 import mSpinner from '@modules/m-spinner/m-spinner.vue';
 import mNotification from '@modules/m-notification/m-notification.vue';
+import mCategoriesList from '@modules/m-categories-list/m-categories-list.vue';
 
 const boardStore = useBoardStore();
 
@@ -137,6 +138,8 @@ async function removeBoard() {
       </a>
     </ul>
   </div>
+
+  <m-categories-list />
 
   <div v-if="boards.length === 0" class="notification is-warning is-light">
     {{ $t('mBoardList.info.add') }}
