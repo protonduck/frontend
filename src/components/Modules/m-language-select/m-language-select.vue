@@ -1,5 +1,5 @@
 <script setup>
-import storage from '@plugins/storage';
+import storage from '@helpers/storage';
 import { useI18n } from 'vue-i18n';
 
 const { t, locale } = useI18n();

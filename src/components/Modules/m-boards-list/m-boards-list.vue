@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia';
 import { useField, useForm } from 'vee-validate';
 import { object, string } from 'yup';
 import { useBoardStore } from '@stores/boardStore';
-import storage from '@plugins/storage';
+import storage from '@helpers/storage';
 import mModal from '@modules/m-modal/m-modal.vue';
 import eButton from '@elements/e-button/e-button.vue';
 import eInput from '@elements/e-input/e-input.vue';

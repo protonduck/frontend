@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import { apiClient } from '@/apiClient';
-import storage from '@plugins/storage';
+import { apiClient } from '@helpers/apiClient';
+import storage from '@helpers/storage';
 
 export const useUserStore = defineStore('userStore', {
   state: () => {

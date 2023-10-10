@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import { apiClient } from '@/apiClient';
-import storage from '@plugins/storage';
+import { apiClient } from '@helpers/apiClient';
+import storage from '@helpers/storage';
 
 export const useBoardStore = defineStore('boardStore', {
   state: () => ({
@@ -160,7 +160,7 @@ export const useBoardStore = defineStore('boardStore', {
 
           if (boardIndex !== -1) {
             this.boards[boardIndex].categories = this.boards[boardIndex].categories.filter(
-              (item) => item.id !== category.id
+              (item) => item.id !== category.id,
             );
           }
 
@@ -220,7 +220,7 @@ export const useBoardStore = defineStore('boardStore', {
 
             if (categoryIndex !== -1) {
               let linkIndex = this.boards[boardIndex].categories[categoryIndex].links.findIndex(
-                (item) => item.id === link.id
+                (item) => item.id === link.id,
               );
 
               if (linkIndex !== -1) {
@@ -250,7 +250,7 @@ export const useBoardStore = defineStore('boardStore', {
 
             if (categoryIndex !== -1) {
               let linkIndex = this.boards[boardIndex].categories[categoryIndex].links.findIndex(
-                (item) => item.id === link.id
+                (item) => item.id === link.id,
               );
 
               if (linkIndex !== -1) {

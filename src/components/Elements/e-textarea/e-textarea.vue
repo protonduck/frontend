@@ -16,6 +16,10 @@ defineProps({
     type: String,
     default: '',
   },
+  placeholder: {
+    type: String,
+    default: '',
+  },
   modelValue: {
     type: String,
     default: '',
@@ -38,7 +42,7 @@ defineProps({
         :rows="rows"
         :cols="cols"
         :value="modelValue"
-        :placeholder="$t(label)"
+        :placeholder="$t(placeholder)"
         :class="{ 'is-danger': errorMessage }"
         @input="$emit('update:modelValue', $event.target.value)"
         class="textarea"

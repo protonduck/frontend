@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useUserStore } from '@stores/userStore';
-import storage from '@plugins/storage';
-import env from '@plugins/helper/env';
+import storage from '@helpers/storage';
+import env from '@helpers/env';
 
 let authToken;
 
@@ -40,7 +40,7 @@ apiClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default {};

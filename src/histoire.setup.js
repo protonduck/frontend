@@ -1,5 +1,5 @@
 import { defineSetupVue3 } from '@histoire/plugin-vue';
-import router from '@/router';
+import router from '@router';
 import pinia from '@plugins/pinia';
 import i18n from '@plugins/i18n';
 import fontAwesome from '@plugins/fontAwesome';

@@ -7,7 +7,7 @@ import { useField, useForm } from 'vee-validate';
 import { object as yupObject, string as yupString, ref as yupRef } from 'yup';
 import eInput from '@elements/e-input/e-input.vue';
 import eButton from '@elements/e-button/e-button.vue';
-import env from '@plugins/helper/env';
+import env from '@helpers/env';
 
 const userStore = useUserStore();
 const { errors: apiErrors } = storeToRefs(useUserStore());

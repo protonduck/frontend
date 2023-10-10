@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { useUserStore } from '@/stores/userStore';
-import HomeView from '@/views/HomeView.vue';
-import StatsView from '@/views/StatsView.vue';
-import LoginView from '@/views/LoginView.vue';
-import RegisterView from '@/views/RegisterView.vue';
-import ErrorView from '@/views/ErrorView.vue';
+import { useUserStore } from '@stores/userStore';
+import HomeView from '@views/v-home.vue';
+import StatsView from '@views/v-stats.vue';
+import LoginView from '@views/v-login.vue';
+import RegisterView from '@views/v-register.vue';
+import ErrorView from '@views/v-error.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
