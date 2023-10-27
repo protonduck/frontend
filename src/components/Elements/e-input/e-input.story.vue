@@ -24,7 +24,7 @@ const state = reactive({
     </Variant>
 
     <Variant title="With error message">
-      <e-input v-bind="state" errorMessage="Test error message" />
+      <e-input v-bind="state" error-message="Test error message" />
     </Variant>
   </Story>
 </template>

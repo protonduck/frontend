@@ -166,32 +166,32 @@ const categoryIcons = ref([
   </div>
 
   <m-modal v-model="showModal" @cancel="showModal = false">
-    <template v-slot:title>
+    <template #title>
       {{ !isEdit ? $t('mCategoriesList.title.add') : $t('mCategoriesList.title.edit') }}
     </template>
-    <template v-slot:content>
+    <template #content>
       <m-notification :item="apiErrors" />
-      <form @submit.prevent="!isEdit ? addCategory() : editCategory()" novalidate>
-        <e-input v-model="name" :errorMessage="errors.name" id="name" label="mCategoriesList.form.name.label" />
+      <form novalidate @submit.prevent="!isEdit ? addCategory() : editCategory()">
+        <e-input id="name" v-model="name" :error-message="errors.name" label="mCategoriesList.form.name.label" />
         <e-textarea
-          v-model="description"
-          :errorMessage="errors.description"
           id="description"
+          v-model="description"
+          :error-message="errors.description"
           label="mCategoriesList.form.description.label"
         />
         <e-select
+          id="icon"
           v-model="icon"
           :options="categoryIcons"
-          :errorMessage="errors.icon"
-          id="icon"
+          :error-message="errors.icon"
           label="mCategoriesList.form.icon.label"
         />
         <e-select
           v-if="isEdit"
+          id="board_id"
           v-model="board_id"
           :options="boards"
-          :errorMessage="errors.board_id"
-          id="board_id"
+          :error-message="errors.board_id"
           label="mCategoriesList.form.board_id.label"
         />
         <div class="field is-grouped pt-3">

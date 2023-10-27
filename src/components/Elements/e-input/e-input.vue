@@ -36,8 +36,11 @@ defineProps({
   },
   errorMessage: {
     type: String,
+    default: '',
   },
 });
+
+defineEmits(['update:modelValue']);
 </script>
 
 <template>
@@ -51,11 +54,11 @@ defineProps({
         :id="id"
         :type="type"
         :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
         :placeholder="$t(placeholder)"
         :autocomplete="autocomplete"
         :class="{ 'is-danger': errorMessage }"
         class="input"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
       <p v-if="errorMessage" class="help is-danger">
         {{ $t(errorMessage) }}

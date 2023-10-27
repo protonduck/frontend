@@ -4,6 +4,7 @@ import { computed } from 'vue';
 const props = defineProps({
   item: {
     type: Object,
+    required: true,
   },
   layout: {
     type: String,

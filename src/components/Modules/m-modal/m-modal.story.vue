@@ -9,8 +9,8 @@ let showModal = ref(false);
   <Story title="Modules/Modal">
     <div @click="showModal = true">Open modal</div>
     <m-modal v-model="showModal" @cancel="showModal = false">
-      <template v-slot:title>Modal title</template>
-      <template v-slot:content>Modal content</template>
+      <template #title>Modal title</template>
+      <template #content>Modal content</template>
     </m-modal>
   </Story>
 </template>

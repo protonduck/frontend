@@ -49,36 +49,36 @@ const disableRegister = ref(env.getItem('VITE_DISABLE_REGISTER') === 'false');
     <h1 class="title has-text-centered">{{ $t('register.title') }}</h1>
     <div class="columns is-centered">
       <div class="column is-4">
-        <form v-if="disableRegister" @submit="onSubmit" novalidate>
+        <form v-if="disableRegister" novalidate @submit="onSubmit">
           <e-input
-            v-model="name"
-            :errorMessage="errors.name"
             id="name"
+            v-model="name"
+            :error-message="errors.name"
             autocomplete="username"
             label="register.form.name.label"
             icon-left="fa-solid fa-user"
           />
           <e-input
-            v-model="email"
-            :errorMessage="errors.email"
             id="email"
+            v-model="email"
+            :error-message="errors.email"
             type="email"
             autocomplete="email"
             label="register.form.email.label"
             icon-left="fa-solid fa-envelope"
           />
           <e-input
-            v-model="password"
-            :errorMessage="errors.password"
             id="password"
+            v-model="password"
+            :error-message="errors.password"
             type="password"
             label="register.form.password.label"
             icon-left="fa-solid fa-key"
           />
           <e-input
-            v-model="passwordConfirm"
-            :errorMessage="errors.passwordConfirm"
             id="passwordConfirm"
+            v-model="passwordConfirm"
+            :error-message="errors.passwordConfirm"
             type="password"
             label="register.form.passwordConfirm.label"
             icon-left="fa-solid fa-key"

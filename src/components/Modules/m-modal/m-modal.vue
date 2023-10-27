@@ -1,6 +1,8 @@
 <script setup>
 import { VueFinalModal } from 'vue-final-modal';
 import eButton from '@elements/e-button/e-button.vue';
+
+defineEmits(['cancel']);
 </script>
 
 <template>

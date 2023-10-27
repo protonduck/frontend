@@ -40,20 +40,20 @@ const { value: password } = useField('password');
     <h1 class="title has-text-centered">{{ $t('login.title') }}</h1>
     <div class="columns is-centered">
       <div class="column is-4">
-        <form @submit="onSubmit" novalidate>
+        <form novalidate @submit="onSubmit">
           <e-input
-            v-model="email"
-            :errorMessage="errors.email"
             id="email"
+            v-model="email"
+            :error-message="errors.email"
             type="email"
             autocomplete="email"
             label="login.form.email.label"
             icon-left="fa-solid fa-envelope"
           />
           <e-input
-            v-model="password"
-            :errorMessage="errors.password"
             id="password"
+            v-model="password"
+            :error-message="errors.password"
             type="password"
             label="login.form.password.label"
             icon-left="fa-solid fa-key"

@@ -30,8 +30,14 @@ let showModal = ref(false);
 let isEdit = ref(false);
 
 const props = defineProps({
-  links: Array,
-  categoryId: Number,
+  links: {
+    type: Array,
+    default: () => [],
+  },
+  categoryId: {
+    type: Number,
+    default: 0,
+  },
 });
 
 function favicon(link) {
@@ -138,18 +144,18 @@ async function removeLink() {
   </div>
 
   <m-modal v-model="showModal" @cancel="showModal = false">
-    <template v-slot:title>
+    <template #title>
       {{ !isEdit ? $t('mLinksList.title.add') : $t('mLinksList.title.edit') }}
     </template>
-    <template v-slot:content>
+    <template #content>
       <m-notification :item="apiErrors" />
-      <form @submit.prevent="!isEdit ? addLink() : editLink()" novalidate>
-        <e-input v-model="title" :errorMessage="errors.title" id="title" label="mLinksList.form.title.label" />
-        <e-input v-model="url" :errorMessage="errors.url" id="url" label="mLinksList.form.url.label" />
+      <form novalidate @submit.prevent="!isEdit ? addLink() : editLink()">
+        <e-input id="title" v-model="title" :error-message="errors.title" label="mLinksList.form.title.label" />
+        <e-input id="url" v-model="url" :error-message="errors.url" label="mLinksList.form.url.label" />
         <e-textarea
-          v-model="description"
-          :errorMessage="errors.description"
           id="description"
+          v-model="description"
+          :error-message="errors.description"
           label="mLinksList.form.description.label"
         />
         <div class="field is-grouped pt-3">

@@ -120,8 +120,8 @@ async function removeBoard() {
         <li
           v-for="board in boards"
           :key="board.id"
-          @click="switchBoard(board.id)"
           :class="{ 'is-active': board.id === activeBoardId }"
+          @click="switchBoard(board.id)"
         >
           <a>{{ board.name }}</a>
         </li>
@@ -146,13 +146,13 @@ async function removeBoard() {
   </div>
 
   <m-modal v-model="showModal" @cancel="showModal = false">
-    <template v-slot:title>
+    <template #title>
       {{ !isEdit ? $t('mBoardList.title.add') : $t('mBoardList.title.edit') }}
     </template>
-    <template v-slot:content>
+    <template #content>
       <m-notification :item="apiErrors" />
-      <form @submit.prevent="!isEdit ? addBoard() : editBoard()" novalidate>
-        <e-input v-model="name" :errorMessage="errors.name" id="name" label="mBoardList.form.name.label" />
+      <form novalidate @submit.prevent="!isEdit ? addBoard() : editBoard()">
+        <e-input id="name" v-model="name" :error-message="errors.name" label="mBoardList.form.name.label" />
         <div class="field is-grouped pt-3">
           <e-button type="submit">
             {{ $t('mBoardList.form.button.save') }}
@@ -166,13 +166,13 @@ async function removeBoard() {
   </m-modal>
 
   <m-modal v-model="showRemoveModal" @cancel="showRemoveModal = false">
-    <template v-slot:title>{{ $t('mBoardList.title.remove') }}</template>
-    <template v-slot:content>
+    <template #title>{{ $t('mBoardList.title.remove') }}</template>
+    <template #content>
       <m-notification :item="apiErrors" />
       <div class="block has-text-danger">
         <p>{{ $t('mBoardList.info.remove') }}</p>
       </div>
-      <form @submit.prevent="removeBoard()" novalidate>
+      <form novalidate @submit.prevent="removeBoard()">
         <e-button layout="link-danger" type="submit">
           {{ $t('mBoardList.form.button.remove') }}
         </e-button>

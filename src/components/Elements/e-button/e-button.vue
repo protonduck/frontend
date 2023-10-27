@@ -17,6 +17,8 @@ const props = defineProps({
   },
 });
 
+defineEmits(['click']);
+
 const classes = computed(() => [
   {
     'is-link': props.layout === 'primary',
@@ -30,7 +32,7 @@ const classes = computed(() => [
 
 <template>
   <div class="control">
-    <button :type="type" :disabled="isDisabled" @click="$emit('click')" class="button" :class="classes">
+    <button :type="type" :disabled="isDisabled" :class="classes" class="button" @click="$emit('click')">
       <slot />
     </button>
   </div>

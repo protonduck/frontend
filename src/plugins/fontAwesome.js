@@ -51,8 +51,8 @@ export default {
       faVideo,
       faWallet,
       faShareNodes,
-      faPenToSquare
+      faPenToSquare,
     );
-    app.component('font-awesome-icon', FontAwesomeIcon);
+    app.component('FontAwesomeIcon', FontAwesomeIcon);
   },
 };

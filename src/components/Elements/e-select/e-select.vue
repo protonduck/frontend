@@ -26,8 +26,11 @@ defineProps({
   },
   errorMessage: {
     type: String,
+    default: '',
   },
 });
+
+defineEmits(['update:modelValue']);
 </script>
 
 <template>
@@ -39,8 +42,8 @@ defineProps({
       <div class="select">
         <select
           v-bind="$attrs"
-          :value="modelValue"
           :id="id"
+          :value="modelValue"
           :class="{ 'is-danger': errorMessage }"
           @change="$emit('update:modelValue', $event.target.value)"
         >

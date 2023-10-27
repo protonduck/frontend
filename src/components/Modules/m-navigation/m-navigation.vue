@@ -10,7 +10,10 @@ const router = useRouter();
 const route = useRoute();
 
 const props = defineProps({
-  items: Array,
+  items: {
+    type: Array,
+    default: () => [],
+  },
 });
 
 function filtredItems() {
@@ -59,7 +62,7 @@ const isOpen = ref(false);
           <m-export v-if="userStore.isLoggedIn && route.name === 'home'" />
           <m-language-select class="navbar-item" />
           <div class="buttons">
-            <a v-if="userStore.isLoggedIn" @click="logoutUser()" class="button">
+            <a v-if="userStore.isLoggedIn" class="button" @click="logoutUser()">
               <span class="icon pr-3">
                 <font-awesome-icon icon="fa-solid fa-right-to-bracket" />
               </span>

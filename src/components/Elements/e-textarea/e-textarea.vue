@@ -26,8 +26,11 @@ defineProps({
   },
   errorMessage: {
     type: String,
+    default: '',
   },
 });
+
+defineEmits(['update:modelValue']);
 </script>
 
 <template>
@@ -44,8 +47,8 @@ defineProps({
         :value="modelValue"
         :placeholder="$t(placeholder)"
         :class="{ 'is-danger': errorMessage }"
-        @input="$emit('update:modelValue', $event.target.value)"
         class="textarea"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
       <p v-if="errorMessage" class="help is-danger">
         {{ $t(errorMessage) }}
