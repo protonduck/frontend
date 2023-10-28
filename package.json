@@ -10,7 +10,9 @@
     "story": "histoire dev",
     "story:build": "histoire build",
     "story:preview": "histoire preview",
-    "server": "node ./mock-api/server.js"
+    "server": "node ./mock-api/server.js",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
@@ -29,15 +31,18 @@
     "@histoire/plugin-vue": "^0.17.1",
     "@rushstack/eslint-patch": "^1.4.0",
     "@vitejs/plugin-vue": "^4.3.4",
+    "@vitest/coverage-v8": "^0.34.6",
     "@vue/eslint-config-prettier": "^8.0.0",
     "bulma": "^0.9.4",
     "cors": "^2.8.5",
     "eslint": "^8.49.0",
     "eslint-plugin-vue": "^9.17.0",
     "express": "^4.18.2",
+    "happy-dom": "^12.10.3",
     "histoire": "^0.17.0",
     "prettier": "^3.0.3",
     "sass": "^1.68.0",
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
+    "vitest": "^0.34.6"
   }
 }

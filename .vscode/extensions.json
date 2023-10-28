@@ -7,6 +7,7 @@
     "eamodio.gitlens",
     "tombonnike.vscode-status-bar-format-toggle",
     "dbaeumer.vscode-eslint",
-    "Gruntfuggly.todo-tree"
+    "Gruntfuggly.todo-tree",
+    "ZixuanChen.vitest-explorer"
   ]
 }
