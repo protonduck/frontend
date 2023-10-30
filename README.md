@@ -12,7 +12,13 @@ Made with ❤️ in [Vue.js 3](https://vuejs.org/) & [Bulma CSS-Framework](https
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compile and minify for production
+
+```sh
+npm run build
+```
+
+### Compile and hot-reload for development
 
 ```sh
 npm run dev
@@ -30,16 +36,16 @@ npm run server
 npm run story
 ```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint
+### Run ESLint for development
 
 ```sh
 npm run lint
+```
+
+### Run Vitest for development
+
+```
+npm run test
 ```
 
 ## License
