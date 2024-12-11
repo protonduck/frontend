@@ -2,9 +2,8 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-  item: {
-    type: Object,
-    required: true,
+  message: {
+    type: String,
   },
   layout: {
     type: String,
@@ -15,12 +14,13 @@ const props = defineProps({
 const classes = computed(() => [
   {
     'is-danger': props.layout === 'danger',
+    'is-warning': props.layout === 'warning',
   },
 ]);
 </script>
 
 <template>
-  <div v-if="item.length !== 0" class="notification is-light" :class="classes">
-    {{ item.status }} - {{ item.message }}
+  <div v-if="message" class="notification is-light" :class="classes">
+    {{ message }}
   </div>
 </template>

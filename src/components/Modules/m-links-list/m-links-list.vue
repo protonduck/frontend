@@ -148,7 +148,7 @@ async function removeLink() {
       {{ !isEdit ? $t('mLinksList.title.add') : $t('mLinksList.title.edit') }}
     </template>
     <template #content>
-      <m-notification :item="apiErrors" />
+      <m-notification v-if="apiErrors" :message="apiErrors.message" />
       <form novalidate @submit.prevent="!isEdit ? addLink() : editLink()">
         <e-input id="title" v-model="title" :error-message="errors.title" label="mLinksList.form.title.label" />
         <e-input id="url" v-model="url" :error-message="errors.url" label="mLinksList.form.url.label" />

@@ -141,16 +141,14 @@ async function removeBoard() {
 
   <m-categories-list />
 
-  <div v-if="boards.length === 0" class="notification is-warning is-light">
-    {{ $t('mBoardList.info.add') }}
-  </div>
+  <m-notification v-if="boards.length === 0" :message="$t('mBoardList.info.add')" layout="warning" />
 
   <m-modal v-model="showModal" @cancel="showModal = false">
     <template #title>
       {{ !isEdit ? $t('mBoardList.title.add') : $t('mBoardList.title.edit') }}
     </template>
     <template #content>
-      <m-notification :item="apiErrors" />
+      <m-notification v-if="apiErrors" :message="apiErrors.message" />
       <form novalidate @submit.prevent="!isEdit ? addBoard() : editBoard()">
         <e-input id="name" v-model="name" :error-message="errors.name" label="mBoardList.form.name.label" />
         <div class="field is-grouped pt-3">
@@ -168,7 +166,7 @@ async function removeBoard() {
   <m-modal v-model="showRemoveModal" @cancel="showRemoveModal = false">
     <template #title>{{ $t('mBoardList.title.remove') }}</template>
     <template #content>
-      <m-notification :item="apiErrors" />
+      <m-notification v-if="apiErrors" :message="apiErrors.message" />
       <div class="block has-text-danger">
         <p>{{ $t('mBoardList.info.remove') }}</p>
       </div>

@@ -158,19 +158,14 @@ const categoryIcons = ref([
     </div>
   </div>
 
-  <div
-    v-if="boards.length && !boardStore.getBoardById(activeBoardId)?.categories.length && !activeBoardId"
-    class="notification is-warning is-light"
-  >
-    {{ $t('mCategoriesList.info.select') }}
-  </div>
+  <m-notification v-if="boards.length && !boardStore.getBoardById(activeBoardId)?.categories.length && !activeBoardId" :message="$t('mCategoriesList.info.select')" layout="warning" />
 
   <m-modal v-model="showModal" @cancel="showModal = false">
     <template #title>
       {{ !isEdit ? $t('mCategoriesList.title.add') : $t('mCategoriesList.title.edit') }}
     </template>
     <template #content>
-      <m-notification :item="apiErrors" />
+      <m-notification v-if="apiErrors" :message="apiErrors.message" />
       <form novalidate @submit.prevent="!isEdit ? addCategory() : editCategory()">
         <e-input id="name" v-model="name" :error-message="errors.name" label="mCategoriesList.form.name.label" />
         <e-textarea
